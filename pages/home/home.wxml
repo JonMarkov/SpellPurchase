@@ -1,0 +1,33 @@
+<!-- 轮播 star -->
+<swiper autoplay='{{true}}' interval='2000' indicator-dots='{{true}}' circular='{{true}}' current="{{swiperCurrent}}" bindchange="swiperChange">
+  <!-- wx:key对于静态遍历不需要 -->
+  <swiper-item wx:for="{{homeImg}}" wx:key=''>
+    <image src='{{item.imgUrl}}' bindtap="ruleshow"></image>
+  </swiper-item>
+</swiper>
+<!-- 频道入口 star -->
+<view class='clan' wx:if="{{frequency}}">
+  <view class='clan-cate' data-chick="{{item.frequencyId}}" bindtap='bindToCharge'  wx:for="{{frequency}}" wx:key="">
+    <image src='{{item.frequencyImg}}'></image>
+    <text>{{item.frequencyName}}</text>
+  </view>
+  <view class='clan-cate' bindtap='bindToMall'>
+    <image src='../../images/img_member.png'></image>
+    <text>砍价拿</text>
+  </view>
+  <view class='clan-cate' bindtap='bindToMall'>
+    <image src='../../images/img_more.png'></image>
+    <text>拼团购</text>
+  </view>
+  <view class='clan-cate' bindtap='bindToMall'>
+    <image src='../../images/img_service.png'></image>
+    <text>0元购</text>
+  </view>
+</view>
+<view class='message'></view>
+<!-- 内容区域 star 此处内容需遍历 -->
+<block wx:for="{{homeCom}}" wx:key="" >
+  <view class="list-con" data-sku="{{item.sku_id}}" data-modity="{{item.goods_id}}">
+    <template is="list" data="{{...item}}"></template>
+  </view>
+</block>

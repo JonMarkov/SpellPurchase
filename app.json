@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/product/product",
+    "pages/personal/personal"
+
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#7a43b6",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "北银科技"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "color": "#bdbdbd",
+    "selectedColor": "#30b0ef",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/images/img_home.png",
+        "selectedIconPath": "/images/img_home_selected.png"
+      },
+      {
+        "pagePath": "pages/product/product",
+        "text": "产品中心",
+        "iconPath": "/images/img_sort.png",
+        "selectedIconPath": "/images/img_sort_selected.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "个人中心",
+        "iconPath": "/images/img_personal.png",
+        "selectedIconPath": "/images/img_personal_selected.png"
+      }
+    ]
+  }
+}
