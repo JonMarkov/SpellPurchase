@@ -1,13 +1,12 @@
-<!-- 轮播 star -->
+<!-- 轮播 star 此处内容需要遍历-->
 <swiper autoplay='{{true}}' interval='2000' indicator-dots='{{true}}' circular='{{true}}' current="{{swiperCurrent}}" bindchange="swiperChange">
-  <!-- wx:key对于静态遍历不需要 -->
   <swiper-item wx:for="{{homeImg}}" wx:key=''>
     <image src='{{item.imgUrl}}' bindtap="ruleshow"></image>
   </swiper-item>
 </swiper>
 <!-- 频道入口 star -->
 <view class='clan' wx:if="{{frequency}}">
-  <view class='clan-cate' data-chick="{{item.frequencyId}}" bindtap='bindToCharge'  wx:for="{{frequency}}" wx:key="">
+  <view class='clan-cate' data-chick="{{item.frequencyId}}" bindtap='bindToCharge' wx:for="{{frequency}}" wx:key="">
     <image src='{{item.frequencyImg}}'></image>
     <text>{{item.frequencyName}}</text>
   </view>
@@ -26,8 +25,23 @@
 </view>
 <view class='message'></view>
 <!-- 内容区域 star 此处内容需遍历 -->
-<block wx:for="{{homeCom}}" wx:key="" >
+<block wx:for="{{homeCom}}" wx:key="">
   <view class="list-con" data-sku="{{item.sku_id}}" data-modity="{{item.goods_id}}">
-    <template is="list" data="{{...item}}"></template>
+    <view class='list-det-img'>
+      <image src='../../images/img_more.png'></image>
+    </view>
+    <view class='list-det-info'>
+      <view class='det-info-top'>
+        这里是产品简介
+      </view>
+      <view class='det-info-bottom'>
+        <view class='info-bottom-left'>
+          这里是价钱部分
+        </view>
+        <view class='info-bpttom-right'>
+          <button>点击购买</button>
+        </view>
+      </view>
+    </view>
   </view>
 </block>
