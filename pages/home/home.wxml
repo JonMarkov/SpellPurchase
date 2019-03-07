@@ -1,15 +1,11 @@
 <!-- 轮播 star 此处内容需要遍历-->
 <swiper autoplay='{{true}}' interval='2000' indicator-dots='{{true}}' circular='{{true}}' current="{{swiperCurrent}}" bindchange="swiperChange">
   <swiper-item wx:for="{{homeImg}}" wx:key=''>
-    <image src='{{item.imgUrl}}' bindtap="ruleshow"></image>
+    <image src='{{item.imgUrl}}' bindtap="ruleshow" data-swpId='{{item.id}}'></image>
   </swiper-item>
 </swiper>
 <!-- 频道入口 star -->
-<view class='clan' wx:if="{{frequency}}">
-  <view class='clan-cate' data-chick="{{item.frequencyId}}" bindtap='bindToCharge' wx:for="{{frequency}}" wx:key="">
-    <image src='{{item.frequencyImg}}'></image>
-    <text>{{item.frequencyName}}</text>
-  </view>
+<view class='clan'>
   <view class='clan-cate' bindtap='bindToMall'>
     <image src='../../images/img_member.png'></image>
     <text>砍价拿</text>

@@ -6,23 +6,10 @@ Page({
     // 初始化UserId数据
     user_id: '',
     // 初始化轮播banner数据
-    homeImg: [{
-        'imgUrl': 'https://pic4.zhimg.com/v2-3da78883263a03fe9b14b6f72e88e0de_1200x500.jpg'
-      },
-      {
-        'imgUrl': 'https://pic1.zhimg.com/80/v2-0cfa27275a933e6ab81ec1097a24d25c_hd.jpg'
-      },
-      {
-        'imgUrl': 'https://pic4.zhimg.com/v2-3da78883263a03fe9b14b6f72e88e0de_1200x500.jpg'
-      }
-    ],
-    homeCom: [{
-
-    }],
-    frequency: [],
-    nullHouse: true, //先设置隐藏
-    swiperCurrent: 0,
-    // 当前显示banner的索引
+    homeImg: [],
+    // 初始化商品数据
+    homeCom: [],
+    //初始化轮播图的索引
     currentSwiper: 0
   },
   // DY函数定义 实时监控当前显示的banner图索引函数
@@ -32,21 +19,95 @@ Page({
     })
   },
   // DY函数定义 点击banner图函数
-  ruleshow: function() {
-    var currentSwiper = this.data.currentSwiper
-    if (currentSwiper == 0) {
-      console.log('等于0')
+  ruleshow: function(e) {
+    var _this = this
+    // 获取data数据中banner全部数据
+    var homeImg = this.data.homeImg
+    // 获取当前点击的索引
+    var currentSwiperNum = this.data.currentSwiper
+    // 获取当前点击的ID
+    var currentSwiperId = homeImg[currentSwiperNum].id
+    // 获取当前点击的Url
+    var outer_url = homeImg[currentSwiperNum].jumpLink
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'addClickNumber',
+      // 请求参数
+      requestParam: {
+        advertId: currentSwiperId
+      }
     }
-    if (currentSwiper == 1) {
-      console.log('等于1')
-    } else {
-      console.log('等于2')
-    }
-
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      // dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res.data.code)
+        // 如果请求成功则跳转
+        if (res.data.code == 0) {
+          // 跳转到中转页面，广告位对应页面
+          wx.navigateTo({
+            url: '/pages/outerChain/outerChain?outer_url=' + outer_url,
+          })
+        }
+      }
+    })
   },
   // DY函数定义 请求banner轮播图函数
   reqBanner: function() {
-    console.log(this.data.user_id)
+    var _this = this
+    // 声明user_id
+    var user_id = this.data.user_id
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'getAdvertByState',
+      // 请求参数
+      requestParam: {
+        user_id: user_id
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      // dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        // 声明返回的数值
+        var resData = res.data
+        // 初始化数据集合
+        var homeImg = []
+        // 遍历返回数组里面的数据
+        for (let i in resData) {
+          // 暂存每个数据为对象  
+          let temp = {
+            id: resData[i].advertId,
+            imgUrl: resData[i].advertUrl,
+            jumpLink: resData[i].jumpLink
+          }
+          // 把每个暂存的对象放进初始化的数据里面
+          homeImg.push(temp)
+        }
+        // 把数据设置进data数据
+        _this.setData({
+          homeImg: homeImg
+        })
+      }
+    })
   },
   // SMZQ生命周期钩子函数 监听页面加载
   onLoad: function(options) {

@@ -1,0 +1,2 @@
+<!--广告页面-->
+<web-view src="{{outer_url}}"></web-view>
