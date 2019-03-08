@@ -1,8 +1,8 @@
   {
   "pages": [
-  
-    "pages/comDetails/comDetails",
     "pages/login/login",
+    "pages/comDetails/comDetails",
+ 
     "pages/home/home",
     "pages/product/product",
     "pages/personal/personal",

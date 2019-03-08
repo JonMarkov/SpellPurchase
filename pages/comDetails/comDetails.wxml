@@ -34,7 +34,7 @@
     </view>
   </view>
 </view>
-
+<!-- 他的小店主页 -->
 <view class='shopDet'>
   <view class='shopDet_info'>
     <view class='shopDet_info_left'>
@@ -52,7 +52,7 @@
     </view>
   </view>
 </view>
-
+<!-- 产品详情图片 -->
 <view class='DetImg'>
   <view class='DetImg_info'>
     <view class='DetImg_info_title'>
@@ -60,7 +60,18 @@
       <text>产品详情</text>
     </view>
     <view class='DetImg_info_img'>
-      <image src='../../images/det.png'></image>
+      <image src='../../images/det.png' mode="widthFix"></image>
     </view>
+  </view>
+</view>
+<!-- 广告位 -->
+<view class='DetAdv'>
+  <image src='../../images/adv1.png' mode="widthFix"></image>
+</view>
+<!-- 点击按钮部分 -->
+<view class='DetBtn'>
+  <text class='DetBtn_left'>￥6</text>
+  <view class='DetBtn_right'>
+    <text>发起拼团</text>
   </view>
 </view>
