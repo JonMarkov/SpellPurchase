@@ -27,9 +27,9 @@ page {
   position: absolute;
   left: 10px;
   /* right: 10px; */
-  top: 7px;
+  top: 11px;
 }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 .weui-search-bar__form {
   position: relative;
   -webkit-box-flex: 1;
@@ -51,8 +51,8 @@ page {
 }
 
 .weui-search-bar__input {
-  height: 28px;
-  line-height: 28px;
+  height: 36px;
+  line-height: 36px;
   font-size: 14px;
 }
 
