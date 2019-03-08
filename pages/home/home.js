@@ -7,8 +7,14 @@ Page({
     user_id: '',
     // 初始化轮播banner数据
     homeImg: [],
-    // 初始化商品数据
-    homeCom: [],
+    // 砍价拿商品数据
+    bargainCom: [
+      
+    ],
+    // 拼团购商品数据
+    assembleCom:[],
+    // 0元购商品数据
+    freeCom:[],
     //初始化轮播图的索引
     currentSwiper: 0
   },
@@ -109,6 +115,37 @@ Page({
       }
     })
   },
+  // DY函数定义 请求商品参数函数
+  commoditiesList: function() {
+    var _this = this
+    // 声明user_id
+    var user_id = this.data.user_id
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'getIndexGoodsByVolume',
+      // 请求参数
+      requestParam: {
+        user_id: user_id
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        // 声明返回的数值
+        var resData = res.data
+      }
+    })
+  },
   // SMZQ生命周期钩子函数 监听页面加载
   onLoad: function(options) {
     // 重定向this指向，预防回调函数改变this问题
@@ -128,6 +165,8 @@ Page({
   onReady: function() {
     //ZX函数执行 请求banner轮播图函数
     this.reqBanner()
+    // 函数执行 请求首页热销商品
+    this.commoditiesList()
   },
   // SMZQ生命周期个钩子函数 监听页面显示
   onShow: function() {},

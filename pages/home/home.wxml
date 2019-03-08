@@ -4,6 +4,10 @@
     <image src='{{item.imgUrl}}' bindtap="ruleshow" data-swpId='{{item.id}}'></image>
   </swiper-item>
 </swiper>
+<!-- 广告位 star -->
+<view class='home_adv'>
+  <image src='../../images/adv.png'></image>
+</view>
 <!-- 频道入口 star -->
 <view class='clan'>
   <view class='clan-cate' bindtap='bindToMall'>
@@ -20,22 +24,97 @@
   </view>
 </view>
 <view class='message'></view>
-<!-- 内容区域 star 此处内容需遍历 -->
-<block wx:for="{{homeCom}}" wx:key="">
-  <view class="list-con" data-sku="{{item.sku_id}}" data-modity="{{item.goods_id}}">
-    <view class='list-det-img'>
-      <image src='../../images/img_more.png'></image>
+<!-- 砍价拿部分内容区域 star 此处内容需遍历 -->
+<block>
+  <view class='bargain'>
+    <!-- 标题部分 -->
+    <view class='bargainTitle'>
+      <image src='../../images/title_icon.png' class='bargainIcon'></image>
+      <text class='titleInfo'>砍价拿</text>
+      <view class='bargainRoll'>涉江采芙蓉，兰泽多芳草</view>
     </view>
-    <view class='list-det-info'>
-      <view class='det-info-top'>
-        这里是产品简介
+    <!-- 商品部分 -->
+    <view class='bargainDet'>
+      <view class='det_left'>
+        <image src='../../images/img_member.png'></image>
       </view>
-      <view class='det-info-bottom'>
-        <view class='info-bottom-left'>
-          这里是价钱部分
+      <view class='det_right'>
+        <view class='right_info'>
+          <text>我踏过江水去采荷花，生有兰草的水泽中长满了香草</text>
         </view>
-        <view class='info-bpttom-right'>
-          <button>点击购买</button>
+        <view class='right_sub'>
+          <text>古墨清主编</text>
+        </view>
+        <view class='right_click'>
+          <view class='click_info'>
+            <view class='click_info_money'>￥3.9</view>
+            <view class='click_info_info'>已卖出39件</view>
+          </view>
+          <view class='click_btn'>立即砍价</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+<!-- 拼团购部分内容区域 star 此处内容需遍历 -->
+<block>
+  <view class='bargain'>
+    <!-- 标题部分 -->
+    <view class='bargainTitle'>
+      <image src='../../images/title_icon.png' class='bargainIcon'></image>
+      <text class='titleInfo'>拼团购</text>
+      <view class='bargainRoll'>采之欲遗谁，所思在远道</view>
+    </view>
+    <!-- 商品部分 -->
+    <view class='bargainDet'>
+      <view class='det_left'>
+        <image src='../../images/img_more.png'></image>
+      </view>
+      <view class='det_right'>
+        <view class='right_info'>
+          <text>可是我采了荷花要送给谁呢?我想要送给远方的爱人</text>
+        </view>
+        <view class='right_sub'>
+          <text>红旗出版社</text>
+        </view>
+        <view class='right_click'>
+          <view class='click_info'>
+            <view class='click_info_money'>￥33.8</view>
+            <view class='click_info_info'>已卖出39件</view>
+          </view>
+          <view class='click_btn'>立即砍价</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+<!-- 0元购部分内容区域 star 此处内容需遍历 -->
+<block>
+  <view class='bargain'>
+    <!-- 标题部分 -->
+    <view class='bargainTitle'>
+      <image src='../../images/title_icon.png' class='bargainIcon'></image>
+      <text class='titleInfo'>0元购</text>
+      <view class='bargainRoll'>还顾望旧乡，长路漫浩浩</view>
+    </view>
+    <!-- 商品部分 -->
+    <view class='bargainDet'>
+      <view class='det_left'>
+        <image src='../../images/img_recharge.png'></image>
+      </view>
+      <view class='det_right'>
+        <view class='right_info'>
+          <text>回头看那一起生活过的故乡，路途显得那么无边无际</text>
+        </view>
+        <view class='right_sub'>
+          <text>初心莫负青葱</text>
+        </view>
+        <view class='right_click'>
+          <view class='click_info'>
+            <view class='click_info_money'>￥23.9</view>
+            <view class='click_info_info'>已卖出39件</view>
+          </view>
+          <view class='click_btn'>立即砍价</view>
         </view>
       </view>
     </view>

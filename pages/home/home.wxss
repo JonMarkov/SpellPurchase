@@ -1,22 +1,42 @@
 /* 全局样式 */
+
 page {
-  background: #fff;
+  background: #f8f8f8;
+  width: 100%;
 }
 
-
 /* 轮播部分 */
+
 swiper image {
   width: 100%;
   height: 350rpx;
 }
 
+/* 广告位部分 */
+
+.home_adv {
+  width: 100%;
+  margin: 10rpx auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.home_adv image {
+  margin: auto;
+  width: 750rpx;
+  height: 220rpx;
+}
 
 /* 频道部分 */
+
 .clan {
   display: flex;
   justify-content: space-between;
-  background: #f0f0f0;
+  background: #fff;
 }
+
 .clan-cate {
   width: 200rpx;
   display: flex;
@@ -37,39 +57,112 @@ swiper image {
   color: #cbcbcb;
 }
 
-
 /* 产品介绍部分 */
-.list-con {
-  padding: 20rpx;
-  margin-bottom: 20rpx;
-  border: 1px solid #e5e5e5;
-  border-radius: 6rpx;
-  width: 90%;
+
+.bargain {
+  width: 100%;
   text-align: center;
-  margin: auto;
-  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  margin: 10rpx auto;
+}
+
+/* 标题部分 */
+
+.bargainTitle {
+  font-size: 32rpx;
+  width: 96%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 30rpx 0rpx;
+}
+
+.titleInfo {
+  color: #cc020e;
+  margin-left: 20rpx;
+}
+
+.bargainIcon {
+  width: 6rpx;
+  height: 32rpx;
+}
+
+.bargainRoll {
+  margin-left: 20rpx;
+}
+
+/* 商品内容部分 */
+
+.bargainDet {
+  width: 96%;
+  border-top: 1rpx solid #e6e6e6;
   display: flex;
   flex-direction: row;
+  padding: 20rpx 0rpx;
   justify-content: space-between;
 }
-/* 左侧图片部分 */
-.list-det-img{
-  width: 30%
+
+.det_left {
+  width: 30%;
 }
-/* 左侧图片 */
-.list-det-img image{
-  width: 50rpx;
-  height: 50rpx
+
+.det_left image {
+  width: 200rpx;
+  height: 210rpx;
 }
-/* 右侧内容介绍部分 */
-.list-det-info{
+
+.det_right {
   width: 70%;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
-.det-info-bottom{
+
+.right_info {
+  font-size: 28rpx;
+  justify-content: space-between;
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+}
+
+.right_sub {
+  font-size: 24rpx;
+  justify-content: space-between;
+  text-align: left;
+  color: #666;
+}
+
+.right_click {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.click_info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 20rpx;
+}
+
+.click_info_money {
+  font-size: 30rpx;
+  color: #cc020e;
+}
+
+.click_info_info {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.click_btn {
+  background: #cc020e;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  padding: 10rpx 50rpx;
+  color: #fff;
 }
