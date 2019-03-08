@@ -1,2 +1,66 @@
 <!--pages/comDetails/comDetails.wxml-->
-<text>pages/comDetails/comDetails.wxml</text>
+<!-- 轮播 star 此处内容需要遍历-->
+<swiper autoplay='{{true}}' interval='2000' indicator-dots='{{true}}' circular='{{true}}' current="{{swiperCurrent}}" bindchange="swiperChange">
+  <swiper-item wx:for="{{homeImg}}" wx:key=''>
+    <image src='{{item.imgUrl}}' bindtap="ruleshow" data-swpId='{{item.id}}'></image>
+  </swiper-item>
+</swiper>
+<!-- 商品详情内容 star -->
+<view class='DetCom'>
+  <view class='infoDet'>
+    <view class='infoDet_top'>
+      <view class='infoDet_top_left'>
+        <text class='infoDet_top_left_money'>￥ 55.00</text>
+        <text class='infoDet_top_left_time'>活动剩余： 23：29：00</text>
+      </view>
+      <view class='infoDet_top_right'>
+        <text>已有235人浏览</text>
+      </view>
+    </view>
+    <view class='infoDet_center'>
+      <text>松露巧克力</text>
+    </view>
+    <view class='infoDet_bottpm'>
+      <text>你做的是昌平线，然后倒几号线啊，西二旗之后就可以坐公交了是吗？</text>
+    </view>
+    <view class='infoDet_foter'>
+      <view class='infoDet_foter_left'>
+        <text class='infoDet_foter_left_left'>运费：包邮</text>
+        <text class='infoDet_foter_left_right'>库存剩余：569</text>
+      </view>
+      <view class='infoDet_foter_right'>
+        <text>已有125864人砍价成功</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='shopDet'>
+  <view class='shopDet_info'>
+    <view class='shopDet_info_left'>
+      <view class='shopDet_info_left_img'>
+        <image src='../../images/logo.jpg'></image>
+      </view>
+      <view class='shopDet_info_left_text'>
+        <text>商户昵称：初心莫负</text>
+        <text>发布产品数量：6</text>
+      </view>
+    </view>
+    <view class='shopDet_info_right'>
+      <text>他的主页</text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+</view>
+
+<view class='DetImg'>
+  <view class='DetImg_info'>
+    <view class='DetImg_info_title'>
+      <image src='../../images/title_icon.png'></image>
+      <text>产品详情</text>
+    </view>
+    <view class='DetImg_info_img'>
+      <image src='../../images/det.png'></image>
+    </view>
+  </view>
+</view>

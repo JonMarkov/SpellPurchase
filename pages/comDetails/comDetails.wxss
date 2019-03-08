@@ -1,1 +1,178 @@
 /* pages/comDetails/comDetails.wxss */
+
+page {
+  background: #f8f8f8;
+}
+
+/* 轮播部分 */
+
+swiper {
+  height: 400rpx;
+}
+
+swiper image {
+  width: 96%;
+  height: 400rpx;
+  display: flex;
+  margin: auto;
+  margin-top: 20rpx;
+}
+
+/* 商品详情标题部分 */
+
+.DetCom {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.infoDet {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  margin: auto;
+  padding-bottom: 20rpx;
+}
+
+.infoDet_top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15rpx 0rpx;
+}
+
+.infoDet_top_left {
+  display: flex;
+  align-items: center;
+}
+
+.infoDet_top_left_money {
+  font-size: 32rpx;
+  color: #cc020e;
+  font-weight: bold;
+}
+
+.infoDet_top_left_time {
+  font-size: 26rpx;
+  color: #cc020e;
+  margin-left: 20rpx;
+}
+
+.infoDet_top_right {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.infoDet_center {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.infoDet_bottpm {
+  margin: 15rpx 0rpx;
+  font-size: 26rpx;
+  color: #8d8d8d;
+}
+
+.infoDet_foter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 26rpx;
+}
+
+.infoDet_foter_left_right {
+  margin-left: 40rpx;
+}
+
+/* 店铺信息 */
+
+.shopDet {
+  width: 100%;
+  display: flex;
+  background: #fff;
+  padding: 10rpx 0rpx;
+  margin: 15rpx auto;
+}
+
+.shopDet_info {
+  width: 96%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shopDet_info_left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.shopDet_info_left_img image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.shopDet_info_left_text {
+  display: flex;
+  flex-direction: column;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  margin-left: 20rpx;
+}
+
+.shopDet_info_right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.shopDet_info_right image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 产品详情部分 */
+
+.DetImg {
+  background: #fff;
+}
+
+.DetImg_info {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  margin: auto;
+  padding: 20rpx 0rpx;
+}
+
+.DetImg_info_title {
+  display: flex;
+  flex-direction: row;
+}
+
+.DetImg_info_title image {
+  width: 6rpx;
+  height: 38rpx;
+}
+
+.DetImg_info_title text {
+  font-size: 30rpx;
+  margin-left: 10rpx;
+  font-weight: bold;
+  color: #cc020e;
+}
+
+.DetImg_info_img {
+  margin: auto;
+  width: 100%;
+  margin-top: 20rpx;
+}
+
+.DetImg_info_img image {
+  width: 100%;
+}

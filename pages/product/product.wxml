@@ -13,19 +13,36 @@
 </view>
 <!-- 砍价拿商品部分 star -->
 <view class='infoDet'>
+  <!-- 标题部分 -->
   <view class='infoDet_title'>
     <view class='infoDet_title_right'>
       <image src='../../images/title_icon.png'></image>
-      <view>
-        <text>砍价拿</text>
+      <view class='infoDet_title_right_text'>
+        <text>砍价抢购</text>
       </view>
     </view>
     <view class='infoDet_title_left'>
       <text>查看全部</text>
-      <image src='../../images/title_icon.png'></image>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+  <!-- 商品部分 -->
+  <view class='info_det'>
+    <view class='infoDet_adv'>
+      <image src='../../images/adv1.png'></image>
+    </view>
+    <view class='infoDet_info'>
+      <view class='infoDet_info_det' wx:for="{{list}}">
+        <view class='infoDet_info_det_top'>
+          <image src='../../images/logo.jpg'></image>
+        </view>
+        <view class='infoDet_info_det_bottom'>
+          <view class='infoDet_info_det_bottom_title'>国航正品iPhone X</view>
+          <view class='infoDet_info_det_bottom_money'>￥ 7380</view>
+        </view>
+      </view>
     </view>
   </view>
 
 
-  <view>内容</view>
 </view>

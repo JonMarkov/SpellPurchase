@@ -83,6 +83,7 @@ swiper image {
 .titleInfo {
   color: #cc020e;
   margin-left: 20rpx;
+  font-weight: bold;
 }
 
 .bargainIcon {
