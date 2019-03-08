@@ -4,7 +4,8 @@
     "pages/home/home",
     "pages/product/product",
     "pages/personal/personal",
-    "pages/outerChain/outerChain"
+    "pages/outerChain/outerChain",
+    "pages/comDetails/comDetails"
 
   ],
   "window": {
@@ -25,13 +26,13 @@
       },
       {
         "pagePath": "pages/product/product",
-        "text": "产品中心",
+        "text": "产品",
         "iconPath": "/images/img_sort.png",
         "selectedIconPath": "/images/img_sort_selected.png"
       },
       {
         "pagePath": "pages/personal/personal",
-        "text": "个人中心",
+        "text": "我的",
         "iconPath": "/images/img_personal.png",
         "selectedIconPath": "/images/img_personal_selected.png"
       }

@@ -92,6 +92,21 @@ swiper image {
 
 .bargainRoll {
   margin-left: 20rpx;
+  font-size: 26rpx;
+  text-align: left;
+}
+
+.swiper-box {
+  position: relative;
+  height: 50rpx;
+  line-height: 50rpx;
+  overflow: hidden;
+  width: 300rpx;
+}
+
+.swiper-box .item {
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* 商品内容部分 */

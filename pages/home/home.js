@@ -7,14 +7,35 @@ Page({
     user_id: '',
     // 初始化轮播banner数据
     homeImg: [],
-    // 砍价拿商品数据
+    // 初始化砍价拿商品数据
     bargainCom: [
-      
+
     ],
-    // 拼团购商品数据
-    assembleCom:[],
-    // 0元购商品数据
-    freeCom:[],
+    // 初始化拼团购商品数据
+    assembleCom: [],
+    // 初始化0元购商品数据
+    freeCom: [],
+    //初始化砍价拿文字滚动
+    bargainList: [
+      '涉江采芙蓉，兰泽多芳草',
+      '采之欲遗谁，所思在远道',
+      '还顾望旧乡，长路漫浩浩',
+      '同心而离居，忧伤以终老'
+    ],
+    //初始化拼团购文字滚动
+    assembleList: [
+      '东城高且长，逶迤自相属',
+      '回风动地起，秋草萋已绿',
+      '四时更变化，岁暮一何速',
+      '荡涤放情志，何为自结束'
+    ],
+    //初始化0元购文字滚动
+    freeList: [
+      '力拔山兮气盖世',
+      '时不利兮骓不逝',
+      '骓不逝兮可奈何',
+      '虞兮虞兮奈若何'
+    ],
     //初始化轮播图的索引
     currentSwiper: 0
   },
@@ -141,8 +162,44 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: res => {
-        // 声明返回的数值
-        var resData = res.data
+        // 声明返回的数值转JSON格式
+        var resData = JSON.parse(res.data)
+        // 砍价拿数据
+        var bargainCom = [];
+        // 拼团购数据
+        var assembleCom = [];
+        // 0元购数据
+        var freeCom = []
+        for (let i in resData) {
+          var resDataCom = resData[i]
+          // 如果是i等于1 则是砍价拿数据
+          if (i == 1) {
+            for (let j in resDataCom) {
+              bargainCom.push(resDataCom[j])
+            }
+
+          }
+          // 如果是i等于2 则是拼团购数据
+          else if (i == 2) {
+            for (let j in resDataCom) {
+              assembleCom.push(resDataCom[j])
+            }
+
+          }
+          // 如果是i等于3 则是0元购数据
+          else {
+            for (let j in resDataCom) {
+              freeCom.push(resDataCom[j])
+            }
+
+          }
+        }
+        // 把得到数据设置进全局Data中
+        _this.setData({
+          bargainCom: bargainCom,
+          assembleCom: assembleCom,
+          freeCom: freeCom
+        })
       }
     })
   },

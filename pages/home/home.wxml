@@ -23,7 +23,6 @@
     <text>0元购</text>
   </view>
 </view>
-<view class='message'></view>
 <!-- 砍价拿部分内容区域 star 此处内容需遍历 -->
 <block>
   <view class='bargain'>
@@ -31,12 +30,16 @@
     <view class='bargainTitle'>
       <image src='../../images/title_icon.png' class='bargainIcon'></image>
       <text class='titleInfo'>砍价拿</text>
-      <view class='bargainRoll'>涉江采芙蓉，兰泽多芳草</view>
+      <view class='bargainRoll'>
+        <swiper class='swiper-box' autoplay='{{true}}' interval='2000' vertical='{{true}}' circular='{{true}}'>
+          <swiper-item class='item' wx:for='{{bargainList}}' wx:key="">{{item}}</swiper-item>
+        </swiper>
+      </view>
     </view>
     <!-- 商品部分 -->
-    <view class='bargainDet'>
+    <view class='bargainDet' wx:for="{{bargainCom}}" wx:key="">
       <view class='det_left'>
-        <image src='../../images/img_member.png'></image>
+        <image src='{{item.listImage}}'></image>
       </view>
       <view class='det_right'>
         <view class='right_info'>
@@ -63,12 +66,16 @@
     <view class='bargainTitle'>
       <image src='../../images/title_icon.png' class='bargainIcon'></image>
       <text class='titleInfo'>拼团购</text>
-      <view class='bargainRoll'>采之欲遗谁，所思在远道</view>
+      <view class='bargainRoll'>
+        <swiper class='swiper-box' autoplay='{{true}}' interval='2000' vertical='{{true}}' circular='{{true}}'>
+          <swiper-item class='item' wx:for='{{assembleList}}' wx:key="">{{item}}</swiper-item>
+        </swiper>
+      </view>
     </view>
     <!-- 商品部分 -->
-    <view class='bargainDet'>
+    <view class='bargainDet' wx:for="{{assembleCom}}" wx:key="">
       <view class='det_left'>
-        <image src='../../images/img_more.png'></image>
+        <image src='{{item.listImage}}'></image>
       </view>
       <view class='det_right'>
         <view class='right_info'>
@@ -95,12 +102,16 @@
     <view class='bargainTitle'>
       <image src='../../images/title_icon.png' class='bargainIcon'></image>
       <text class='titleInfo'>0元购</text>
-      <view class='bargainRoll'>还顾望旧乡，长路漫浩浩</view>
+      <view class='bargainRoll'>
+        <swiper class='swiper-box' autoplay='{{true}}' interval='2000' vertical='{{true}}' circular='{{true}}'>
+          <swiper-item class='item' wx:for='{{freeList}}' wx:key="">{{item}}</swiper-item>
+        </swiper>
+      </view>
     </view>
     <!-- 商品部分 -->
-    <view class='bargainDet'>
+    <view class='bargainDet' wx:for='{{freeCom}}' wx:key=''>
       <view class='det_left'>
-        <image src='../../images/img_recharge.png'></image>
+        <image src='{{item.listImage}}'></image>
       </view>
       <view class='det_right'>
         <view class='right_info'>
