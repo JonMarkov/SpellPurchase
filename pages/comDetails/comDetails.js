@@ -8,18 +8,18 @@ Page({
   data: {
 
   },
-  
+  // DY函数定义 请求商品详情函数
   reqBanner: function() {
     var _this = this
     // 声明user_id
-    var user_id = this.data.user_id
+    var goods_id = this.data.goodsId
     // 拼装请求所需参数
     var params = {
       // 请求方法名
-      action: 'getAdvertByState',
+      action: 'getGoods',
       // 请求参数
       requestParam: {
-        user_id: user_id
+        goodsId: goods_id
       }
     }
     // 请求参数合并
@@ -36,25 +36,66 @@ Page({
       success: res => {
         // 声明返回的数值
         var resData = res.data
-        // 初始化数据集合
-        var homeImg = []
-        // 遍历返回数组里面的数据
-        for (let i in resData) {
-          // 暂存每个数据为对象  
-          let temp = {
-            id: resData[i].advertId,
-            imgUrl: resData[i].advertUrl,
-            jumpLink: resData[i].jumpLink
-          }
-          // 把每个暂存的对象放进初始化的数据里面
-          homeImg.push(temp)
-        }
-        // 把数据设置进data数据
+        // 活动开始时间
+        let starTime = (resData.activityStartTime) / 1000
+        // 活动结束时间
+        let endTime = (resData.activityEndTime) / 1000
+        //获取当前时间
+        let surplusTime = (resData.activitySurplusTime) / 1000
+        // 把数据存进data
         _this.setData({
-          homeImg: homeImg
+          detList: resData,
+          starTime: starTime,
+          endTime: endTime,
+          surplusTime: surplusTime
         })
       }
     })
+  },
+  // DY函数定义 请求活动剩余时间
+  activity: function() {
+    var _this = this
+    // 活动开始时间
+    let starTime = _this.data.starTime
+    // 活动结束时间
+    let endTime = _this.data.endTime
+    // 获取当前时间
+    let surplusTime = this.data.surplusTime
+    // 剩余秒数
+    var actTimer = setInterval(function() {
+      // 获取最新的结束时间
+      let endTime = _this.data.endTime
+      // 获取最新的当前时间
+      let surplusTime = ++(_this.data.surplusTime)
+      // 剩余时间时间戳                                               
+      let SurTime = endTime - surplusTime
+      // 天数
+      // 毫秒和天数的换算规则
+      let daysGz = 60 * 60 * 24 //秒->分->时
+      let dayTime = parseInt(SurTime / daysGz)
+      // 小时
+      // 毫秒和小时的换算规则
+      let hourGz = 60 * 60 //秒->分
+      let hourTime = parseInt((SurTime - (daysGz * dayTime)) / hourGz)
+      // 分钟
+      // 毫秒和分钟的换算规则
+      let branchGz = 60 //分
+      let branchTime = parseInt((SurTime - ((daysGz * dayTime) + hourGz * hourTime)) / branchGz)
+      // 秒 
+      // 毫秒和秒的换算规则
+      let secondGz = 1 //无
+      let secondGzTime = parseInt((SurTime - ((daysGz * dayTime) + (hourGz * hourTime) + (branchGz * branchTime))) / secondGz)
+      _this.setData({
+        surplusTime: surplusTime,
+        dayTime: dayTime,
+        hourTime: hourTime,
+        branchTime: branchTime,
+        secondGzTime: secondGzTime
+      })
+      if (SurTime <= 0) {
+        clearInterval(actTimer)
+      }
+    }, 1000)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -72,6 +113,12 @@ Page({
         })
       },
     })
+    // 获取上个页面携带的参数goods_id
+    var goodsId = options.goods_id
+    // 把参数goods_id存入data
+    _this.setData({
+      goodsId: goodsId
+    })
   },
 
   /**
@@ -80,6 +127,8 @@ Page({
   onReady: function() {
     //ZX函数执行 请求banner轮播图函数
     this.reqBanner()
+    // ZX函数执行 每秒执行一次倒计时函数
+    this.activity()
   },
 
   /**

@@ -2,7 +2,7 @@
   "pages": [
     "pages/login/login",
     "pages/comDetails/comDetails",
- 
+    "pages/singleProduct/singleProduct",
     "pages/home/home",
     "pages/product/product",
     "pages/personal/personal",

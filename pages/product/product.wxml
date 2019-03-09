@@ -1,16 +1,4 @@
 <!--产品列表-->
-<!-- 搜索框部分 star -->
-<view class="weui-search-bar">
-  <view class="weui-search-bar__form">
-    <view class="weui-search-bar__box">
-      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-      <input type="text" class="weui-search-bar__input" placeholder="请输入查询内容" value="{{SearchData.value}}" bindinput='SearchInput' bindconfirm="SearchConfirm" />
-      <view class="weui-icon-clear" wx:if="{{SearchData.value.length > 0}}" bindtap="SearchClear">
-        <icon type="clear" size="14"></icon>
-      </view>
-    </view>
-  </view>
-</view>
 <!-- 砍价拿商品部分 star -->
 <view class='infoDet'>
   <!-- 标题部分 -->
@@ -21,7 +9,7 @@
         <text>砍价抢购</text>
       </view>
     </view>
-    <view class='infoDet_title_left'>
+    <view class='infoDet_title_left' data-type="1" bindtap='ToViewAll'>
       <text>查看全部</text>
       <image src='../../images/arr.png'></image>
     </view>
@@ -32,13 +20,83 @@
       <image src='../../images/adv1.png'></image>
     </view>
     <view class='infoDet_info'>
-      <view class='infoDet_info_det' wx:for="{{list}}">
+      <view class='infoDet_info_det' wx:for="{{bargainCom}}" wx:key="" data-goods_id='{{item.goodsId}}' bindtap='ToDetails'>
         <view class='infoDet_info_det_top'>
-          <image src='../../images/logo.jpg'></image>
+          <image src='{{item.listImage}}'></image>
         </view>
         <view class='infoDet_info_det_bottom'>
-          <view class='infoDet_info_det_bottom_title'>国航正品iPhone X</view>
-          <view class='infoDet_info_det_bottom_money'>￥ 7380</view>
+          <view class='infoDet_info_det_bottom_title'>{{item.goodsName}}</view>
+          <view class='infoDet_info_det_bottom_money'>￥ {{item.price}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+</view>
+<!-- 拼团购商品部分 star -->
+<view class='infoDet'>
+  <!-- 标题部分 -->
+  <view class='infoDet_title'>
+    <view class='infoDet_title_right'>
+      <image src='../../images/title_icon.png'></image>
+      <view class='infoDet_title_right_text'>
+        <text>拼团抢购</text>
+      </view>
+    </view>
+    <view class='infoDet_title_left' data-type="2" bindtap='ToViewAll'>
+      <text>查看全部</text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+  <!-- 商品部分 -->
+  <view class='info_det'>
+    <view class='infoDet_adv'>
+      <image src='../../images/adv1.png'></image>
+    </view>
+    <view class='infoDet_info'>
+      <view class='infoDet_info_det' wx:for="{{assembleCom}}" wx:key="" data-goods_id='{{item.goodsId}}' bindtap='ToDetails'>
+        <view class='infoDet_info_det_top'>
+          <image src='{{item.listImage}}'></image>
+        </view>
+        <view class='infoDet_info_det_bottom'>
+          <view class='infoDet_info_det_bottom_title'>{{item.goodsName}}</view>
+          <view class='infoDet_info_det_bottom_money'>￥ {{item.price}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+</view>
+<!-- 0元购商品部分 star -->
+<view class='infoDet'>
+  <!-- 标题部分 -->
+  <view class='infoDet_title'>
+    <view class='infoDet_title_right'>
+      <image src='../../images/title_icon.png'></image>
+      <view class='infoDet_title_right_text'>
+        <text>0元抢购</text>
+      </view>
+    </view>
+    <view class='infoDet_title_left' data-type="3" bindtap='ToViewAll'>
+      <text>查看全部</text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+  <!-- 商品部分 -->
+  <view class='info_det'>
+    <view class='infoDet_adv'>
+      <image src='../../images/adv1.png'></image>
+    </view>
+    <view class='infoDet_info'>
+      <view class='infoDet_info_det' wx:for="{{freeCom}}" wx:key="" data-goods_id='{{item.goodsId}}' bindtap='ToDetails'>
+        <view class='infoDet_info_det_top'>
+          <image src='{{item.listImage}}'></image>
+        </view>
+        <view class='infoDet_info_det_bottom'>
+          <view class='infoDet_info_det_bottom_title'>{{item.goodsName}}</view>
+          <view class='infoDet_info_det_bottom_money'>￥ {{item.price}}</view>
         </view>
       </view>
     </view>

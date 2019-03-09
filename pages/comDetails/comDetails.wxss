@@ -7,11 +7,11 @@ page {
 
 /* 轮播部分 */
 
-swiper {
+.banner_swiper {
   height: 400rpx;
 }
 
-swiper image {
+.banner_swiper image {
   width: 96%;
   height: 400rpx;
   display: flex;

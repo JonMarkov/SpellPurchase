@@ -12,8 +12,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 重定向this指向，预防回调函数改变this问题
+    var _this = this;
+    // 获取本地缓存内的user_id信息
+    wx.getStorage({
+      key: 'loginInfo',
+      success: function (res) {
+        // 把user_id存入本地data数据
+        _this.setData({
+          user_id: res.data.userId,
+          phone:res.data.phone
+        })
+      },
+    })
   },
+// 判断是否登录
 
   /**
    * 生命周期函数--监听页面初次渲染完成

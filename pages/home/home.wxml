@@ -10,15 +10,15 @@
 </view>
 <!-- 频道入口 star -->
 <view class='clan'>
-  <view class='clan-cate' bindtap='bindToMall'>
+  <view class='clan-cate' data-type="1" bindtap='bindToMall'>
     <image src='../../images/img_member.png'></image>
-    <text>砍价拿</text>
+    <text>砍价</text>
   </view>
-  <view class='clan-cate' bindtap='bindToMall'>
+  <view class='clan-cate' data-type="1" bindtap='bindToMall'>
     <image src='../../images/img_more.png'></image>
     <text>拼团购</text>
   </view>
-  <view class='clan-cate' bindtap='bindToMall'>
+  <view class='clan-cate' data-type="1" bindtap='bindToMall'>
     <image src='../../images/img_service.png'></image>
     <text>0元购</text>
   </view>
@@ -29,7 +29,7 @@
     <!-- 标题部分 -->
     <view class='bargainTitle'>
       <image src='../../images/title_icon.png' class='bargainIcon'></image>
-      <text class='titleInfo'>砍价拿</text>
+      <text class='titleInfo'>砍价抢购</text>
       <view class='bargainRoll'>
         <swiper class='swiper-box' autoplay='{{true}}' interval='2000' vertical='{{true}}' circular='{{true}}'>
           <swiper-item class='item' wx:for='{{bargainList}}' wx:key="">{{item}}</swiper-item>
@@ -38,22 +38,22 @@
     </view>
     <!-- 商品部分 -->
     <view class='bargainDet' wx:for="{{bargainCom}}" wx:key="">
-      <view class='det_left'>
+      <view class='det_left' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
         <image src='{{item.listImage}}'></image>
       </view>
       <view class='det_right'>
-        <view class='right_info'>
-          <text>我踏过江水去采荷花，生有兰草的水泽中长满了香草</text>
+        <view class='right_info' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+          <text>{{item.goodsName}}</text>
         </view>
-        <view class='right_sub'>
-          <text>古墨清主编</text>
+        <view class='right_sub' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+          <text>{{item.goodsDescribe}}</text>
         </view>
         <view class='right_click'>
-          <view class='click_info'>
-            <view class='click_info_money'>￥3.9</view>
-            <view class='click_info_info'>已卖出39件</view>
+          <view class='click_info' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+            <view class='click_info_money'>￥{{item.price}}</view>
+            <view class='click_info_info'>已卖出{{item.volume}}件</view>
           </view>
-          <view class='click_btn'>立即砍价</view>
+          <view class='click_btn' bindtap='ToBargain'>立即砍价</view>
         </view>
       </view>
     </view>
@@ -65,7 +65,7 @@
     <!-- 标题部分 -->
     <view class='bargainTitle'>
       <image src='../../images/title_icon.png' class='bargainIcon'></image>
-      <text class='titleInfo'>拼团购</text>
+      <text class='titleInfo'>拼团抢购</text>
       <view class='bargainRoll'>
         <swiper class='swiper-box' autoplay='{{true}}' interval='2000' vertical='{{true}}' circular='{{true}}'>
           <swiper-item class='item' wx:for='{{assembleList}}' wx:key="">{{item}}</swiper-item>
@@ -74,22 +74,22 @@
     </view>
     <!-- 商品部分 -->
     <view class='bargainDet' wx:for="{{assembleCom}}" wx:key="">
-      <view class='det_left'>
+      <view class='det_left' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
         <image src='{{item.listImage}}'></image>
       </view>
       <view class='det_right'>
-        <view class='right_info'>
-          <text>可是我采了荷花要送给谁呢?我想要送给远方的爱人</text>
+        <view class='right_info' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+          <text>{{item.goodsName}}</text>
         </view>
-        <view class='right_sub'>
-          <text>红旗出版社</text>
+        <view class='right_sub' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+          <text>{{item.goodsDescribe}}</text>
         </view>
         <view class='right_click'>
-          <view class='click_info'>
-            <view class='click_info_money'>￥33.8</view>
-            <view class='click_info_info'>已卖出39件</view>
+          <view class='click_info' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+            <view class='click_info_money'>￥{{item.price}}</view>
+            <view class='click_info_info'>已卖出{{item.volume}}件</view>
           </view>
-          <view class='click_btn'>立即砍价</view>
+          <view class='click_btn' bindtap='ToBargain'>立即砍价</view>
         </view>
       </view>
     </view>
@@ -101,7 +101,7 @@
     <!-- 标题部分 -->
     <view class='bargainTitle'>
       <image src='../../images/title_icon.png' class='bargainIcon'></image>
-      <text class='titleInfo'>0元购</text>
+      <text class='titleInfo'>0元抢购</text>
       <view class='bargainRoll'>
         <swiper class='swiper-box' autoplay='{{true}}' interval='2000' vertical='{{true}}' circular='{{true}}'>
           <swiper-item class='item' wx:for='{{freeList}}' wx:key="">{{item}}</swiper-item>
@@ -110,22 +110,22 @@
     </view>
     <!-- 商品部分 -->
     <view class='bargainDet' wx:for='{{freeCom}}' wx:key=''>
-      <view class='det_left'>
+      <view class='det_left' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
         <image src='{{item.listImage}}'></image>
       </view>
       <view class='det_right'>
-        <view class='right_info'>
-          <text>回头看那一起生活过的故乡，路途显得那么无边无际</text>
+        <view class='right_info' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+          <text>{{item.goodsName}}</text>
         </view>
-        <view class='right_sub'>
-          <text>初心莫负青葱</text>
+        <view class='right_sub' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+          <text>{{item.goodsDescribe}}</text>
         </view>
         <view class='right_click'>
-          <view class='click_info'>
-            <view class='click_info_money'>￥23.9</view>
-            <view class='click_info_info'>已卖出39件</view>
+          <view class='click_info' data-goods_id="{{item.goodsId}}" bindtap='ToDetails'>
+            <view class='click_info_money'>￥{{item.price}}</view>
+            <view class='click_info_info'>已卖出{{item.volume}}件</view>
           </view>
-          <view class='click_btn'>立即砍价</view>
+          <view class='click_btn' bindtap='ToBargain'>立即砍价</view>
         </view>
       </view>
     </view>

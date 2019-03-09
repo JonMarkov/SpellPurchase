@@ -72,6 +72,11 @@ Page({
                 key: "loginInfo",
                 data: res.data
               })
+              //把用户登录状态存进本地缓存
+              wx.setStorage({
+                key: 'phone',
+                data: res.data.phone,
+              })
               // 点击允许按钮之后如果code等于0则代表请求成功->跳转Home页面
               if (res.data.code == 0){
                 wx.switchTab({

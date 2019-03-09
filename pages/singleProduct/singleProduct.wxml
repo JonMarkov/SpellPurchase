@@ -1,0 +1,32 @@
+<!-- 搜索框部分 star -->
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="请输入查询内容" value="{{SearchData.value}}" bindinput='SearchInput' bindconfirm="SearchConfirm" />
+      <view class="weui-icon-clear" wx:if="{{SearchData.value.length > 0}}" bindtap="SearchClear">
+        <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 商品部分 star -->
+<view class='infoDet'>
+  <!-- 商品部分 -->
+  <view class='info_det'>
+    <view class='infoDet_adv'>
+      <image src='../../images/adv1.png'></image>
+    </view>
+    <view class='infoDet_info'>
+      <view class='infoDet_info_det' wx:for="{{detList}}" wx:key='' data-goods_id='{{item.goodsId}}' bindtap='ToDetails'>
+        <view class='infoDet_info_det_top'>
+          <image src='{{item.listImage}}'></image>
+        </view>
+        <view class='infoDet_info_det_bottom'>
+          <view class='infoDet_info_det_bottom_title'>{{item.goodsName}}</view>
+          <view class='infoDet_info_det_bottom_money'>￥ {{item.price}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
