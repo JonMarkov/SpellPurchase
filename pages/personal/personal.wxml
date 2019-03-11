@@ -1,2 +1,117 @@
-<view>1</view>
-<view>2</view>
+<!-- 用户已登录状态 -->
+<view class='' wx:if="{{phoneState}}">
+  <!-- 个人信息头部 -->
+  <view class='ownInfo'>
+    <!-- 个人信息左部--头像 -->
+    <view class='ownInfo_avatarUrl'>
+      <image src='{{weChat.avatarUrl}}'></image>
+    </view>
+    <!-- 个人信息右部--呢称、id -->
+    <view class='ownInfo_info'>
+      <view class='ownInfo_info_name'>
+        <text>{{weChat.nickName}}</text>
+        <image src='../../images/logo.jpg'></image>
+      </view>
+      <view class='ownInfo_info_id'>
+        <text>ID:{{user_id}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 快捷入口 -->
+  <view class='quickEnt'>
+    <!-- 第一行 账户余额 -->
+    <view class='quickEntOne' bindtap='ToMyBalance'>
+      <view class='quickEntOne_left'>
+        <image src='../../images/money_icon.png'></image>
+        <text>账户余额</text>
+      </view>
+      <view class='quickEntOne_right'>
+        <text>124</text>
+        <image src='../../images/arr.png'></image>
+      </view>
+    </view>
+    <!-- 第二行 商户认证 -->
+    <view class='quickEntOne' bindtap='ToMyApproval'>
+      <view class='quickEntOne_left'>
+        <image src='../../images/business_icon.png'></image>
+        <text>商户认证</text>
+      </view>
+      <view class='quickEntOne_right'>
+        <text>124</text>
+        <image src='../../images/arr.png'></image>
+      </view>
+    </view>
+    <!-- 第三行 我的订单 -->
+    <view class='quickEntOne' bindtap='ToMyOrder'>
+      <view class='quickEntOne_left'>
+        <image src='../../images/order_icon.png'></image>
+        <text>我的订单</text>
+      </view>
+      <view class='quickEntOne_right'>
+        <text>124</text>
+        <image src='../../images/arr.png'></image>
+      </view>
+    </view>
+    <!-- 第四行 我的商品 -->
+    <view class='quickEntOne' bindtap='ToMyGoods'>
+      <view class='quickEntOne_left'>
+        <image src='../../images/info_icon.png'></image>
+        <text>我的商品</text>
+      </view>
+      <view class='quickEntOne_right'>
+        <text>124</text>
+        <image src='../../images/arr.png'></image>
+      </view>
+    </view>
+    <!-- 第五行 收货地址 -->
+    <view class='quickEntOne' bindtap='ToMyAddress'>
+      <view class='quickEntOne_left'>
+        <image src='../../images/sh_icon.png'></image>
+        <text>收货地址</text>
+      </view>
+      <view class='quickEntOne_right'>
+        <text>124</text>
+        <image src='../../images/arr.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 用户未登录状态 -->
+<view class='noPages' wx:else>
+  <view class='elseLoginTitle'>
+    <text>您好，请登录</text>
+  </view>
+  <view class='LoginInput'>
+    <!-- 手机输入框 -->
+    <view class='inputPhone'>
+      <view class="inputPhoneItem {{regexpStatus?'statusTure':'statusFalse'}}">
+        <image src='../../images/Login_input_icon.png' />
+        <input placeholder='请输入手机号' bindinput='phoneItem'></input>
+      </view>
+    </view>
+    <!-- 验证码输入框 -->
+    <view class='inputCode'>
+      <view class='inputCodeItem'>
+        <image src='../../images/Login_code_icon.png' />
+        <input placeholder='验证码' bindinput='codeItem'></input>
+        <text class="inputCodeText {{codeStatus?'codeStatusTure':'codeStatusFalse'}}" bindtap='verification'>{{btntext}}</text>
+      </view>
+    </view>
+    <view class='ReportErrors'>
+      {{ReportErrors_text}}
+    </view>
+    <!-- 登录按钮 -->
+    <view class='inputLoginBtn' bindtap='regLogin'>
+      <view class="inputBtnItem {{btnStatus?'btnStatusTure':'btnStatusFalse'}}">
+        <text>登录</text>
+      </view>
+    </view>
+    <!-- 点击注册协议 -->
+    <view class='inputAgr'>
+      <view class='inputAgrMent'>
+        <text class='inputAgrBtn' bindtap='ToAgr'>{{to_agr}}</text>
+        <text class='inputAgrText' bindtap='ToAgr'>同意注册协议</text>
+      </view>
+    </view>
+  </view>
+</view>

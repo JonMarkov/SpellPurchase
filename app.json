@@ -6,7 +6,13 @@
     "pages/home/home",
     "pages/product/product",
     "pages/personal/personal",
-    "pages/outerChain/outerChain"
+    "pages/outerChain/outerChain",
+    "pages/myBalance/myBalance",
+    "pages/myApproval/myApproval",
+    "pages/myOrder/myOrder",
+    "pages/myGoods/myGoods",
+    "pages/myAddress/myAddress",
+    "pages/address/address"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7a43b6",

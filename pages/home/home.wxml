@@ -53,7 +53,7 @@
             <view class='click_info_money'>￥{{item.price}}</view>
             <view class='click_info_info'>已卖出{{item.volume}}件</view>
           </view>
-          <view class='click_btn' bindtap='ToBargain'>立即砍价</view>
+          <view class='click_btn' data-goods_id='{{item.goodsId}}' bindtap='ToBargain'>立即砍价</view>
         </view>
       </view>
     </view>
@@ -89,7 +89,7 @@
             <view class='click_info_money'>￥{{item.price}}</view>
             <view class='click_info_info'>已卖出{{item.volume}}件</view>
           </view>
-          <view class='click_btn' bindtap='ToBargain'>立即砍价</view>
+          <view class='click_btn' data-goods_id='{{item.goodsId}}' bindtap='ToBargain'>立即砍价</view>
         </view>
       </view>
     </view>
@@ -125,7 +125,7 @@
             <view class='click_info_money'>￥{{item.price}}</view>
             <view class='click_info_info'>已卖出{{item.volume}}件</view>
           </view>
-          <view class='click_btn' bindtap='ToBargain'>立即砍价</view>
+          <view class='click_btn' data-goods_id='{{item.goodsId}}' bindtap='ToBargain'>立即砍价</view>
         </view>
       </view>
     </view>

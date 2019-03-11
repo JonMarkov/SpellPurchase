@@ -66,7 +66,6 @@ Page({
               'content-type': 'application/json' // 默认值
             },
             success: res => {
-              console.log(res)
               // 把返回的数据存进本地缓存
               wx.setStorage({
                 key: "loginInfo",
@@ -76,6 +75,11 @@ Page({
               wx.setStorage({
                 key: 'phone',
                 data: res.data.phone,
+              })
+              // 把所有信息传入缓存
+              wx.setStorage({
+                key: 'LoginSq',
+                data: res.data,
               })
               // 点击允许按钮之后如果code等于0则代表请求成功->跳转Home页面
               if (res.data.code == 0){

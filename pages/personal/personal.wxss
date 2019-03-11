@@ -1,1 +1,285 @@
 /* pages/personal/personal.wxss */
+
+page {
+  background: #dcdcdc;
+  width: 100%;
+}
+
+.noPages {
+  background: #fff;
+  height: 1000rpx
+}
+
+/* 登录标题部分 */
+
+.elseLoginTitle {
+  display: flex;
+  padding: 20rpx 0rpx;
+  font-size: 40rpx;
+  margin-left: 60rpx;
+}
+
+/* 手机号输入框 */
+
+.inputPhone {
+  display: flex;
+  flex-direction: row;
+  height: 98rpx;
+  background: #fff;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.inputPhoneItem {
+  display: flex;
+  width: 100%;
+  background: #fff;
+  flex-direction: row;
+  border-radius: 0rpx;
+  margin-right: 60rpx;
+  margin-left: 60rpx;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.inputPhoneItem image {
+  height: 42rpx;
+  width: 42rpx;
+  align-self: center;
+  margin-left: 10rpx;
+  margin-right: 20rpx;
+  padding: 20rpx;
+}
+
+.inputPhoneItem input {
+  flex: 1;
+  font-size: 30rpx;
+  padding: 20rpx 0rpx;
+}
+
+/* 验证码输入框 */
+
+.inputCode {
+  display: flex;
+  flex-direction: row;
+  height: 98rpx;
+  background: #fff;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.inputCodeItem {
+  display: flex;
+  width: 100%;
+  background: #fff;
+  flex-direction: row;
+  border-radius: 0rpx;
+  margin-right: 60rpx;
+  margin-left: 60rpx;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.inputCodeItem image {
+  height: 42rpx;
+  width: 42rpx;
+  align-self: center;
+  margin-left: 10rpx;
+  margin-right: 20rpx;
+  padding: 20rpx;
+}
+
+.inputCodeItem input {
+  flex: 1;
+  font-size: 30rpx;
+  padding: 20rpx 0rpx;
+}
+
+.inputCodeText {
+  font-size: 26rpx;
+  padding: 30rpx;
+}
+
+/* 登录按钮 */
+
+.inputLoginBtn {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 80rpx;
+}
+
+.inputBtnItem {
+  background: #ce0212;
+  width: 82%;
+  padding: 20rpx;
+  border-radius: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #fff;
+}
+
+/* 登录协议按钮 */
+
+.inputAgr {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+.inputAgrMent {
+  width: 82%;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inputAgrBtn {
+  width: 20rpx;
+  height: 20rpx;
+  border: 1rpx solid #d8595f;
+  border-radius: 50%;
+  font-size: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #d8595f;
+}
+
+.inputAgrText {
+  font-size: 26rpx;
+  color: #d8595f;
+}
+
+/* 报错信息状态 */
+
+.ReportErrors {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20rpx;
+  color: #ce0212;
+  font-size: 20rpx;
+}
+
+/* 条件判断之后的样式 */
+
+.statusTure {
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.statusFalse {
+  border: 1rpx solid #ce0212;
+  border-radius: 10rpx;
+}
+
+.codeStatusTure {
+  color: #db686d;
+}
+
+.codeStatusFalse {
+  color: #dcdcdc;
+}
+
+.btnStatusTure {
+  background: #ce0212;
+}
+
+.btnStatusFalse {
+  background: #dcdcdc;
+}
+
+/* 已登录状态下的 */
+
+.ownInfo {
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 20rpx;
+}
+
+.ownInfo_avatarUrl image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 10rpx;
+}
+
+.ownInfo_info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30rpx;
+  justify-content: center;
+}
+
+.ownInfo_info_name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  line-height: 70rpx;
+}
+
+.ownInfo_info_name text {
+  color: #333;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.ownInfo_info_name image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 10rpx;
+}
+
+.ownInfo_info_id {
+  font-size: 24rpx;
+  color: #dcdcdc;
+}
+
+.quickEnt {
+  margin-top: 20rpx;
+  background: #fff;
+}
+
+.quickEntOne {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #dcdcdc;
+  padding: 30rpx;
+}
+
+.quickEntOne_left {
+  display: flex;
+  align-items: center;
+}
+
+.quickEntOne_left image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.quickEntOne_left text {
+  font-size: 26rpx;
+  margin-left: 15rpx;
+}
+
+.quickEntOne_right {
+  display: flex;
+  align-items: center;
+}
+
+.quickEntOne_right image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.quickEntOne_right text {
+  font-size: 26rpx;
+  color: #ce0212;
+}

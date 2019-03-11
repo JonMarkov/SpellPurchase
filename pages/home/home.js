@@ -196,8 +196,13 @@ Page({
     })
   },
   // DY函数定义 点击进入砍价函数
-  ToBargain: function() {
-    console.log('23')
+  ToBargain: function(e) {
+    var _this = this
+    // 获取当前点击的商品id
+    let goods_id = e.currentTarget.dataset.goods_id
+    let user_id = _this.data.user_id
+    console.log(goods_id)
+    console.log(user_id)
   },
   //DY函数定义 请求消息列表函数
   messageList: function() {
@@ -285,6 +290,16 @@ Page({
         // 把user_id存入本地data数据
         _this.setData({
           user_id: res.data.userId,
+        })
+      },
+    })
+    // 获取本地缓存内的登录状态
+    wx.getStorage({
+      key: 'phone',
+      success: function(res) {
+        // 把user_id存入本地data数据
+        _this.setData({
+          phone: res.data,
         })
       },
     })
