@@ -1,480 +1,456 @@
+var WxLicUrl = getApp().globalData.wx_url_1;
+// 引入省市区的JavaScript库
+var  area =  require('../../utils/area.js');
+
+var  areaInfo = []; 
+//所有省市区县数据
+var  provinces = []; 
+//省
+var  provinceNames = []; 
+//省名称
+var  citys = []; 
+//城市
+var  cityNames = []; 
+//城市名称
+var  countys = []; 
+//区县
+var  countyNames = []; 
+//区县名称
+var  value = [0,  0,  0]; 
+//0
+var  addressList =  null;
+
 Page({
+
   /**
    * 页面的初始数据
    */
-
   data: {
-    isDefault: 1,
-    provinceIndex: 0, //省份
-    cityIndex: 0, //城市
-    countyIndex: 0, //区县
+    // 收货人
+    consignee: '',
+    // 手机号
+    mobile: '',
+    // 详细地址
     address: '',
-    addPhone: '',
-    addName: '',
-    provinceNames: [""],
-    provinceNum: [],
-    cityNum: ["11"],
-    cityNames: ["请选择"],
-    countyNum: ["12"],
-    countyNames: ["请选择"]
+    // 主键
+    addrid: '',
+    provinceIndex:  0,
+      //省份
+    cityIndex:  0,
+      //城市
+    countyIndex:  0,
+      //区县
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+
+    // 重定向this值
+    var _this = this;
     console.log(options)
-    var receiving_id = options.province ? options.province : ''
-    //重定向this
-    var that = this
-    // 获取缓存内user_id
+    if (options.addrId) {
+      _this.setData({
+        addrid: options.addrId
+      })
+    }
+    // 获取本地缓存内的user_id信息
     wx.getStorage({
-      key: "uerid",
-      success: function (res) {
-        that.setData({
-          user_id: res.data
+      key: 'loginInfo',
+      success: function(res) {
+        // 把user_id存入本地data数据
+        _this.setData({
+          user_id: res.data.userId,
+
         })
-      }
+      },
     })
-    this.setData({
-      // 省份
-      proValQh: '',
-      // 城市
-      cityValQh: '',
-      // 区县
-      countyValQh: '',
-    })
-    if (receiving_id) {
-      this.entryTr(receiving_id)
-    } else {
-      this.getProvinceData()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+    if (this.data.addrid != '') {
+      this.detInfo()
     }
   },
+
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function (e) {
-
-  },
-  // 进入页面遍历
-  entryTr: function (receiving_id) {
-    // 重定向this
-    var that = this
-    // URL
-    var phoneUrl = getApp().globalData.wx_url_1;
-    // 请求携带参数
-    wx.request({
-      url: phoneUrl,
-      method: "POST",
-      data: {
-        service: "selectAddressDetail",
-        receiving_id: receiving_id
-      },
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        var valQh_1 = res.data.userReceiving.province
-        var valQh_2 = res.data.userReceiving.city
-        var valQh_3 = res.data.userReceiving.district
-        that.setData({
-          address: res.data.userReceiving.address,
-          addPhone: res.data.userReceiving.contacts,
-          addName: res.data.userReceiving.consignee,
-          isDefault: res.data.userReceiving.isDefault,
-          receivingId: res.data.userReceiving.receivingId
-        })
-        that.entryTrProCallback(valQh_1, valQh_2, valQh_3)
-      }
-    })
-  },
-
-  //请求当前携带来的省市参数
-  entryTrProCallback: function (valQh_1, valQh_2, valQh_3) {
-    var that = this
-    var phoneUrl = getApp().globalData.wx_url_1;
-    // 请求省市数据
-    wx.request({
-      url: phoneUrl,
-      method: "POST",
-      data: {
-        service: "selectArea",
-        rank: '1'
-      },
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        // 获取返回值List
-        var provin = res.data.areaList;
-        // 初始化省份名称
-        var provinceNames = [];
-        // 初始化省份区号
-        var provinceNum = [];
-        // 遍历返回值List存进省份区号和名称列表
-        for (var i in provin) {
-          provinceNum.push(provin[i].area_no)
-          provinceNames.push(provin[i].area_name)
-        }
-        for (var j in provinceNum) {
-          if (provinceNum[j] == valQh_1) {
-            that.setData({
-              provinceIndex: j
-            })
-            that.entryTrCityCallback(valQh_1, valQh_2, valQh_3)
-          }
-        }
-        // 存进data
-        that.setData({
-          provinceNames: provinceNames,
-          provinceNum: provinceNum,
-          proValQh: valQh_1
-
-        })
-        console.log(that.data)
-      }
-    })
-  },
-  // 请求携带来的城市参数
-  entryTrCityCallback: function (valQh_1, valQh_2, valQh_3) {
-    var phoneUrl = getApp().globalData.wx_url_1;
-    var that = this
-    // 请求城市数据
-    wx.request({
-      url: phoneUrl,
-      method: "POST",
-      data: {
-        service: "selectArea",
-        rank: '2',
-        area_no: valQh_1
-      },
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        console.log(res.data.areaList)
-        // 获取返回值List
-        var city = res.data.areaList;
-        // 初始化省份名称
-        var cityNames = [];
-        // 初始化省份区号
-        var cityNum = [];
-        // 遍历返回值List存进省份区号和名称列表
-        for (var i in city) {
-          cityNum.push(city[i].area_no)
-          cityNames.push(city[i].area_name)
-
-        }
-        for (var j in cityNum) {
-          if (cityNum[j] == valQh_2) {
-            that.setData({
-              cityIndex: j
-            })
-            that.entryTrCounCallback(valQh_1, valQh_2, valQh_3)
-          }
-        }
-        // 存进data
-        that.setData({
-          cityNames: cityNames,
-          cityNum: cityNum,
-          cityValQh: valQh_2
-        })
-      }
-    })
-  },
-  // 请求携带来的区县参数
-  entryTrCounCallback: function (valQh_1, valQh_2, valQh_3) {
-
-    var phoneUrl = getApp().globalData.wx_url_1;
-    var that = this
-    // 请求城市数据
-    wx.request({
-      url: phoneUrl,
-      method: "POST",
-      data: {
-        service: "selectArea",
-        rank: '3',
-        area_no: valQh_2
-      },
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        console.log(res.data.areaList)
-        // 获取返回值List
-        var county = res.data.areaList;
-        // 初始化省份名称
-        var countyNames = [];
-        // 初始化省份区号
-        var countyNum = [];
-        // 遍历返回值List存进省份区号和名称列表
-        for (var i in county) {
-          countyNum.push(county[i].area_no)
-          countyNames.push(county[i].area_name)
-
-        }
-        for (var j in countyNum) {
-          if (countyNum[j] == valQh_3) {
-            that.setData({
-              countyIndex: j
-            })
-          }
-        }
-        // 存进data
-        that.setData({
-          countyNames: countyNames,
-          countyNum: countyNum,
-          countyValQh: valQh_3
-        })
-      }
-    })
-  },
-
-  // 获取省份数据
-  getProvinceData: function (options) {
-    // 重定向this
-    var that = this
-    // URL
-    var phoneUrl = getApp().globalData.wx_url_1;
-    // 请求省份数据
-    wx.request({
-      url: phoneUrl,
-      method: "POST",
-      data: {
-        service: "selectArea",
-        rank: '1'
-      },
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        // 获取返回值List
-        var provin = res.data.areaList;
-        // 初始化省份名称
-        var provinceNames = [];
-        // 初始化省份区号
-        var provinceNum = [];
-        // 遍历返回值List存进省份区号和名称列表
-        for (var i in provin) {
-          provinceNum.push(provin[i].area_no)
-          provinceNames.push(provin[i].area_name)
-        }
-        // 存进data
-        that.setData({
-          provinceNames: provinceNames,
-          provinceNum: provinceNum
-        })
-      }
-    })
-  },
-  // 点击省份列表执行函数
-  bindProvinceNameChange: function (e) {
-    // 获取区号
-    var valQh = this.data.provinceNum[e.detail.value]
+  onShow: function() {
     var that = this;
-    console.log('picker province 发生选择改变，携带值为', e.detail.value);
-    var val = e.detail.value
-    that.getCityArr(valQh); //获取地级市数据
-    that.getCountyInfo(valQh); //获取区县数据
+
+
+    // 执行调用JavaScript省市区库
+    area.getAreaInfo(function(arr) {
+      areaInfo = arr;
+      //ZX函数 执行获取省份数据
+      that.getProvinceData();
+    });
+  },
+  // DY函数执行 如果是编辑则获取信息
+  detInfo: function() {
+    var that = this
+    var addrid = this.data.addrid
+    var params = {
+      // 请求方法名
+      action: 'getDeliveryAddress',
+      // 请求参数
+      requestParam: {
+        addrid: addrid
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      // dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res)
+        // 如果请求成功则跳转
+        that.setData({
+          consignee: res.data.receiverName,
+          mobile: res.data.receiverPhone,
+          address: res.data.detailedAddress,
+          provinceIndex: res.data.province,
+        })
+        // 开始执行当前所选省份
+        that.bindProvinceNameChangeTwo(res.data.province)
+      }
+    })
+  },
+  // DY函数执行 获取收货人输入框内容
+  consigneeFn: function(e) {
     this.setData({
-      // 城市
-      cityValQh: '',
-      // 区县
-      countyValQh: '',
+      consignee: e.detail.value
+    })
+  },
+  // DY函数执行 获取收货人输入框内容
+  mobileFn: function(e) {
+    this.setData({
+      mobile: e.detail.value
+    })
+  },
+  // DY函数执行 获取详细地址输入框内容
+  addressFn(e) {
+    this.setData({
+      address: e.detail.value
+    })
+  },
+  // DY函数执行 执行省份函数
+  getProvinceData: function() {
+    var  that =  this;
+    var  s;
+    // 省份数据列表
+    provinces = [];
+    // 省份数据名字列表
+    provinceNames = [];
+    var  num =  0;
+    for  (var  i =  0; i < areaInfo.length; i++) {
+      s = areaInfo[i];
+      if  (s.di ==  "00"  && s.xian ==  "00") {
+        provinces[num] = s;
+        provinceNames[num] = s.name;
+        num++;
+      }
+    }
+    // 把得到的省份数据名字列表放入data中
+    that.setData({
+      provinceNames: provinceNames
+    })
+    // ZX函数执行 执行获取城市列表函数
+    that.getCityArr();
+    // Zx函数执行 执行获取区县列表函数
+    that.getCountyInfo();  
+  },
+  // DY函数执行 执行城市函数
+  getCityArr: function(count =  0) {
+    var  c;
+    // 城市数据列表
+    citys = [];
+    // 城市名字数据列表
+    cityNames = [];
+    var  num =  0;
+    for  (var  i =  0; i < areaInfo.length; i++) {
+      c = areaInfo[i];
+      if  (c.xian ==  "00"  && c.sheng == provinces[count].sheng && c.di !=  "00") {
+        citys[num] = c;
+        cityNames[num] = c.name;
+        num++;
+      }
+    }
+    if  (citys.length ==  0) {
+      citys[0] = {
+        name:   ''
+      };
+      cityNames[0] = {
+        name:   ''
+      };
+    }
+    var  that =  this;
+    that.setData({
+      citys: citys,
+      cityNames: cityNames
+    })
+    console.log('cityNames:'  + cityNames);
+    that.getCountyInfo(count,  0);  
+  },
+  // DY函数执行 获取区县数据
+  getCountyInfo: function(column0 =  0, column1 =  0) {
+    var  c;
+    countys = [];
+    countyNames = [];
+    var  num =  0;
+    for  (var  i =  0; i < areaInfo.length; i++) {
+      c = areaInfo[i];
+      if  (c.xian !=  "00"  && c.sheng == provinces[column0].sheng && c.di == citys[column1].di) {
+        countys[num] = c;
+        countyNames[num] = c.name;
+        num++;
+      }
+    }
+
+    if  (countys.length ==  0) {
+      countys[0] = {
+        name:   ''
+      };
+      countyNames[0] = {
+        name:   ''
+      };
+    }
+    console.log('countyNames:'  + countyNames);
+    var  that =  this;
+    // value = [column0, column1, 0];
+    that.setData({
+      countys: countys,
+      countyNames: countyNames,
+      // value: value,
+    })  
+  },
+  // DY函数定义 选择省份函数定义
+  bindProvinceNameChange: function(e) {
+    var  that =  this;
+    console.log('picker province 发生选择改变，携带值为', e.detail.value);
+    var  val = e.detail.value
+    that.getCityArr(val);  //获取地级市数据
+    that.getCountyInfo(val,  0);  //获取区县数据
+    value = [val,  0,  0];
+    this.setData({
       provinceIndex: e.detail.value,
+      cityIndex:  0,
+      countyIndex:  0,
+      value: value
+    })  
+  },
+  // DY函数定义 选择省份函数定义Two 修改进入
+  bindProvinceNameChangeTwo: function(e) {
+    console.log(e)
+    var that = this;
+    var val = e
+    that.getCityArr(val);  //获取地级市数据
+    that.getCountyInfo(val, 0);  //获取区县数据
+    value = [val, 0, 0];
+    this.setData({
+      provinceIndex: e,
       cityIndex: 0,
       countyIndex: 0,
-      proValQh: valQh
+      value: value
     })
+    // ZX函数执行 开始执行请求所选城市数据
+    this.cityMa()
   },
-  // 获取城市数据
-  getCityArr: function (valQh) {
-    // 重定向this
+  // DY函数定义 开始执行请求所选城市数据
+  cityMa: function() {
     var that = this
-    // URL
-    var phoneUrl = getApp().globalData.wx_url_1;
-    // 请求省份数据
+    var addrid = this.data.addrid
+    var params = {
+      // 请求方法名
+      action: 'getDeliveryAddress',
+      // 请求参数
+      requestParam: {
+        addrid: addrid
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
     wx.request({
-      url: phoneUrl,
+      url: WxLicUrl,
+      data: newparams,
       method: "POST",
-      data: {
-        service: "selectArea",
-        rank: '2',
-        area_no: valQh
-      },
+      // dataType: JSON,
       header: {
-        "content-type": "application/json"
+        'content-type': 'application/json' // 默认值
       },
-      success: function (res) {
-        console.log(res.data.areaList)
-        // 获取返回值List
-        var city = res.data.areaList;
-        // 初始化省份名称
-        var cityNames = [];
-        // 初始化省份区号
-        var cityNum = [];
-        // 遍历返回值List存进省份区号和名称列表
-        for (var i in city) {
-          cityNum.push(city[i].area_no)
-          cityNames.push(city[i].area_name)
-        }
-        // 存进data
+      success: res => {
+        console.log(res)
+        // 如果请求成功则跳转
         that.setData({
-          cityNames: cityNames,
-          cityNum: cityNum
+          cityIndex: res.data.city,
         })
+        //ZX函数执行 开始执行请求所选区县数据
+        that.countysMa()
       }
     })
   },
-  // 点击城市列表执行函数
-  bindCityNameChange: function (e) {
-    // 获取区号
-    var valQh = this.data.cityNum[e.detail.value]
-    var that = this;
-    console.log('picker province 发生选择改变，携带值为', e.detail.value);
-    var val = e.detail.value
-    that.getCountyInfo(valQh); //获取区县数据
+  // ZX函数定义 开始执行请求所选城市数据
+  countysMa: function() {
+    var that = this
+    var addrid = this.data.addrid
+    var params = {
+      // 请求方法名
+      action: 'getDeliveryAddress',
+      // 请求参数
+      requestParam: {
+        addrid: addrid
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      // dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res)
+        // 如果请求成功则跳转
+        that.setData({
+          countyIndex: res.data.county
+        })
+
+      }
+    })
+  },
+  // DY函数定义 选择城市函数定义
+  bindCityNameChange: function(e) {
+    var  that =  this;
+    console.log('picker city 发生选择改变，携带值为', e.detail.value);
+    var  val = e.detail.value
+    that.getCountyInfo(value[0], val);  //获取区县数据
+    value = [value[0], val,  0];
     this.setData({
       cityIndex: e.detail.value,
-      countyIndex: 0,
-      cityValQh: valQh
-    })
+      countyIndex:  0,
+      value: value
+    }) 
+
   },
-  // 获取区县数据
-  getCountyInfo: function (valQh) {
-    console.log(valQh)
-    // 重定向this
-    var that = this
-    // URL
-    var phoneUrl = getApp().globalData.wx_url_1;
-    // 请求省份数据
+  // DY函数定义 选择区县函数定义
+  bindCountyNameChange:   function(e) {
+    var  that =  this;
+    console.log('picker county 发生选择改变，携带值为', e.detail.value);
+    this.setData({
+      countyIndex: e.detail.value
+    })  
+  },
+  //DY函数定义 确认提交
+  addAddressFn: function() {
+    var _this = this
+    // 收货人
+    let receiver_name = this.data.consignee;
+    // 手机号
+    let receiver_phone = this.data.mobile;
+    // 详细地址
+    let detailed_address = this.data.address;
+    // 省份
+    let province = this.data.provinceNames[this.data.provinceIndex]
+    let provinceIndex = this.data.provinceIndex
+    // 城市
+    let city = this.data.cityNames[this.data.cityIndex]
+    let cityIndex = this.data.cityIndex
+    // 区县
+    let county = this.data.countyNames[this.data.countyIndex]
+    let countyIndex = this.data.countyIndex
+
+    // 用户id
+    var user_id = this.data.user_id
+    // 主键Id
+    var addrid = this.data.addrid
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'addOrEditAddr',
+      // 请求参数
+      requestParam: {
+        userId: user_id,
+        addrId: addrid,
+        receiverName: receiver_name,
+        receiverPhone: receiver_phone,
+        province: province,
+        city: city,
+        county: county,
+        provinceIndex: provinceIndex,
+        cityIndex: cityIndex,
+        countyIndex: countyIndex,
+        detailedAddress: detailed_address
+
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
     wx.request({
-      url: phoneUrl,
+      url: WxLicUrl,
       method: "POST",
-      data: {
-        service: "selectArea",
-        rank: '3',
-        area_no: valQh
-      },
+      data: newparams,
       header: {
         "content-type": "application/json"
       },
-      success: function (res) {
-        console.log(res.data.areaList)
-        // 获取返回值List
-        var county = res.data.areaList;
-        // 初始化省份名称
-        var countyNames = [];
-        // 初始化省份区号
-        var countyNum = [];
-        // 遍历返回值List存进省份区号和名称列表
-        for (var i in county) {
-          countyNum.push(county[i].area_no)
-          countyNames.push(county[i].area_name)
-        }
-        // 存进data
-        that.setData({
-          countyNum: countyNum,
-          countyNames: countyNames
+      success: function(res) {
+        wx.navigateTo({
+          url: '/pages/myAddress/myAddress',
         })
       }
     })
   },
-  // 点击区县列表执行函数
-  bindCountyNameChange: function (e) {
-    // 获取区号
-    var valQh = this.data.countyNum[e.detail.value]
-    var that = this;
-    console.log('picker province 发生选择改变，携带值为', e.detail.value);
-    var val = e.detail.value
-    this.setData({
-      countyIndex: e.detail.value,
-      countyValQh: valQh
-    })
+
+
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
   },
-  // 保存
-  saveAddress: function (e) {
-    console.log(this.data)
-    // receivingId 可以为空
-    var receiving_id = this.data.receivingId
-    // 是否默认 可以为空
-    var isDefault = this.data.isDefault;
-    // 名字
-    var consignee = e.detail.value.consignee;
-    // 手机号
-    var mobile = e.detail.value.mobile;
-    // 省份
-    var proValQh = this.data.proValQh;
-    // 城市
-    var cityValQh = this.data.cityValQh;
-    // 区县
-    var countyValQh = this.data.countyValQh;
-    console.log(countyValQh)
-    // 地址
-    var address = e.detail.value.address;
-    if (consignee == '') {
-      wx.showModal({
-        title: '提示',
-        content: '请输入姓名',
-        showCancel: false,
-      })
-    } else if (mobile == '' || mobile.length < 11) {
-      wx.showModal({
-        title: '提示',
-        content: '请输入正确的手机号',
-        showCancel: false,
-      })
-    } else if (proValQh == '') {
-      wx.showModal({
-        title: '提示',
-        content: '请选择省份',
-        showCancel: false,
-      })
-    } else if (cityValQh == '') {
-      wx.showModal({
-        title: '提示',
-        content: '请选择市区',
-        showCancel: false,
-      })
-    } else if (countyValQh == '') {
-      wx.showModal({
-        title: '提示',
-        content: '请选择区县',
-        showCancel: false,
-      })
-    } else if (address == '') {
-      wx.showModal({
-        title: '提示',
-        content: '请输入详细地址',
-        showCancel: false,
-      })
-    } else {
-      var phoneUrl = getApp().globalData.wx_url_1;
-      wx.request({
-        url: phoneUrl,
-        method: "POST",
-        data: {
-          service: "addAddress",
-          receiving_id: receiving_id,
-          user_id: this.data.user_id,
-          name: consignee,
-          province: proValQh,
-          city: cityValQh,
-          district: countyValQh,
-          address: address,
-          phone: mobile,
-          is_default: isDefault,
-        },
-        header: {
-          "content-type": "application/json"
-        },
-        success: function (res) {
-          console.log(res)
-          if (res.data.result_code == 0) {
-            wx.navigateBack({})
-          }
-        }
-      })
-    }
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
 
   }
 })

@@ -1,1 +1,22 @@
-/* pages/myApproval/myApproval.wxss */
+page{
+  background: #ffffff
+}
+.merchantCA{
+  padding: 20rpx 20rpx
+}
+.translate{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #f8f8f8;
+  justify-content: space-between;
+  font-size: 26rpx;
+  margin-top: 20rpx
+}
+
+.translate input{
+  padding: 10rpx;
+  text-align: left
+}
+.translate text{
+  margin-top: 15rpx
+}

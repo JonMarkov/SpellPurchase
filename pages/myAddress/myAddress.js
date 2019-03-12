@@ -129,7 +129,7 @@ Page({
     var index = e.target.dataset.index;
     var addrId = this.data.addressList[index].addrId;
     wx.navigateTo({
-      url: '../address/address?province=' + addrId,
+      url: '../address/address?addrId=' + addrId,
     })
   }
 })

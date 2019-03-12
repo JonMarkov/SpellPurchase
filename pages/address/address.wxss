@@ -1,18 +1,30 @@
 @import '../../utils/weui.wxss';
-.weui-cells:before {
-  top: 0;
-  border-top: 1rpx solid white;
-}
-.weui-cell {
+.weui-cells:before{
+  top:0;
+  border-top:1rpx solid white;
+  }
+.weui-cell{
   line-height: 3.5rem;
 }
-.weui-cells:after {
-  bottom: 0;
-  border-bottom: 1rpx solid white;
+.weui-cells:after{
+  bottom:0; border-bottom:1rpx solid white
 }
-.weui-btn {
-  width: 94%;
+.weui-btn{
+  width: 80%;
+}
+.add-address{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  width: 88%;
+  margin: 24rpx;
+  padding: 20rpx;
+  border: 1px solid #FEA12E;
+  background: #FEA12E;
+  border-radius: 10rpx;
+  color: #fff;
   position: absolute;
-  bottom: 10rpx;
-  margin: 24rpx
+  bottom: 10rpx
 }

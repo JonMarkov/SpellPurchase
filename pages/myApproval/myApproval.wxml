@@ -1,2 +1,28 @@
 <!--pages/myApproval/myApproval.wxml-->
-<text>pages/myApproval/myApproval.wxml</text>
+<view class='merchantCA'>
+  <view class='translate'>
+    <text>企业名称</text>
+    <input placeholder='请输入公司名称' placeholder-style='text-align:right' bindinput='ToTraOne'></input>
+  </view>
+
+  <view class='translate'>
+    <text>企业法人</text>
+    <input placeholder='请输入法人姓名' placeholder-style='text-align:right' bindinput='ToTraTwo'></input>
+  </view>
+  <view class='translate'>
+    <text>组织机构代码</text>
+    <input placeholder='请输入组织机构代码' placeholder-style='text-align:right' bindinput='ToTraThree'></input>
+  </view>
+  <view class='translate'>
+    <text>营业执照</text>
+    <!-- <input placeholder='请输入联系人姓名' placeholder-style='text-align:right'></input> -->
+  </view>
+  <view class='translate'>
+    <text>联系人姓名</text>
+    <input placeholder='请输入联系人姓名' placeholder-style='text-align:right' bindinput='ToTraFour'></input>
+  </view>
+  <view class='translate'>
+    <text>联系人电话</text>
+    <input placeholder='请输入联系人电话' placeholder-style='text-align:right' bindinput='ToTraFive'></input>
+  </view>
+</view>
