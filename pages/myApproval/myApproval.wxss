@@ -20,3 +20,19 @@ page{
 .translate text{
   margin-top: 15rpx
 }
+.add-address{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  width: 88%;
+  
+  padding: 20rpx;
+  border: 1px solid #FEA12E;
+  background: #FEA12E;
+  border-radius: 10rpx;
+  color: #fff;
+  position: absolute;
+  bottom: 10rpx
+}

@@ -1,2 +1,32 @@
-<!--pages/myBalance/myBalance.wxml-->
-<text>pages/myBalance/myBalance.wxml</text>
+<!-- 账单时间 -->
+<view class="bill_time_box" style="position:fixed; top:0;">
+  <picker mode="date" value="{{date}}" start="2015-09" end="2017-09" bindchange="bindDateChange">
+    <view class="picker">
+       {{yearAndMonth}}
+    </view>
+  </picker>
+  <view class="bill_details">支出
+    <text>￥ {{income}}</text>收入
+    <text>￥ {{expenditure}}</text>
+  </view>
+</view>
+
+<!-- 账单记录 -->
+<view class='bills_info'>
+  <view class='bills' wx:for="{{bills}}" wx:key="index">
+    <!-- 左侧 -->
+    <view class='bills_left'>
+      <view class='bills_left_text'>
+        <text class='bills_left_text_title'>{{item.goodsName}} </text>
+        <text class='bills_left_text_type'> {{item.activityType_text}}</text>
+      </view>
+      <view class='bills_left_time'>
+        <text>{{item.payDate}}</text>
+      </view>
+    </view>
+    <!-- 右侧 -->
+    <view class='bills_right'>
+      <text> {{item.showAmount}} </text>
+    </view>
+  </view>
+</view>

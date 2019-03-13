@@ -12,7 +12,9 @@ Page({
     codeStatus: true,
     to_agr: '',
     code_item: '',
-    ReportErrors_text:''
+    ReportErrors_text: '',
+    resState: '',
+    merAuthId: ''
   },
   // DY函数定义 获取输入的手机号
   phoneItem: function(e) {
@@ -102,6 +104,8 @@ Page({
       _this.setData({
         phoneState: true
       })
+      // 执行查询函数
+      _this.ergodicFn()
     }
   },
   // DY函数定义 点击登录请求注册
@@ -175,14 +179,14 @@ Page({
             // 返回信息
             let resData = res.data
             // 如果请求失败则显示相应的错误
-            if(resData.code != 0){
+            if (resData.code != 0) {
               _this.setData({
-                ReportErrors_text:resData.msg
+                ReportErrors_text: resData.msg
               })
-            }else{
+            } else {
               // 把返回成功的信息存入data且把状态转为已登录模式
               _this.setData({
-                phoneState:true,
+                phoneState: true,
                 userIfo: resData
               })
               // 把信息存入缓存
@@ -203,33 +207,115 @@ Page({
 
   },
   // DY函数定义 点击进入我的账户余额
-  ToMyBalance:function(){
+  ToMyBalance: function() {
     wx.navigateTo({
       url: '/pages/myBalance/myBalance',
     })
   },
   // DY函数定义 点击进入我的商户认证
-  ToMyApproval: function () {
-    wx.navigateTo({
-      url: '/pages/myApproval/myApproval',
-    })
+  ToMyApproval: function() {
+    var merAuthId = this.data.merAuthId
+    if (merAuthId) {
+      wx.navigateTo({
+        url: '/pages/myApproval/myApproval?merAuth_id=' + merAuthId,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/myApproval/myApproval',
+      })
+    }
+
   },
   // DY函数定义 点击进入我的订单页面
-  ToMyOrder: function () {
+  ToMyOrder: function() {
     wx.navigateTo({
       url: '/pages/myOrder/myOrder',
     })
   },
   // DY函数定义 点击进入我的商品
-  ToMyGoods: function () {
+  ToMyGoods: function() {
     wx.navigateTo({
       url: '/pages/myGoods/myGoods',
     })
   },
   // DY函数定义 点击进入我的收货地址
-  ToMyAddress: function () {
+  ToMyAddress: function() {
     wx.navigateTo({
       url: '/pages/myAddress/myAddress',
+    })
+  },
+  ergodicFn: function() {
+    var _this = this
+    let user_id = _this.data.user_id
+    var params = {
+      // 请求方法名
+      action: 'judgeIsRegister',
+      // 请求参数
+      requestParam: {
+        userId: user_id
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      // dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res.data)
+        let resData = res.data
+        // 账户余额
+        let balance = resData.balance;
+        // 用户身份
+        let role = resData.role
+        // 商户认证状态
+        let merchantAuthState = resData.merchantAuth;
+        console.log(merchantAuthState)
+        if (merchantAuthState) {
+          var merAuthId = resData.merchantAuth.merAuthId;
+          if (merchantAuthState.state == 1) {
+            var resState = '认证中';
+            var resClassOne = true;
+            var resClassTwo = false;
+            var resClassThree = false
+
+          } else if (merchantAuthState.state == 2) {
+            var resState = '审核通过';
+            var resClassOne = false;
+            var resClassTwo = true;
+            var resClassThree = false
+          } else if (merchantAuthState.state == 3) {
+            var resState = '审核失败'
+            var resClassOne = false;
+            var resClassTwo = false;
+            var resClassThree = true;
+
+          }
+        } else {
+          var resState = '待认证';
+          var resClassOne = '';
+          var resClassTwo = '';
+          var resClassThree = '';
+          // 认证的主键
+          var merAuthId = ''
+        }
+
+        // 把数据存入data
+        _this.setData({
+          balance: balance,
+          resClassOne: resClassOne,
+          resClassTwo: resClassTwo,
+          resClassThree: resClassThree,
+          merAuthId: merAuthId,
+          resState: resState,
+          role: role
+        })
+      }
     })
   },
   /**
@@ -261,7 +347,7 @@ Page({
     //获取微信的信息
     wx.getStorage({
       key: 'weChat',
-      success: function (res) {
+      success: function(res) {
         var resData = res.data
         // 把user_id存入本地data数据
         _this.setData({
@@ -272,7 +358,7 @@ Page({
     //获取个人中心信息
     wx.getStorage({
       key: 'LoginSq',
-      success: function (res) {
+      success: function(res) {
         var resData = res.data
         // 把user_id存入本地data数据
         _this.setData({
@@ -281,7 +367,6 @@ Page({
       },
     })
   },
-  // 判断是否登录
 
   /**
    * 生命周期函数--监听页面初次渲染完成

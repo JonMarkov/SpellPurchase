@@ -2,16 +2,19 @@
 <view class='merchantCA'>
   <view class='translate'>
     <text>企业名称</text>
-    <input placeholder='请输入公司名称' placeholder-style='text-align:right' bindinput='ToTraOne'></input>
+    <input placeholder='请输入公司名称' wx:if="{{proveState == false}}" value='{{traOne}}' placeholder-style='text-align:right' bindinput='ToTraOne'></input>
+    <input placeholder='请输入公司名称' wx:if="{{proveState == true}}" disabled='true' value='{{traOne}}' placeholder-style='text-align:right'></input>
   </view>
 
   <view class='translate'>
     <text>企业法人</text>
-    <input placeholder='请输入法人姓名' placeholder-style='text-align:right' bindinput='ToTraTwo'></input>
+    <input wx:if="{{proveState == false}}" placeholder='请输入法人姓名' value='{{traTwo}}' placeholder-style='text-align:right' bindinput='ToTraTwo'></input>
+    <input wx:if="{{proveState == true}}" placeholder='请输入法人姓名' disabled='true' value='{{traTwo}}' placeholder-style='text-align:right'></input>
   </view>
   <view class='translate'>
     <text>组织机构代码</text>
-    <input placeholder='请输入组织机构代码' placeholder-style='text-align:right' bindinput='ToTraThree'></input>
+    <input placeholder='请输入组织机构代码' wx:if="{{proveState == false}}" value='{{traThree}}' placeholder-style='text-align:right' bindinput='ToTraThree'></input>
+    <input placeholder='请输入组织机构代码' wx:if="{{proveState == true}}" disabled='true' value='{{traThree}}' placeholder-style='text-align:right'></input>
   </view>
   <view class='translate'>
     <text>营业执照</text>
@@ -19,10 +22,20 @@
   </view>
   <view class='translate'>
     <text>联系人姓名</text>
-    <input placeholder='请输入联系人姓名' placeholder-style='text-align:right' bindinput='ToTraFour'></input>
+    <input placeholder='请输入联系人姓名' wx:if="{{proveState == false}}" value='{{traFour}}' placeholder-style='text-align:right' bindinput='ToTraFour'></input>
+    <input placeholder='请输入联系人姓名' wx:if="{{proveState == true}}" disabled='true' value='{{traFour}}' placeholder-style='text-align:right'></input>
   </view>
   <view class='translate'>
     <text>联系人电话</text>
-    <input placeholder='请输入联系人电话' placeholder-style='text-align:right' bindinput='ToTraFive'></input>
+    <input placeholder='请输入联系人电话' wx:if="{{proveState == false}}" value='{{traFive}}' placeholder-style='text-align:right' bindinput='ToTraFive'></input>
+    <input placeholder='请输入联系人电话' wx:if="{{proveState == true}}" disabled='true' value='{{traFive}}' placeholder-style='text-align:right'></input>
+  </view>
+  <view class='translate'>
+    <text>公司地址</text>
+    <input placeholder='请输入公司地址' wx:if="{{proveState == false}}" value='{{traSix}}' placeholder-style='text-align:right' bindinput='ToTraSix'></input>
+    <input placeholder='请输入公司地址' wx:if="{{proveState == true}}" disabled='true' value='{{traSix}}' placeholder-style='text-align:right'></input>
+  </view>
+  <view class="add-address" wx:if="{{proveState == false}}" bindtap="Submission">
+    <p>确认提交</p>
   </view>
 </view>

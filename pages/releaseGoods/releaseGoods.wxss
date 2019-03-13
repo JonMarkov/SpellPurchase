@@ -1,0 +1,49 @@
+/* 下面是tobar */
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+  background-color:white;
+}
+
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 30%;
+  color: #777;
+  border-bottom: 0rpx;
+}
+
+.on {
+  color: #da7c0c;
+  border-bottom: 2rpx solid #da7c0c;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-box view {
+  text-align: center;
+}
+
+/* 点击发布商品 */
+.add-address{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  width: 88%;
+  margin: 24rpx;
+  padding: 20rpx;
+  border: 1px solid #FEA12E;
+  background: #FEA12E;
+  border-radius: 10rpx;
+  color: #fff;
+  position: absolute;
+  bottom: 10rpx
+}

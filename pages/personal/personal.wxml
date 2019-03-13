@@ -26,7 +26,7 @@
         <text>账户余额</text>
       </view>
       <view class='quickEntOne_right'>
-        <text>124</text>
+        <text>{{balance}} 元 </text>
         <image src='../../images/arr.png'></image>
       </view>
     </view>
@@ -37,7 +37,7 @@
         <text>商户认证</text>
       </view>
       <view class='quickEntOne_right'>
-        <text>124</text>
+        <text>{{resState}}</text>
         <image src='../../images/arr.png'></image>
       </view>
     </view>
@@ -48,18 +48,17 @@
         <text>我的订单</text>
       </view>
       <view class='quickEntOne_right'>
-        <text>124</text>
         <image src='../../images/arr.png'></image>
       </view>
     </view>
     <!-- 第四行 我的商品 -->
+    <!-- <view class='quickEntOne' bindtap='ToMyGoods' wx:if="{{role == 2}}"> -->
     <view class='quickEntOne' bindtap='ToMyGoods'>
       <view class='quickEntOne_left'>
         <image src='../../images/info_icon.png'></image>
-        <text>我的商品</text>
+        <text>商家后台</text>
       </view>
       <view class='quickEntOne_right'>
-        <text>124</text>
         <image src='../../images/arr.png'></image>
       </view>
     </view>
@@ -70,7 +69,6 @@
         <text>收货地址</text>
       </view>
       <view class='quickEntOne_right'>
-        <text>124</text>
         <image src='../../images/arr.png'></image>
       </view>
     </view>

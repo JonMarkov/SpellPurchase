@@ -1,30 +1,34 @@
-// pages/myGoods/myGoods.js
+// pages/releaseOrders/releaseOrders.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    isShow: true,
+    currentTab: 0,
   },
+  tabNav: function (e) {
+    console.log(e.target.dataset.current, 111, this.data.currentTab)
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
 
+      var showMode = e.target.dataset.current == 0;
+
+      this.setData({
+        currentTab: e.target.dataset.current,
+        isShow: showMode
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
   },
-  // 跳转到我发布的商品
-  ToGoodsFn:function(){
-      wx.navigateTo({
-        url: '/pages/releaseGoods/releaseGoods',
-      })
-  },
-  ToOrdersFn:function(){
-    wx.navigateTo({
-      url: '/pages/releaseOrders/releaseOrders',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

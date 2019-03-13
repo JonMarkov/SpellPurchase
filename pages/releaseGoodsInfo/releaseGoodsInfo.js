@@ -1,4 +1,4 @@
-// pages/myGoods/myGoods.js
+// pages/releaseGoodsInfo/releaseGoodsInfo.js
 Page({
 
   /**
@@ -14,17 +14,7 @@ Page({
   onLoad: function (options) {
 
   },
-  // 跳转到我发布的商品
-  ToGoodsFn:function(){
-      wx.navigateTo({
-        url: '/pages/releaseGoods/releaseGoods',
-      })
-  },
-  ToOrdersFn:function(){
-    wx.navigateTo({
-      url: '/pages/releaseOrders/releaseOrders',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

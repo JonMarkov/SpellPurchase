@@ -1,2 +1,22 @@
-<!--pages/myGoods/myGoods.wxml-->
-<text>pages/myGoods/myGoods.wxml</text>
+<view class='order'>
+  <!-- 我的商品 -->
+  <view class='order_info' bindtap='ToGoodsFn'>
+    <view class='order_info_title'>
+      <text>我的商品</text>
+    </view>
+    <view class='order_prder_num'>
+      <text>1个 </text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+  <!-- 我的订单 -->
+  <view class='order_info' bindtap='ToOrdersFn'>
+    <view class='order_info_title'>
+      <text>我的订单</text>
+    </view>
+    <view class='order_prder_num'>
+      <text>1个 </text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+</view>

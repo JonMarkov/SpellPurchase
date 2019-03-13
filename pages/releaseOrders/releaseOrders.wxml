@@ -1,0 +1,12 @@
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="tabNav">隆胸</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="tabNav">纹眉</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="tabNav">双眼皮</view>
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="tabNav">闪现</view>
+</view>
+<swiper current="{{currentTab}}" duration="1000"  >
+    <swiper-item><view>。。。隆胸。。。。</view></swiper-item>
+    <swiper-item><view>。。。纹眉。。。。</view></swiper-item>
+    <swiper-item><view>。。。双眼皮。。。</view></swiper-item>
+    <swiper-item><view>。。。闪现。。。</view></swiper-item>
+</swiper>

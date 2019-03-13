@@ -12,7 +12,10 @@
     "pages/myOrder/myOrder",
     "pages/myGoods/myGoods",
     "pages/myAddress/myAddress",
-    "pages/address/address"
+    "pages/address/address",
+    "pages/releaseGoods/releaseGoods",
+    "pages/releaseOrders/releaseOrders",
+    "pages/releaseGoodsInfo/releaseGoodsInfo"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7a43b6",
