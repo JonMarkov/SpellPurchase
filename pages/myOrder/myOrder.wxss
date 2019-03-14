@@ -1,1 +1,25 @@
-/* pages/myOrder/myOrder.wxss */
+/* pages/myGoods/myGoods.wxss */
+page{
+
+}
+/* 页面最大块级 */
+.order{
+  padding: 0rpx 15rpx 0rpx 15rpx;
+  font-size: 26rpx
+}
+.order_info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 30rpx 2rpx 30rpx 2rpx;
+  border-bottom: 1rpx solid #ccc
+}
+.order_prder_num{
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
+.order_prder_num image{
+  width: 40rpx;
+  height: 40rpx
+}

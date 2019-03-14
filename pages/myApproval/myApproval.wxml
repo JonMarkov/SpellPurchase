@@ -18,7 +18,17 @@
   </view>
   <view class='translate'>
     <text>营业执照</text>
-    <!-- <input placeholder='请输入联系人姓名' placeholder-style='text-align:right'></input> -->
+    <block wx:if="{{proveState == false}}">
+
+    </block>
+    <block wx:if="{{proveState == false}}">
+      <image bindtap='choose' wx:if="{{result_state == ture}}" class='yyzzImg' src='{{business_license}}'></image>
+      <input bindtap='choose' wx:if="{{result_state==false}}" class='yyzz' placeholder='' disabled='true' value='点击上传图片' placeholder-style='text-align:right' style='text-align:right'></input>
+    </block>
+    <block wx:if="{{proveState == true}}">
+      <image bindtap='choose' class='yyzzImg' src='{{business_license}}'></image>
+    </block>
+
   </view>
   <view class='translate'>
     <text>联系人姓名</text>

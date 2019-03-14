@@ -84,7 +84,7 @@ Page({
       action: 'getAdvertByState',
       // 请求参数
       requestParam: {
-        user_id: user_id
+        userId: user_id
       }
     }
     // 请求参数合并
@@ -132,7 +132,7 @@ Page({
       action: 'getIndexGoodsByVolume',
       // 请求参数
       requestParam: {
-        user_id: user_id
+        userId: user_id
       }
     }
     // 请求参数合并
@@ -215,7 +215,7 @@ Page({
       action: 'getIndexMessage',
       // 请求参数
       requestParam: {
-        user_id: user_id
+        userId: user_id
       }
     }
     // 请求参数合并

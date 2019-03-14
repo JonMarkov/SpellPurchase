@@ -36,3 +36,17 @@ page{
   position: absolute;
   bottom: 10rpx
 }
+.yyzz{
+  text-align: right;
+  background: #f8f8f8;
+  border: 1rpx solid #ffffff;
+  padding: 0rpx 10rpx;
+  width: 160rpx
+}
+.yyzzImg{
+  width: 70rpx;
+  height: 70rpx
+}
+.merchantCA input{
+  text-align:right 
+}

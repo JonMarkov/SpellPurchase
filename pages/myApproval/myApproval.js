@@ -1,13 +1,17 @@
 // pages/myApproval/myApproval.js
 // 声明接口名称
 var WxLicUrl = getApp().globalData.wx_url_1;
+// 引入阿里上传图片的JavaScript库
+var uploadImage = require('../../utils/uploadFile.js');
+var util = require('../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    business_license: '12',
+    business_license: '',
+    result_state:false,
     merAuth_id: '',
     proveState: false
   },
@@ -42,12 +46,56 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    console.log()
     if (this.data.merAuth_id) {
       // 查询商户认证信息
       this.editView()
     }
 
+  },
+  //DY函数定义 选择照片上传
+  choose: function() {
+    var _this = this
+    wx.chooseImage({
+      count: 1, // 默认最多一次选择9张图
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function(res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+        var nowTime = util.formatTime(new Date());
+
+        //支持多图上传
+        for (var i = 0; i < res.tempFilePaths.length; i++) {
+          //显示消息提示框
+          wx.showLoading({
+            title: '上传中' + (i + 1) + '/' + res.tempFilePaths.length,
+            mask: true
+          })
+
+          //上传图片
+          //你的域名下的/cbb文件下的/当前年月日文件下的/图片.png
+          //图片路径可自行修改
+          uploadImage(res.tempFilePaths[i], 'cbb/' + nowTime + '/',
+            function(result) {
+              console.log("======上传成功图片地址为：", result);
+              _this.setData({
+                business_license: result,
+                result_state:true
+              })
+              wx.hideLoading();
+            },
+            function(result) {
+              console.log("======上传失败======", result);
+              _this.setData({
+                business_license: result,
+                result_state: false
+              })
+              wx.hideLoading()
+            }
+          )
+        }
+      }
+    })
   },
   // 如果是编辑或是查看则执行
   editView: function() {

@@ -15,7 +15,8 @@
     "pages/address/address",
     "pages/releaseGoods/releaseGoods",
     "pages/releaseOrders/releaseOrders",
-    "pages/releaseGoodsInfo/releaseGoodsInfo"
+    "pages/releaseGoodsInfo/releaseGoodsInfo",
+    "pages/orderList/orderList"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7a43b6",

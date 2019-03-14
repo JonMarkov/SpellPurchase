@@ -1,2 +1,32 @@
-<!--pages/myOrder/myOrder.wxml-->
-<text>pages/myOrder/myOrder.wxml</text>
+<view class='order'>
+  <!-- 我的商品 -->
+  <view class='order_info' data-order='1' bindtap='ToOrderFn'>
+    <view class='order_info_title'>
+      <text>砍价订单</text>
+    </view>
+    <view class='order_prder_num'>
+      <text>{{bargains}}个 </text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+    <!-- 我的拼团 -->
+  <view class='order_info' data-order='2' bindtap='ToOrderFn'>
+    <view class='order_info_title'>
+      <text>拼团订单</text>
+    </view>
+    <view class='order_prder_num'>
+      <text>{{groupOrdersList}}个 </text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+  <!-- 我的0元购 -->
+  <view class='order_info' data-order='3' bindtap='ToOrderFn'>
+    <view class='order_info_title'>
+      <text>0元购订单</text>
+    </view>
+    <view class='order_prder_num'>
+      <text>{{zeroPurchases}}个 </text>
+      <image src='../../images/arr.png'></image>
+    </view>
+  </view>
+</view>
