@@ -5,11 +5,10 @@
 </view>
 <swiper current="{{currentTab}}" duration="1000">
   <swiper-item>
-    <view class='sucOrderList' wx:for="{{orderInfo}}" wx:key="">
+    <view class='sucOrderList' data-my_order='{{item.orderNo}}' data-my_state='1' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
       <view class='sucOrderList_title'>
         <view class='sucOrderList_title_title'>
-          <text>{{item.goodsName
-          }}</text>
+          <text>{{item.goodsName}}</text>
         </view>
         <view class='sucOrderList_title_state'>
           <text>已完成</text>
@@ -25,7 +24,7 @@
               订单号：{{item.orderNo}}
             </view>
             <view class='sucOrderList_content_det_info_two'>
-              {{goodsDescribe}}
+              {{item.goodsDescribe}}
             </view>
           </view>
           <view class='sucOrderList_content_det_money'>
@@ -41,7 +40,7 @@
     </view>
   </swiper-item>
   <swiper-item>
-    <view class='penOrderList' wx:for="{{orderInfo}}" wx:key="">
+    <view class='penOrderList' data-my_order='{{item.orderNo}}' data-my_state='2' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
       <view class='sucOrderList_title'>
         <view class='sucOrderList_title_title'>
           <text>{{item.goodsName}}</text>
@@ -60,7 +59,7 @@
               订单号：{{item.orderNo}}
             </view>
             <view class='sucOrderList_content_det_info_two'>
-              {{goodsDescribe}}
+              {{item.goodsDescribe}}
             </view>
           </view>
           <view class='sucOrderList_content_det_money'>
@@ -76,7 +75,7 @@
     </view>
   </swiper-item>
   <swiper-item>
-    <view class='verdueOrderList' wx:for="{{orderInfo}}" wx:key="">
+    <view class='verdueOrderList' data-my_order='{{item.orderNo}}' data-my_state='3' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
       <view class='sucOrderList_title'>
         <view class='sucOrderList_title_title'>
           <text>{{item.goodsName}}</text>
@@ -95,7 +94,7 @@
               订单号：{{item.orderNo}}
             </view>
             <view class='sucOrderList_content_det_info_two'>
-              {{goodsDescribe}}
+              {{item.goodsDescribe}}
             </view>
           </view>
           <view class='sucOrderList_content_det_money'>

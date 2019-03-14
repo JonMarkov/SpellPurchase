@@ -158,6 +158,15 @@ Page({
       }
     })
   },
+  // DY函数定义 跳转详情
+  ToMyOrderDet: function(e) {
+    console.log(e)
+    var my_order = e.currentTarget.dataset.my_order
+    var my_state = e.currentTarget.dataset.my_state
+    wx.navigateTo({
+      url: '/pages/userMyOrderDetails/userMyOrderDetails?my_order=' + my_order + '&' + 'my_state=' + my_state,
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

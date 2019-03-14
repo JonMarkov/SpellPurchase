@@ -31,7 +31,7 @@ Page({
   orderFn: function() {
     var _this = this
     // 声明user_id
-    var user_id = this.data.user_id87
+    var user_id = this.data.user_id
     // 拼装请求所需参数
     var params = {
       // 请求方法名

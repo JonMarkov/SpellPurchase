@@ -1,0 +1,23 @@
+<!-- 购买信息列表 -->
+<view class="lines">
+<view>订单编号：<text>XXXXXXX</text></view>
+<view>付款时间：<text>XXXXXXX</text></view>
+<view>物流单号：<text>XXXXXXX</text></view>
+<view>物流公司：<text>XXXXXXX</text></view>
+<view>购买人姓名：<text>XXXXXXX</text></view>
+<view>购买人电话：<text>XXXXXXX</text></view>
+<view class="last_line">购买人地址：<text>XXXXXXX</text></view>
+</view>
+
+<!-- 参与砍价人员 -->
+<view class="participant">
+<view class="participant_title">参与砍价人员</view>
+<view class="head_box">
+<block wx:for="{{head}}">
+<view class="head">
+<image src="{{item.url}}" class="head_img"></image>
+<view class="head_name">{{item.name}}</view>
+</view>
+</block>
+</view>
+</view>
