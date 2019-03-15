@@ -106,7 +106,14 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: res => {
-        console.log(res)
+        console.log(res.data)
+        var resData = res.data
+        var resDataImg = resData.participants
+        _this.setData({
+          addList: resData,
+          resDataImg: resDataImg
+        })
+
       }
     })
   },

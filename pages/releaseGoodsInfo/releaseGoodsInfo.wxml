@@ -1,2 +1,142 @@
-<!--pages/releaseGoodsInfo/releaseGoodsInfo.wxml-->
-<text>pages/releaseGoodsInfo/releaseGoodsInfo.wxml</text>
+<view class='GoodsInfo'>
+  <!-- 商品名称 -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>商品名称：</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <input type='value' placeholder='请输入商品名称'></input>
+    </view>
+  </view>
+  <!-- 商品简介 -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>商品简介：</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <input type='value' placeholder='请输入商品简介'></input>
+    </view>
+  </view>
+  <!-- 商品列表图片、商品图、商品详情图 -->
+  <view class='GoodsInfo_comDet_img'>
+    <view class='GoodsInfo_comDet_img_list'>
+      <text>商品列表图片：</text>
+      <image src='../../images/up_img.png'></image>
+    </view>
+    <view class='GoodsInfo_comDet_img_info'>
+      <text>商品图：</text>
+      <image src='../../images/up_img.png'></image>
+    </view>
+    <view class='GoodsInfo_comDet_img_info'>
+      <text>商品详情图：</text>
+      <image src='../../images/up_img.png'></image>
+    </view>
+  </view>
+
+  <!-- 商品SKU -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>商品SKU：</text>
+    </view>
+    <!-- 两项、点击可增加一项  可删除一项 -->
+    <view class='GoodsInfo_comDet_input'>
+      <view class='GoodsInfo_comDet_input_sku'>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>款式:</text>
+          <input type='value' placeholder='款式'></input>
+        </view>
+
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>售价:</text>
+          <input type='value' placeholder='售价'></input>
+        </view>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>库存:</text>
+          <input type='value' placeholder='库存'></input>
+        </view>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <image src='../../images/add_img.png'></image>
+        </view>
+      </view>
+    </view>
+    <!-- 五项/点击可删除当前项 -->
+    <view class='GoodsInfo_comDet_input'>
+      <view class='GoodsInfo_comDet_input_sku'>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>颜色:</text>
+          <text>12</text>
+        </view>
+
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>材质:</text>
+          <text>23</text>
+        </view>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>尺码:</text>
+          <text>23</text>
+        </view>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>售价:</text>
+          <text>23</text>
+        </view>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <text>库存:</text>
+          <text>23</text>
+        </view>
+        <view class='GoodsInfo_comDet_input_sku_style'>
+          <image src='../../images/down_img.png'></image>
+        </view>
+      </view>
+    </view>
+    <!-- 点击增加一项第二种形式，然后第一种形式隐藏 -->
+    <view class='GoodsInfo_comDet_input_btn'>
+      <text>增加商品属性</text>
+    </view>
+  </view>
+
+  <!-- 活动性质 -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>活动性质：</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker" class='Nature_picker'>
+          <text>{{array[index]}}</text>
+          <image src='../../images/open_arr.png'></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+  <!-- 活动时间 -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>活动时间：</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <input type='value' placeholder='请输入'></input>
+    </view>
+  </view>
+  <!-- 活动时间 -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>活动时间：</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <input type='value' placeholder='请输入'></input>
+    </view>
+  </view>
+  <!-- 活动时间 -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>活动时间：</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <input type='value' placeholder='请输入'></input>
+    </view>
+  </view>
+</view>
+
+<view class="add-address" bindtap="addAddress">
+  <p>新增地址</p>
+</view>

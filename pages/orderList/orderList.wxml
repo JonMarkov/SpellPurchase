@@ -38,6 +38,7 @@
         </view>
       </view>
     </view>
+    
   </swiper-item>
   <swiper-item>
     <view class='penOrderList' data-my_order='{{item.orderNo}}' data-my_state='2' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>

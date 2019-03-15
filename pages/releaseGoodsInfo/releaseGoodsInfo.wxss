@@ -1,1 +1,131 @@
 /* pages/releaseGoodsInfo/releaseGoodsInfo.wxss */
+
+page {
+  background: #fff;
+}
+
+.GoodsInfo {
+  padding: 10rpx 20rpx;
+}
+
+.GoodsInfo_comDet {
+  line-height: 70rpx;
+}
+
+.GoodsInfo_comDet_text {
+  font-size: 28rpx;
+  color: #808080;
+}
+
+.GoodsInfo_comDet_input input {
+  font-size: 30rpx;
+  border: 1rpx solid #8a8a8a;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  /* -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #8a8a8a;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.075), 0px 0px 8px #8a8a8a; */
+}
+
+.GoodsInfo_comDet_img {
+  margin-top: 20rpx;
+  line-height: 70rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.GoodsInfo_comDet_img image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.GoodsInfo_comDet_img_list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+  color: #808080;
+}
+
+.GoodsInfo_comDet_img_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+  color: #808080;
+}
+
+.GoodsInfo_comDet_input_sku {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.GoodsInfo_comDet_input_sku_style {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10rpx;
+  align-items: center;
+}
+
+.GoodsInfo_comDet_input_sku_style text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+  color: #808080;
+}
+
+.GoodsInfo_comDet_input_sku_style input {
+  width: 60rpx;
+  margin-left: 20rpx;
+  padding: 0rpx 10rpx;
+  font-size: 22rpx
+}
+
+.GoodsInfo_comDet_input_sku_style image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.GoodsInfo_comDet_input_btn {
+  font-size: 28rpx;
+  color: #808080;
+  background: #e9f0f9;
+  width: 50%;
+  margin-top: 20rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.add-address{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  width: 88%;
+  margin: 24rpx;
+  padding: 20rpx;
+  border: 1px solid #FEA12E;
+  background: #FEA12E;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.Nature_picker{
+  font-size: 30rpx;
+  color: #333;
+  padding: 0rpx 20rpx;
+  border-radius: 10rpx; 
+  border: 1rpx solid #8a8a8a 
+}
+.Nature_picker{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center
+}
+.Nature_picker image{
+  width: 50rpx;
+  height: 50rpx
+}
