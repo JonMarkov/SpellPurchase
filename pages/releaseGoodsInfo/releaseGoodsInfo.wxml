@@ -5,7 +5,7 @@
       <text>商品名称：</text>
     </view>
     <view class='GoodsInfo_comDet_input'>
-      <input type='value' placeholder='请输入商品名称'></input>
+      <input type='value' placeholder='请输入商品名称' bindinput='ToGoodsName'></input>
     </view>
   </view>
   <!-- 商品简介 -->
@@ -14,84 +14,104 @@
       <text>商品简介：</text>
     </view>
     <view class='GoodsInfo_comDet_input'>
-      <input type='value' placeholder='请输入商品简介'></input>
+      <input type='value' placeholder='请输入商品简介' bindinput='ToGoodsDescribe'></input>
     </view>
   </view>
   <!-- 商品列表图片、商品图、商品详情图 -->
   <view class='GoodsInfo_comDet_img'>
     <view class='GoodsInfo_comDet_img_list'>
       <text>商品列表图片：</text>
-      <image src='../../images/up_img.png'></image>
+      <image bindtap='ListChoose' src='{{ListChooseImages}}'></image>
     </view>
     <view class='GoodsInfo_comDet_img_info'>
       <text>商品图：</text>
-      <image src='../../images/up_img.png'></image>
+      <image bindtap='ImgChoose' src='{{ImgChooseImages}}'></image>
     </view>
     <view class='GoodsInfo_comDet_img_info'>
       <text>商品详情图：</text>
-      <image src='../../images/up_img.png'></image>
+      <image bindtap='DetChoose' src='{{DetChoose}}'></image>
     </view>
   </view>
-
+  <!-- 商品属性 -->
+  <view class='GoodsInfo_comDet'>
+    <view class='GoodsInfo_comDet_text'>
+      <text>商品属性</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <picker bindchange="bindPickerChangeSku" value="{{indexSku}}" range="{{SkuArr}}">
+        <view class='picker Nature_picker'>
+          <text>{{SkuArr[indexSku]}}</text>
+          <image src='../../images/open_arr.png'></image>
+        </view>
+      </picker>
+    </view>
+  </view>
   <!-- 商品SKU -->
   <view class='GoodsInfo_comDet'>
     <view class='GoodsInfo_comDet_text'>
-      <text>商品SKU：</text>
+      <!-- <text style='color:red;font-size:22rpx'>多种属性的商品类型适用于有不同 颜色，尺码，材质 的商品</text> -->
     </view>
     <!-- 两项、点击可增加一项  可删除一项 -->
-    <view class='GoodsInfo_comDet_input'>
+    <view class='GoodsInfo_comDet_input' wx:for="{{SkuOne}}" wx:key="" wx:if="{{attrType}}">
       <view class='GoodsInfo_comDet_input_sku'>
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>款式:</text>
-          <input type='value' placeholder='款式'></input>
+          <input type='value' placeholder='' data-index="{{index}}" value='{{item.styles}}' bindinput='SkuOneStyles'></input>
         </view>
 
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>售价:</text>
-          <input type='value' placeholder='售价'></input>
+          <input type='value' placeholder='' data-index="{{index}}" value='{{item.prices}}' bindinput='SkuOnePrices'></input>
         </view>
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>库存:</text>
-          <input type='value' placeholder='库存'></input>
+          <input type='value' placeholder='' data-index="{{index}}" value='{{item.stock}}' bindinput='SkuOneStock'></input>
         </view>
         <view class='GoodsInfo_comDet_input_sku_style'>
-          <image src='../../images/add_img.png'></image>
+          <image bindtap='AddSkuOne' data-index="{{index}}" src='../../images/add_img.png' wx:if="{{index == SkuOne.length - 1}}"></image>
+          <image bindtap='RemSkuOne' data-index="{{index}}" src='../../images/down_img.png' wx:else></image>
         </view>
       </view>
     </view>
     <!-- 五项/点击可删除当前项 -->
-    <view class='GoodsInfo_comDet_input'>
+    <view class='GoodsInfo_comDet_input' wx:for="{{SkuTwo}}" wx:key="" wx:if="{{attrType == false}}">
       <view class='GoodsInfo_comDet_input_sku'>
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>颜色:</text>
-          <text>12</text>
+          <!-- <text>{{item.colour}}</text> -->
+          <input style='width:30rpx' type='value' placeholder='' data-index="{{index}}" value='{{item.colour}}' bindinput='SkuTwoColour'></input>
         </view>
 
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>材质:</text>
-          <text>23</text>
+          <!-- <text>{{item.texture}}</text> -->
+          <input style='width:30rpx' type='value' placeholder='' data-index="{{index}}" value='{{item.texture}}' bindinput='SkuTwoTexture'></input>
         </view>
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>尺码:</text>
-          <text>23</text>
+          <!-- <text>{{item.size}}</text> -->
+          <input style='width:30rpx' type='value' placeholder='' data-index="{{index}}" value='{{item.size}}' bindinput='SkuTwoSize'></input>
         </view>
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>售价:</text>
-          <text>23</text>
+          <!-- <text>{{item.prices}}</text> -->
+          <input style='width:30rpx' type='value' placeholder='' data-index="{{index}}" value='{{item.prices}}' bindinput='SkuTwoPrices'></input>
         </view>
         <view class='GoodsInfo_comDet_input_sku_style'>
           <text>库存:</text>
-          <text>23</text>
+          <!-- <text>{{item.stock}}</text> -->
+          <input style='width:30rpx' type='value' placeholder='' data-index="{{index}}" value='{{item.stock}}' bindinput='SkuTwoStock'></input>
         </view>
         <view class='GoodsInfo_comDet_input_sku_style'>
-          <image src='../../images/down_img.png'></image>
+          <image bindtap='AddSkuTwo' data-index="{{index}}" src='../../images/add_img.png' wx:if="{{index == SkuTwo.length - 1}}"></image>
+          <image bindtap='RemSkuTwo' data-index="{{index}}" src='../../images/down_img.png' wx:else></image>
         </view>
       </view>
     </view>
     <!-- 点击增加一项第二种形式，然后第一种形式隐藏 -->
-    <view class='GoodsInfo_comDet_input_btn'>
+    <!-- <view class='GoodsInfo_comDet_input_btn' bindtap='AddSkuTwo'>
       <text>增加商品属性</text>
-    </view>
+    </view> -->
   </view>
 
   <!-- 活动性质 -->
@@ -101,7 +121,7 @@
     </view>
     <view class='GoodsInfo_comDet_input'>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-        <view class="picker" class='Nature_picker'>
+        <view class='picker Nature_picker'>
           <text>{{array[index]}}</text>
           <image src='../../images/open_arr.png'></image>
         </view>
@@ -114,29 +134,84 @@
       <text>活动时间：</text>
     </view>
     <view class='GoodsInfo_comDet_input'>
-      <input type='value' placeholder='请输入'></input>
+      <view class='picker_date'>
+        <picker mode="date" value="{{date}}" start="" end="" bindchange="bindStarDateChange">
+          <view class="picker date_picker">
+            <text>{{star_date}}</text>
+          </view>
+        </picker>
+        <text class='spacing_date'>-</text>
+        <picker mode="date" value="{{date}}" start="" end="" bindchange="bindEndDateChange">
+          <view class="picker date_picker spacing_date">
+            <text>{{end_date}}</text>
+          </view>
+        </picker>
+      </view>
     </view>
   </view>
-  <!-- 活动时间 -->
+  <!-- 运费 -->
   <view class='GoodsInfo_comDet'>
     <view class='GoodsInfo_comDet_text'>
-      <text>活动时间：</text>
+      <text>运费：</text>
     </view>
     <view class='GoodsInfo_comDet_input'>
-      <input type='value' placeholder='请输入'></input>
+      <view class='radio_group_single'>
+        <radio-group class="item-right radio-group" bindchange="changeSex">
+          <label class="radio" wx:for="{{SingleItems}}" wx:key="">
+            <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
+          </label>
+        </radio-group>
+        <input class='radio_group_single_input' placeholder='请输入运费' bindinput='ToSex'></input>
+        <text>元</text>
+      </view>
     </view>
   </view>
-  <!-- 活动时间 -->
-  <view class='GoodsInfo_comDet'>
+  <!-- 商品底价 -->
+  <view class='GoodsInfo_comDet' wx:if="{{BargainState}}">
     <view class='GoodsInfo_comDet_text'>
-      <text>活动时间：</text>
+      <text>商品底价:</text>
     </view>
     <view class='GoodsInfo_comDet_input'>
-      <input type='value' placeholder='请输入'></input>
+      <view class='floor_price'>
+        <input type='value' placeholder='请输入商品底价' bindinput='TofloorPrice'></input>
+        <text>元</text>
+      </view>
+    </view>
+  </view>
+  <!-- 拼团人数 -->
+  <view class='GoodsInfo_comDet' wx:if="{{AssembleState}}">
+    <view class='GoodsInfo_comDet_text'>
+      <text>拼团人数:</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <view class='floor_price'>
+        <input type='value' placeholder='请输入所需拼团人数' bindinput='TogroupNumber'></input>
+        <text>人</text>
+      </view>
+    </view>
+  </view>
+  <!-- 团购价 -->
+  <view class='GoodsInfo_comDet'wx:if="{{AssembleState}}">
+    <view class='GoodsInfo_comDet_text'>
+      <text>团购价:</text>
+    </view>
+    <view class='GoodsInfo_comDet_input'>
+      <view class='floor_price'>
+        <input type='value' placeholder='请输入团购价' bindinput='TogroupPurchasePrice'></input>
+        <text>元</text>
+      </view>
+    </view>
+  </view>
+  <!-- 0元购数量 -->
+  <view class='GoodsInfo_comDet' wx:if="{{ZeroState}}">
+    <view class='ZeroShop'>
+      <text>当有</text>
+      <input type='value' placeholder='请输入人数' bindinput='TozeroNumber'></input>
+      <text>人新用户注册成功商品可0元购</text>
     </view>
   </view>
 </view>
 
-<view class="add-address" bindtap="addAddress">
-  <p>新增地址</p>
+<view class="add-address" bindtap="RqSUmit">
+  <p>确认发布</p>
 </view>

@@ -1,5 +1,5 @@
 {
-    "usingComponents": {},
-    "navigationBarBackgroundColor": "#30b0ef",
-    "navigationBarTextStyle": "white"
+  "navigationBarBackgroundColor": "#30b0ef",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "北银科技"
 }

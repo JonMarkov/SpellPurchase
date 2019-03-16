@@ -7,44 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    head: [
-      {
-        url: "/images/head.jpg",
-        name: "喵~"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "加上给大家施工队"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "教书育人"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "下厨吗VB迷你版"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "无IE托管人方式对比吧"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "下次是没比较划算的故意"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "下次不能帮"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "UI问题如"
-      },
-      {
-        url: "/images/head.jpg",
-        name: "没相处VB个"
-      },
-    ]
+  
   },
 
   /**

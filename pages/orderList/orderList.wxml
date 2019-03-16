@@ -5,7 +5,7 @@
 </view>
 <swiper current="{{currentTab}}" duration="1000">
   <swiper-item>
-    <view class='sucOrderList' data-my_order='{{item.orderNo}}' data-my_state='1' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
+    <view class='sucOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
       <view class='sucOrderList_title'>
         <view class='sucOrderList_title_title'>
           <text>{{item.goodsName}}</text>
@@ -41,7 +41,7 @@
     
   </swiper-item>
   <swiper-item>
-    <view class='penOrderList' data-my_order='{{item.orderNo}}' data-my_state='2' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
+    <view class='penOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
       <view class='sucOrderList_title'>
         <view class='sucOrderList_title_title'>
           <text>{{item.goodsName}}</text>
@@ -76,7 +76,7 @@
     </view>
   </swiper-item>
   <swiper-item>
-    <view class='verdueOrderList' data-my_order='{{item.orderNo}}' data-my_state='3' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
+    <view class='verdueOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
       <view class='sucOrderList_title'>
         <view class='sucOrderList_title_title'>
           <text>{{item.goodsName}}</text>

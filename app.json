@@ -1,6 +1,5 @@
   {
   "pages": [
-    "pages/releaseGoodsInfo/releaseGoodsInfo",
     "pages/login/login",
     "pages/comDetails/comDetails",
     "pages/singleProduct/singleProduct",
@@ -16,7 +15,7 @@
     "pages/address/address",
     "pages/releaseGoods/releaseGoods",
     "pages/releaseOrders/releaseOrders",
-
+    "pages/releaseGoodsInfo/releaseGoodsInfo",
     "pages/orderList/orderList",
     "pages/userMyOrderDetails/userMyOrderDetails"
   ],

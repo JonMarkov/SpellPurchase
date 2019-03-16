@@ -35,7 +35,6 @@
                 </view>
               </view>
               <view class='business_order_content_content'>
-
                 <image src='../../images/logo.jpg'></image>
                 <view class='business_order_content_content_text'>
                   <text class='text_det'>sadsadsa</text>

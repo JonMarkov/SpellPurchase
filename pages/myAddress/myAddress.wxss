@@ -39,8 +39,8 @@ page {
   width: 88%;
   margin: 24rpx;
   padding: 20rpx;
-  border: 1px solid #FEA12E;
-  background: #FEA12E;
+  border: 1px solid #30b0ef;
+  background: #30b0ef;
   border-radius: 10rpx;
   color: #fff;
   position: absolute;
