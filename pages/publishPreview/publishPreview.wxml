@@ -1,0 +1,23 @@
+<view class='publish'>
+  <view class='publish_info'>
+    <text>商品名称：</text>
+    <text>{{resData.goodsName}}</text>
+  </view>
+  <view class='publish_info'>
+    <text>商品简介:</text>
+    <text>这个世界的地老天荒</text>
+  </view>
+  <view class='publish_info'>
+    <text>商品列表图片：</text>
+    <image src='../../images/logo.jpg'></image>
+  </view>
+  <view class='publish_info'>
+    <text>商品图：</text>
+    <image src='../../images/logo.jpg'></image>
+  </view>
+  <view class='publish_info'>
+    <text>商品详情图：</text>
+    <image src='../../images/logo.jpg'></image>
+  </view>
+  
+</view>

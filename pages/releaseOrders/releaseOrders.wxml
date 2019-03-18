@@ -1,9 +1,9 @@
 <view>
   <view class='swiper-tab'>
-    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">待付款</view>
-    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">待发货</view>
-    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">待收货</view>
-    <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">已完成</view>
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">全部</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">未发货</view>
+    <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">已发货</view>
+    <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">已收货</view>
   </view>
 
   <swiper class='swiper' current='{{currentTab}}' duration="300" bindchange="bindchange">
@@ -25,26 +25,26 @@
                 </view>
               </view>
             </view>
-            <view class='business_order_content'>
+            <view class='business_order_content' data-activit_type='{{item.activitType}}' data-my_order="{{item.orderNo}}" bindtap='TerOrder' wx:for="{{businessInfo}}" wx:key="">
               <view class='business_order_content_title'>
                 <view class='business_order_content_title_left'>
-                  <text>这是商品</text>
+                  <text>{{item.goodsName}}</text>
                 </view>
                 <view class='business_order_content_title_right'>
                   <text>砍价</text>
                 </view>
               </view>
               <view class='business_order_content_content'>
-                <image src='../../images/logo.jpg'></image>
+                <image src='{{item.goodsImage}}'></image>
                 <view class='business_order_content_content_text'>
-                  <text class='text_det'>sadsadsa</text>
-                  <text class='text_money'>1688</text>
+                  <text class='text_det'>{{item.goodsDescribe}}</text>
+                  <text class='text_money'>￥ {{item.price}}</text>
                 </view>
 
               </view>
               <view class='business_order_content_state'>
                 <view class='business_order_content_state_num'>
-                  订单编号：1233
+                  订单编号：{{item.orderNo}}
                 </view>
                 <view class='business_order_content_state_btn'>
                   <text>未收货</text>
@@ -57,17 +57,140 @@
     </view>
     <swiper-item>
       <scroll-view scroll-y="true">
+          <view class='business_order'>
+            <view class='business_order_search'>
+              <!-- 搜索框部分 star -->
+              <view class="weui-search-bar">
+                <view class="weui-search-bar__form">
+                  <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="请输入查询内容" value="{{SearchData.value}}" bindinput='SearchInput' bindconfirm="SearchConfirm" />
+                    <view class="weui-icon-clear" wx:if="{{SearchData.value.length > 0}}" bindtap="SearchClear">
+                      <icon type="clear" size="14"></icon>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='business_order_content' wx:for="{{businessInfo}}" wx:key="">
+              <view class='business_order_content_title'>
+                <view class='business_order_content_title_left'>
+                  <text>{{item.goodsName}}</text>
+                </view>
+                <view class='business_order_content_title_right'>
+                  <text>砍价</text>
+                </view>
+              </view>
+              <view class='business_order_content_content'>
+                <image src='{{item.goodsImage}}'></image>
+                <view class='business_order_content_content_text'>
+                  <text class='text_det'>{{item.goodsDescribe}}</text>
+                  <text class='text_money'>￥ {{item.price}}</text>
+                </view>
 
+              </view>
+              <view class='business_order_content_state'>
+                <view class='business_order_content_state_num'>
+                  订单编号：{{item.orderNo}}
+                </view>
+                <view class='business_order_content_state_btn'>
+                  <text>未收货</text>
+                </view>
+              </view>
+            </view>
+          </view>
       </scroll-view>
     </swiper-item>
     <swiper-item>
       <scroll-view scroll-y="true">
+          <view class='business_order'>
+            <view class='business_order_search'>
+              <!-- 搜索框部分 star -->
+              <view class="weui-search-bar">
+                <view class="weui-search-bar__form">
+                  <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="请输入查询内容" value="{{SearchData.value}}" bindinput='SearchInput' bindconfirm="SearchConfirm" />
+                    <view class="weui-icon-clear" wx:if="{{SearchData.value.length > 0}}" bindtap="SearchClear">
+                      <icon type="clear" size="14"></icon>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='business_order_content' wx:for="{{businessInfo}}" wx:key="">
+              <view class='business_order_content_title'>
+                <view class='business_order_content_title_left'>
+                  <text>{{item.goodsName}}</text>
+                </view>
+                <view class='business_order_content_title_right'>
+                  <text>砍价</text>
+                </view>
+              </view>
+              <view class='business_order_content_content'>
+                <image src='{{item.goodsImage}}'></image>
+                <view class='business_order_content_content_text'>
+                  <text class='text_det'>{{item.goodsDescribe}}</text>
+                  <text class='text_money'>￥ {{item.price}}</text>
+                </view>
 
+              </view>
+              <view class='business_order_content_state'>
+                <view class='business_order_content_state_num'>
+                  订单编号：{{item.orderNo}}
+                </view>
+                <view class='business_order_content_state_btn'>
+                  <text>未收货</text>
+                </view>
+              </view>
+            </view>
+          </view>
       </scroll-view>
     </swiper-item>
     <swiper-item>
       <scroll-view scroll-y="true">
+          <view class='business_order'>
+            <view class='business_order_search'>
+              <!-- 搜索框部分 star -->
+              <view class="weui-search-bar">
+                <view class="weui-search-bar__form">
+                  <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="请输入查询内容" value="{{SearchData.value}}" bindinput='SearchInput' bindconfirm="SearchConfirm" />
+                    <view class="weui-icon-clear" wx:if="{{SearchData.value.length > 0}}" bindtap="SearchClear">
+                      <icon type="clear" size="14"></icon>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='business_order_content' wx:for="{{businessInfo}}" wx:key="">
+              <view class='business_order_content_title'>
+                <view class='business_order_content_title_left'>
+                  <text>{{item.goodsName}}</text>
+                </view>
+                <view class='business_order_content_title_right'>
+                  <text>砍价</text>
+                </view>
+              </view>
+              <view class='business_order_content_content'>
+                <image src='{{item.goodsImage}}'></image>
+                <view class='business_order_content_content_text'>
+                  <text class='text_det'>{{item.goodsDescribe}}</text>
+                  <text class='text_money'>￥ {{item.price}}</text>
+                </view>
 
+              </view>
+              <view class='business_order_content_state'>
+                <view class='business_order_content_state_num'>
+                  订单编号：{{item.orderNo}}
+                </view>
+                <view class='business_order_content_state_btn'>
+                  <text>未收货</text>
+                </view>
+              </view>
+            </view>
+          </view>
 
 
       </scroll-view>

@@ -5,7 +5,7 @@
       <text>我的商品</text>
     </view>
     <view class='order_prder_num'>
-      <text>1个 </text>
+      <text>{{goodsCount}}个 </text>
       <image src='../../images/arr.png'></image>
     </view>
   </view>
@@ -15,7 +15,7 @@
       <text>我的订单</text>
     </view>
     <view class='order_prder_num'>
-      <text>1个 </text>
+      <text>{{ordersCount}}个 </text>
       <image src='../../images/arr.png'></image>
     </view>
   </view>

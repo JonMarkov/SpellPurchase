@@ -11,7 +11,7 @@ Page({
     currentTab: 0,
     curIndex: 1,
     goods_name: '',
-    fahuoState:1
+    fahuoState: 0
 
   },
 
@@ -22,8 +22,10 @@ Page({
     let curIndex = parseInt(current) + 1
     that.setData({
       currentTab: current,
-      curIndex: curIndex
+      curIndex: curIndex,
     })
+
+
   },
   //点击切换，滑块index赋值
   clickTab: function(e) {
@@ -32,8 +34,14 @@ Page({
       return false;
     } else {
       that.setData({
+        fahuoState: e.currentTarget.dataset.current,
         currentTab: e.currentTarget.dataset.current
       })
+      // 一秒之后执行
+      setTimeout(function() {
+        // 请求数据列表 
+        that.rqOrderFn()
+      }, 100)
     }
   },
   // 请求数据
@@ -44,7 +52,7 @@ Page({
     // 商品名称
     var goods_name = _this.data.goods_name
     // 发货状态
-    var fahuoState = _this.data.curIndex
+    var fahuoState = _this.data.currentTab
     // 拼装请求所需参数
     var params = {
       // 请求方法名
@@ -68,8 +76,22 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: res => {
-        console.log(res)
+        console.log(res.data)
+        let resData = res.data
+        _this.setData({
+          businessInfo: resData
+        })
       }
+    })
+  },
+  // 跳转详情
+  TerOrder: function (e) {
+    console.log(e)
+    let my_order = e.currentTarget.dataset.my_order
+    let activi_Type = e.currentTarget.dataset.activit_type
+    console.log(activi_Type)
+    wx.navigateTo({
+      url: '/pages/terminalOrder/terminalOrder?my_order=' + my_order + '&my_state=' + activi_Type,
     })
   },
   // DY函数定义 输入框搜索执行函数
@@ -103,7 +125,10 @@ Page({
       },
       success: res => {
         console.log(res.data)
-
+        let resData = res.data
+        _this.setData({
+          businessInfo: resData
+        })
       }
     })
   },

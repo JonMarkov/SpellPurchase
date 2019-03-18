@@ -1,0 +1,37 @@
+<!-- 购买信息列表 -->
+<view class="lines">
+  <view>订单编号：
+    <text>{{addList.orderNum}}</text>
+  </view>
+  <view>付款时间：
+    <text>{{addList.payTime}}</text>
+  </view>
+  <view wx:if="{{addList.oddNumbers}}">物流单号：
+    <text>{{addList.oddNumbers}}</text>
+  </view>
+  <view wx:if="{{addList.logisticsCompany}}">物流公司：
+    <text>{{addList.logisticsCompany}}</text>
+  </view>
+  <view>购买人姓名：
+    <text>{{addList.userName}}</text>
+  </view>
+  <view>购买人电话：
+    <text>{{addList.userPhone}}</text>
+  </view>
+  <view class="last_line">购买人地址：
+    <text>{{addList.address}}</text>
+  </view>
+</view>
+
+<!-- 参与砍价人员 -->
+<view class="participant">
+  <view class="participant_title">参与砍价人员</view>
+  <view class="head_box">
+    <block wx:for="{{resDataImg}}">
+      <view class="head">
+        <image src="{{item.avatarurl}}" class="head_img"></image>
+        <!-- <view class="head_name">{{item.nickname}}</view> -->
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+/* pages/publishPreview/publishPreview.wxss */
+
+page{
+  background: #fff
+}
+.publish {
+  display: flex;
+  flex-direction: column;
+  padding: 10rpx;
+  font-size: 26rpx;
+  line-height: 50rpx
+}
+
+.publish publish_info {
+  display: flex;
+  flex-direction: row
+}
+.publish_info image{
+  width: 30rpx;
+  height: 30rpx
+
+}

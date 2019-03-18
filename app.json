@@ -17,7 +17,9 @@
     "pages/releaseOrders/releaseOrders",
     "pages/releaseGoodsInfo/releaseGoodsInfo",
     "pages/orderList/orderList",
-    "pages/userMyOrderDetails/userMyOrderDetails"
+    "pages/userMyOrderDetails/userMyOrderDetails",
+    "pages/terminalOrder/terminalOrder",
+    "pages/publishPreview/publishPreview"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7a43b6",

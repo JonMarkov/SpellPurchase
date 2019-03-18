@@ -36,7 +36,7 @@ Page({
       }
     ],
     // 运费
-    freight:0,
+    freight: 0,
     // SKU第一行数组
     SkuOne: [{
       styles: "",
@@ -54,21 +54,21 @@ Page({
     // 商品属性显示条件
     attrType: true,
     // 活动性质
-    activity_type:1,
+    activity_type: 1,
     // 选择商品性质之后判断应该显示的输入框
-    ZeroState:false,
-    AssembleState:false,
-    BargainState:true,
-    sex:"包邮"
+    ZeroState: false,
+    AssembleState: false,
+    BargainState: true,
+    sex: "包邮"
   },
   // 监听商品名称函数
-  ToGoodsName:function(e){
+  ToGoodsName: function(e) {
     this.setData({
       goods_name: e.detail.value
     })
   },
   // 监听商品简介函数
-  ToGoodsDescribe:function(e){
+  ToGoodsDescribe: function(e) {
     this.setData({
       goods_describe: e.detail.value
     })
@@ -92,17 +92,17 @@ Page({
   // 选择活动性质
   bindPickerChange: function(e) {
     var act = e.detail.value
-    if(act == 0){
+    if (act == 0) {
       var activity_type = 1;
       var BargainState = true;
       var AssembleState = false
       var ZeroState = false
-    }else if(act == 1){
+    } else if (act == 1) {
       var activity_type = 2
       var AssembleState = true;
       var BargainState = false
       var ZeroState = false
-    }else{
+    } else {
       var activity_type = 3
       var ZeroState = true;
       var AssembleState = false
@@ -237,7 +237,7 @@ Page({
     })
   },
   // 监听“颜色”输入框（第二行）
-  SkuTwoColour:function(e){
+  SkuTwoColour: function(e) {
     var _this = this
     // 当前输入值
     var colour = e.detail.value
@@ -252,7 +252,7 @@ Page({
     })
   },
   // 监听“材质”输入框（第二行）
-  SkuTwoTexture:function(e){
+  SkuTwoTexture: function(e) {
     var _this = this
     // 当前输入值
     var texture = e.detail.value
@@ -267,7 +267,7 @@ Page({
     })
   },
   // 监听“尺码”输入框（第二行）
-  SkuTwoSize:function(e){
+  SkuTwoSize: function(e) {
     var _this = this
     // 当前输入值
     var size = e.detail.value
@@ -282,7 +282,7 @@ Page({
     })
   },
   // 监听“售价”输入框（第二行）
-  SkuTwoPrices:function(e){
+  SkuTwoPrices: function(e) {
     var _this = this
     // 当前输入值
     var prices = e.detail.value
@@ -297,7 +297,7 @@ Page({
     })
   },
   // 监听“库存”输入框（第二行）
-  SkuTwoStock:function(e){
+  SkuTwoStock: function(e) {
     var _this = this
     // 当前输入值
     var stock = e.detail.value
@@ -447,80 +447,80 @@ Page({
     })
   },
   // 是否包邮函数
-  changeSex:function(e){
+  changeSex: function(e) {
     console.log(e.detail.value)
     var Sex = e.detail.value
     this.setData({
-      sex:Sex
+      sex: Sex
     })
   },
   // 运费函数
-  ToSex:function(e){
+  ToSex: function(e) {
     console.log(e)
     this.setData({
       freight: e.detail.value
     })
   },
   // 商品底价函数
-  TofloorPrice: function (e) {
+  TofloorPrice: function(e) {
     console.log(e)
     this.setData({
       floor_price: e.detail.value
     })
   },
   // 拼团人数函数
-  TogroupNumber: function (e) {
+  TogroupNumber: function(e) {
     console.log(e)
     this.setData({
       group_number: e.detail.value
     })
   },
   // 团购价函数
-  TogroupPurchasePrice: function (e) {
+  TogroupPurchasePrice: function(e) {
     console.log(e)
     this.setData({
       group_purchase_price: e.detail.value
     })
   },
   // 0元购需要人数函数
-  TozeroNumber: function (e) {
+  TozeroNumber: function(e) {
     console.log(e)
     this.setData({
       zero_number: e.detail.value
     })
   },
   // 提交信息
-  RqSUmit:function(){
+  RqSUmit: function() {
     var _this = this
     // 声明user_id
     let user_id = _this.data.user_id;
     // 拼装请求所需参数
     // 判断商品属性单一还是多选
     var indexSku = _this.data.indexSku
-    if(indexSku == 0){
+    if (indexSku == 0) {
       var goodsStyle = _this.data.SkuOne
       var goodsAttribute = []
-    }else{
+    } else {
       var goodsStyle = []
       var goodsAttribute = _this.data.SkuTwo
     }
     // 判断是否包邮
     var sex = _this.data.sex
-    if(sex == "包邮"){
+    if (sex == "包邮") {
       var freight = 0
-    }else{
+    } else {
       var freight = _this.data.freight
     }
-    
+
     var params = {
       // 请求方法名
       action: 'releaseOrEditGoods',
       // 请求参数
       requestParam: {
         // 商品ID 新增时为0
-        goodsId:0,
+        goodsId: 0,
         // 商户ID 
-        busId:user_id,
+        busId: user_id,
         // 商品名称
         goodsName: _this.data.goods_name,
         // 商品简介
@@ -566,10 +566,20 @@ Page({
       },
       success: res => {
         let resData = res.data
-        console.log(resData)
+        if (resData.code == 0) {
+          wx.navigateTo({
+            url: '/pages/publishPreview/publishPreview?goodsId=' + resData.goodsId,
+          })
+        }
       }
     })
 
+  },
+  // 跳转页面
+  publishPreview: function() {
+    wx.navigateTo({
+      url: '/pages/publishPreview/publishPreview',
+    })
   },
 
   /**
@@ -580,7 +590,7 @@ Page({
     // 获取本地缓存内的user_id信息
     wx.getStorage({
       key: 'loginInfo',
-      success: function (res) {
+      success: function(res) {
         // 把user_id存入本地data数据
         _this.setData({
           user_id: res.data.userId,

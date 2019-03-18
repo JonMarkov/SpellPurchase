@@ -9,36 +9,102 @@
     <view>
       <swiper-item>
         <scroll-view scroll-y="true">
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
-          <view>sdasd</view>
+          <view class='business_order'>
+            <view class='business_order_content' wx:for="{{releaseInfo}}">
+              <view class='business_order_content_title'>
+                <view class='business_order_content_title_left'>
+                  <text>{{item.goodsName}}</text>
+                </view>
+                <view class='business_order_content_title_right'>
+                  <text>活动剩余</text>
+                </view>
+              </view>
+              <view class='business_order_content_content'>
+                <image src='{{item.detailsBigImage}}'></image>
+                <view class='business_order_content_content_text'>
+                  <text class='text_det'>{{item.goodsDescribe}}</text>
+                  <text class='text_money'>￥ {{item.floorPrice}}</text>
+                </view>
+
+              </view>
+              <view class='business_order_content_state'>
+                <view class='business_order_content_state_num'>
+                  <text>2人参与 </text>
+                  <text> 剩余7件</text>
+                </view>
+                <view class='business_order_content_state_btn'>
+                  <text>未收货</text>
+                </view>
+              </view>
+            </view>
+          </view>
         </scroll-view>
       </swiper-item>
     </view>
     <swiper-item>
       <scroll-view scroll-y="true">
+          <view class='business_order'>
+            <view class='business_order_content' wx:for="{{releaseInfo}}">
+              <view class='business_order_content_title'>
+                <view class='business_order_content_title_left'>
+                  <text>{{item.goodsName}}</text>
+                </view>
+                <view class='business_order_content_title_right'>
+                  <text>活动剩余</text>
+                </view>
+              </view>
+              <view class='business_order_content_content'>
+                <image src='{{item.detailsBigImage}}'></image>
+                <view class='business_order_content_content_text'>
+                  <text class='text_det'>{{item.goodsDescribe}}</text>
+                  <text class='text_money'>￥ {{item.floorPrice}}</text>
+                </view>
 
+              </view>
+              <view class='business_order_content_state'>
+                <view class='business_order_content_state_num'>
+                  <text>2人参与 </text>
+                  <text> 剩余7件</text>
+                </view>
+                <view class='business_order_content_state_btn'>
+                  <text>未收货</text>
+                </view>
+              </view>
+            </view>
+          </view>
       </scroll-view>
     </swiper-item>
     <swiper-item>
       <scroll-view scroll-y="true">
+          <view class='business_order'>
+            <view class='business_order_content' wx:for="{{releaseInfo}}">
+              <view class='business_order_content_title'>
+                <view class='business_order_content_title_left'>
+                  <text>{{item.goodsName}}</text>
+                </view>
+                <view class='business_order_content_title_right'>
+                  <text>活动剩余</text>
+                </view>
+              </view>
+              <view class='business_order_content_content'>
+                <image src='{{item.detailsBigImage}}'></image>
+                <view class='business_order_content_content_text'>
+                  <text class='text_det'>{{item.goodsDescribe}}</text>
+                  <text class='text_money'>￥ {{item.floorPrice}}</text>
+                </view>
 
-      </scroll-view>
-    </swiper-item>
-    <swiper-item>
-      <scroll-view scroll-y="true">
-
+              </view>
+              <view class='business_order_content_state'>
+                <view class='business_order_content_state_num'>
+                  <text>{{item.volume}}人参与 </text>
+                  <text> 剩余{{item.stock}}件</text>
+                </view>
+                <view class='business_order_content_state_btn'>
+                  <text>未收货</text>
+                </view>
+              </view>
+            </view>
+          </view>
       </scroll-view>
     </swiper-item>
   </swiper>
