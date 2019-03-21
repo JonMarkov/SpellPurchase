@@ -1,0 +1,2 @@
+<image src="/images/bg.jpg" class="bg"></image>
+<button class='go share user-motto' id="shareBtn" open-type="share" hover-class="other-button-hover">点击进入</button>

@@ -7,15 +7,18 @@ Page({
    */
   data: {
     // 是否显示弹窗
-    showModalStatus: true,
+    showModalStatus: false,
     // 颜色的SKU
     colour_txt: '',
     // 材质的SKU
     material_txt: '',
     // 尺码的SKU
     size_txt: '',
+    styles:'',
     gg_price: 0,
-    guigeList: []
+    guigeList: [],
+    styleId: 0,
+    attrId: 0
   },
   // 颜色
   filterColour: function(e) {
@@ -28,7 +31,6 @@ Page({
       self.price_zong()
     }, 100)
   },
-
   // 材质
   filterMaterial: function(e) {
     var self = this;
@@ -51,7 +53,35 @@ Page({
       self.price_zong()
     }, 100)
   },
-  // 计算价格
+  filterStyle:function(e){
+    var self = this;
+    var txt = e.currentTarget.dataset.txt
+    self.setData({
+      styles: txt,
+    });
+    setTimeout(function () {
+      self.price_style()
+    }, 100)
+  },
+  // 计算价格1
+  price_style:function(){
+    var _this = this
+    // SKU数组
+    var guigeList = _this.data.detList.goodsStyles
+    // 当前选择的颜色
+    var styles = _this.data.styles
+    for (var i in guigeList) {
+       console.log(guigeList[i])
+      if (styles == guigeList[i].styles) {
+        console.log(guigeList[i])
+        var sePrice = guigeList[i].price
+        _this.setData({
+          gg_price: sePrice
+        })
+      }
+    }
+  },
+  // 计算价格2
   price_zong: function() {
     var _this = this;
     // SKU数组
@@ -64,8 +94,10 @@ Page({
     var sizes_txt = _this.data.sizes_txt
     for (var i in guigeList) {
       if (colour_txt == guigeList[i].colour && material_txt == guigeList[i].material && sizes_txt == guigeList[i].size) {
+        console.log(guigeList[i])
         _this.setData({
-          gg_price: guigeList[i].price
+          gg_price: guigeList[i].price,
+          attrId: guigeList[i].attrId
         })
       }
     }
@@ -104,8 +136,10 @@ Page({
         let endTime = (resData.activityEndTime) / 1000
         //获取当前时间
         let surplusTime = (resData.activitySurplusTime) / 1000
-        // // SKU属性
+        // // SKU属性1
         let goodsAttributes = resData.goodsAttributes
+        // SKU属性2
+        let goodsStyles = resData.goodsStyles
         // // 默认的数据颜色
         let colors = resData.colors
         let colour_txt = resData.colors[0]
@@ -115,30 +149,58 @@ Page({
         // // 默认的数据尺码
         let sizes = resData.sizes
         let sizes_txt = resData.sizes[0]
-        // 获取初始化价钱
+        // 默认的款式数据
+        let styles = resData.styles[0]
+        let styles_list = resData.styles
+        // 获取3初始化价钱
         for (var i in goodsAttributes) {
           if (
             colour_txt == goodsAttributes[i].colour &&
             material_txt == goodsAttributes[i].material &&
             sizes_txt == goodsAttributes[i].size) {
             var price = goodsAttributes[i].price
+            var attrId = goodsAttributes[i].attrId
           }
         }
-        // 把数据存进data
-        _this.setData({
-          gg_price: price,
-          colors: colors,
-          colour_txt: colour_txt,
-          material: material,
-          material_txt: material_txt,
-          sizes: sizes,
-          sizes_txt: sizes_txt,
-          guigeList: goodsAttributes,
-          detList: resData,
-          starTime: starTime,
-          endTime: endTime,
-          surplusTime: surplusTime
-        })
+
+        // 获取1初始化价钱
+        for (var i in goodsStyles) {
+          if (styles == goodsStyles[i].styles) {
+            var price = goodsStyles[i].price
+            var styleId = goodsStyles[i].styleId
+          }
+        }
+        if (resData.goodsAttributes == '') {
+          _this.setData({
+            styleId: styleId,
+            styles: styles,
+            styles_list: styles_list,
+            detList: resData,
+            starTime: starTime,
+            endTime: endTime,
+            surplusTime: surplusTime,
+            guigeList: goodsAttributes,
+            gg_price: price,
+          })
+        } else {
+          // 把数据存进data
+          _this.setData({
+            attrId: attrId,
+            gg_price: price,
+            colors: colors,
+            colour_txt: colour_txt,
+            material: material,
+            material_txt: material_txt,
+            sizes: sizes,
+            sizes_txt: sizes_txt,
+            guigeList: goodsAttributes,
+            detList: resData,
+            starTime: starTime,
+            endTime: endTime,
+            surplusTime: surplusTime
+          })
+        }
+
       }
     })
 
@@ -189,17 +251,151 @@ Page({
       }
     }, 1000)
   },
-  // DY分享商品
+  // DY分享商品弹窗
   Toshare: function(e) {
+    var _this = this
     var activity_type = e.currentTarget.dataset.activity;
-    if (activity_type == 1) {
-      console.log('砍价')
-    } else if (activity_type == 2) {
-      console.log('拼团')
-    } else if (activity_type == 2) {
-      console.log('0元购')
-    }
+    _this.setData({
+      showModalStatus:true
+    })
   },
+  // 砍价购物
+  reqsucOrder: function() {
+    var _this = this
+    // uesr_id
+    var user_id = _this.data.user_id
+    // 声明user_id
+    var goods_id = _this.data.goodsId
+    var activityType = _this.data.detList.activityType
+    var styleId = this.data.styleId
+    var attrId = this.data.attrId
+
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'advanceOrder',
+      // 请求参数
+      requestParam: {
+        styleId: styleId,
+        attrId: attrId,
+        activityType: activityType,
+        userId: user_id,
+        goodsId: goods_id,
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        var bargainId = res.data.bargainId
+        if (res.data.code == 0) {
+          wx.navigateTo({
+            url: '/pages/shareSuccess/shareSuccess?bargainId=' + bargainId,
+          })
+        }
+
+      }
+    })
+
+
+  },
+  // 拼团购物
+  pintGm: function() {
+    var _this = this
+    // uesr_id
+    var user_id = _this.data.user_id
+    // 声明user_id
+    var goods_id = _this.data.goodsId
+    var activityType = _this.data.detList.activityType
+    var styleId = this.data.styleId
+    var attrId = this.data.attrId
+
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'advanceOrder',
+      // 请求参数
+      requestParam: {
+        styleId: styleId,
+        attrId: attrId,
+        activityType: activityType,
+        userId: user_id,
+        goodsId: goods_id,
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res.data.assembleId)
+        var assembleId = res.data.assembleId
+        if (res.data.code == 0) {
+          wx.navigateTo({
+            url: '/pages/OrderPayment/OrderPayment?assembleId=' + assembleId,
+          })
+        }
+      }
+    })
+  },
+  // 0元购
+  zeroGm: function() {
+    var _this = this
+    // uesr_id
+    var user_id = _this.data.user_id
+    // 声明user_id
+    var goods_id = _this.data.goodsId
+    var activityType = _this.data.detList.activityType
+    var styleId = this.data.styleId
+    var attrId = this.data.attrId
+
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'advanceOrder',
+      // 请求参数
+      requestParam: {
+        styleId: styleId,
+        attrId: attrId,
+        activityType: activityType,
+        userId: user_id,
+        goodsId: goods_id,
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        var zeroId = res.data.zeroId
+        if (res.data.code == 0) {
+          wx.navigateTo({
+            url: '/pages/OrderPayment/OrderPayment?zeroId=' + zeroId,
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -270,22 +466,9 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享s
    */
-  onShareAppMessage: function (ops) {
-    this.reqBanner()
-    if (ops.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(ops.target)
-    }
-    let title = 'this.data.shareList.shareList'
-    let imageUrl = 'this.data.shareList.picUrl'
-    let path = 'this.data.shareList.path'
-    return {
-      title: title,
-      imageUrl: imageUrl,
-      path: path
-    }
-  
+  onShareAppMessage: function(ops) {
+
   }
 })

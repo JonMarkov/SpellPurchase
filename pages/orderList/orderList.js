@@ -13,7 +13,7 @@ Page({
     order_type_text: "已完成"
   },
   // 点击切换tab标签
-  tabNav: function(e) {
+  clickTab: function(e) {
     var _this = this
     //  如果点击的条目和内容区域的条目相同，则不执行操作
     if (this.data.currentTab === e.target.dataset.current) {
@@ -151,6 +151,7 @@ Page({
             price: price,
             deliveryState:deliveryState
           }
+          console.log(resData[i].goodsDescribe)
           orderInfo.push(temp)
         }
         _this.setData({

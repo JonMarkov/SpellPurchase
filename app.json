@@ -1,4 +1,4 @@
-  {
+{
   "pages": [
     "pages/login/login",
     "pages/comDetails/comDetails",
@@ -21,7 +21,10 @@
     "pages/terminalOrder/terminalOrder",
     "pages/publishPreview/publishPreview",
     "pages/CenVip/CenVip",
-    "pages/OrderPayment/OrderPayment"
+    "pages/OrderPayment/OrderPayment",
+    "pages/helpClick0/helpClick0",
+    "pages/helpClick/helpClick",
+    "pages/shareSuccess/shareSuccess"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7a43b6",

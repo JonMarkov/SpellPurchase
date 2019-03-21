@@ -1,0 +1,30 @@
+<view class="box">
+  <view class="bargain_time">活动剩余：
+    <text>1天 23:20:06</text>
+  </view>
+  <!-- 购买商品 -->
+  <view class="goods">
+    <image src="/images/head.jpg" class="goods_img"></image>
+    <view class="goods_details">
+      <text class="goods_title">夏季新款半身裙</text>
+      <view class="goods_size">颜色分类：
+        <text>蓝色</text>尺码：
+        <text>均码</text>
+      </view>
+      <view class="price">
+        <text class="unit_price">￥59</text>
+        <view class="bargain_succeed">
+          <view>已砍
+            <text>35</text>元，还剩
+            <text>23</text>元</view>
+          <view>已有
+            <text>55555</text>人砍价成功</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="bargain_btn">
+    <button>帮他砍价</button>
+    <button class="active">我要砍价</button>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+<view class="box">
+  <view class="goods_name">
+    <text>夜游四方乐</text>
+    <text class="activity_time">活动剩余：21:22:20</text>
+  </view>
+  <!-- 购买商品 -->
+  <view class="goods">
+    <image src="/images/head.jpg" class="goods_img"></image>
+    <view class="goods_details">
+      <text class="goods_title">夏季新款半身裙</text>
+      <view class="goods_size">颜色分类：
+        <text>蓝色</text>尺码：
+        <text>均码</text>
+      </view>
+      <view class="price">
+        <text class="unit_price">￥59</text>
+      </view>
+    </view>
+  </view>
+  <view class="suc_num">已有
+    <text>123</text>人注册成功</view>
+  <view class="group">
+    <image src="/images/head.jpg"></image>
+    <image src="/images/head.jpg"></image>
+    <image src="/images/head.jpg"></image>
+    <image src="/images/head.jpg"></image>
+    <image src="/images/head.jpg"></image>
+  </view>
+  <button class="get_btn">帮他免费拿</button>
+</view>

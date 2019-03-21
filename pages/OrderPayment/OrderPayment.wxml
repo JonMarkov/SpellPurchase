@@ -1,2 +1,41 @@
-<!--pages/OrderPayment/OrderPayment.wxml-->
-<text>pages/OrderPayment/OrderPayment.wxml</text>
+<!-- 收货人地址 -->
+<view class="add"  bindtap='ToqhAdd'>
+  <view class="add_top">
+    <view class="add_top_left">收货人：
+      <text>{{addRess.receiverName}}</text>
+    </view>
+    <view class="add_top_right">{{addRess.receiverPhone}}</view>
+  </view>
+  <view class="add_bottom">
+    <image src="/images/add.png" class="add_icon"></image>
+    <view class="add_mas">收货地址：
+      <text>{{addRess.province}}{{addRess.city}}{{addRess.county}}{{addRess.detailedAddress}}</text>
+    </view>
+    <image src="/images/right.png" class="right"></image>
+  </view>
+</view>
+<!-- 购买商品 -->
+<view class="goods">
+  <image src="{{infoDet.goodsImage}}" class="goods_img"></image>
+  <view class="goods_details">
+    <text class="goods_title">{{infoDet.goodsName}}</text>
+    <view class="goods_size">
+      <text wx:if="{{infoDet.styles}}">{{infoDet.styles}}</text>
+      <text wx:if="{{infoDet.caiZhi}}">{{infoDet.caiZhi}} </text>
+      <text wx:if="{{infoDet.color}}">{{infoDet.color}} </text>
+      <text wx:if="{{infoDet.size}}">{{infoDet.size}} </text>
+    </view>
+    <view class="delivery">发货时间：
+      <text>商家承诺72小时内发货</text>
+    </view>
+    <view class="price">
+      <text class="unit_price">￥{{infoDet.price}}</text>
+    </view>
+  </view>
+</view>
+<!-- 合计 -->
+<view class="total">
+  合计：
+  <text class="total_price">￥{{infoDet.price}}</text>
+  <view class="put" bindtap='subBTo'>提交订单</view>
+</view>

@@ -85,37 +85,46 @@
   <view class='column'>
     <text class="sku-price">￥{{gg_price}}</text>
     <text class="sku-title">
-        <block wx:if="{{gg_txt==''}}">请选择规格</block><block wx:else>已选择 {{colour_txt}}，{{material_txt}}，{{sizes_txt}}</block>
+        <block wx:if="{{gg_txt==''}}">请选择规格</block><block wx:else>已选择 {{colour_txt}} {{material_txt}} {{sizes_txt}} {{styles}}</block>
       </text>
   </view>
-  <view class='guige'>
+  <view wx:if="{{detList.goodsAttributes == ''}}" class='guige'>
+    <text class="gg-title">款式</text>
+    <view class='gg'>
+      <text wx:for="{{styles_list}}" wx:key="gg" wx:for-item="item" class="{{styles==item?'active':''}}" data-txt="{{item}}" bindtap="filterStyle">{{item}}</text>
+    </view>
+  </view>
+  <text class="line" wx:if="{{detList.goodsAttributes != ''}}"></text>
+  <view wx:if="{{detList.goodsAttributes != ''}}" class='guige'>
     <text class="gg-title">颜色</text>
     <view class='gg'>
       <text wx:for="{{colors}}" wx:key="" wx:for-item="item" class="{{colour_txt==item?'active':''}}" data-txt="{{item}}" bindtap="filterColour">{{item}}</text>
     </view>
   </view>
-  <text class="line"></text>
-  <view class='guige'>
+  <text class="line" wx:if="{{detList.goodsAttributes != ''}}"></text>
+  <view wx:if="{{detList.goodsAttributes != ''}}" class='guige'>
     <text class="gg-title">材质</text>
     <view class='gg'>
-      <text wx:for="{{material}}" wx:key="" wx:for-item="item" class="{{material_txt==item?'active':''}}"  data-txt="{{item}}" bindtap="filterMaterial">{{item}}</text>
+      <text wx:for="{{material}}" wx:key="" wx:for-item="item" class="{{material_txt==item?'active':''}}" data-txt="{{item}}" bindtap="filterMaterial">{{item}}</text>
     </view>
   </view>
-  <text class="line"></text>
-  <view class='guige'>
+  <text class="line" wx:if="{{detList.goodsAttributes != ''}}"></text>
+  <view wx:if="{{detList.goodsAttributes != ''}}" class='guige'>
     <text class="gg-title">尺码</text>
     <view class='gg'>
       <text wx:for="{{sizes}}" wx:key="gg" wx:for-item="item" class="{{sizes_txt==item?'active':''}}" data-txt="{{item}}" bindtap="filterSize">{{item}}</text>
     </view>
   </view>
   <text class="line"></text>
-<!-- 如果是砍价订单则出现分享按钮 -->
-<!-- 如果是拼团订单则出现付款按钮 -->
-<!-- 如果是0元购则出现付款立即成功按钮 -->
-  <view class='guige'>
 
-    <button wx:if="{{detList.activityType == 3}}" class='share user-motto' id="shareBtn" open-type="share" hover-class="other-button-hover">确认(砍价)</button>
-      <button wx:if="{{detList.activityType == 2}}">确认（拼团）</button>
-       <button wx:if="{{detList.activityType == 1}}">确认（0元购）</button>
+
+  <view class='guige'>
+    <!-- 如果是砍价订单则出现分享按钮 -->
+    <!-- <button wx:if="{{detList.activityType == 1}}" class='share user-motto' id="shareBtn" open-type="share" hover-class="other-button-hover">确认(砍价)</button> -->
+    <button bindtap='reqsucOrder' wx:if="{{detList.activityType == 1}}">确认(砍价)</button>
+    <!-- 如果是拼团订单则出现付款按钮 -->
+    <button bindtap='pintGm' wx:if="{{detList.activityType == 2}}">确认（拼团）</button>
+    <!-- 如果是0元购则出现付款立即成功按钮 -->
+    <button bindtap='zeroGm' wx:if="{{detList.activityType == 3}}">确认（0元购）</button>
   </view>
 </view>

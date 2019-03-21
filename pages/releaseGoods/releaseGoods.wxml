@@ -6,50 +6,50 @@
   </view>
 
   <swiper class='swiper' current='{{currentTab}}' duration="300" bindchange="bindchange">
-    <view>
-      <swiper-item>
-        <scroll-view scroll-y="true">
-          <view class='business_order'>
-            <view class='business_order_content' wx:for="{{releaseInfo}}" wx:key="">
-              <view class='business_order_content_title'>
-                <view class='business_order_content_title_left'>
-                  <text>{{item.goodsName}}</text>
-                </view>
-                <view class='business_order_content_title_right'>
-                  <text>活动剩余</text>
-                </view>
+    <!-- 2 -->
+    <swiper-item>
+      <scroll-view scroll-y="true">
+        <view class='business_order'>
+          <view class='business_order_content' wx:for="{{releaseInfo}}" wx:key="">
+            <view class='business_order_content_title'>
+              <view class='business_order_content_title_left'>
+                <text>{{item.goodsName}}</text>
               </view>
-              <view class='business_order_content_content'>
-                <image src='{{item.detailsBigImage}}'></image>
-                <view class='business_order_content_content_text'>
-                  <text class='text_det'>{{item.goodsDescribe}}</text>
-                  <text class='text_money'>￥ {{item.floorPrice}}</text>
-                </view>
-
-              </view>
-              <view class='business_order_content_state'>
-                <view class='business_order_content_state_num'>
-                  <text>2人参与 </text>
-                  <text> 剩余7件</text>
-                </view>
-                <view class='bus_or'>
-                  <view class='business_order_content_state_btn'>
-                    <text wx:if="{{item.goodsState == 1}}" bindtap='ToeditGoodsStateById' data-goods_id='{{item.goodsId}}' data-goods_state='{{item.goodsState}}'>上架</text>
-                    <text wx:if="{{item.goodsState == 2}}" bindtap='ToeditGoodsStateById' data-goods_id='{{item.goodsId}}' data-goods_state='{{item.goodsState}}'>下架</text>
-                  </view>
-
-                  <view class='business_order_content_state_btn' wx:if="{{item.goodsState == 2}}">
-
-                    <text wx:if="{{item.goodsState == 2}}" bindtap='TodelGoodsStateById' data-goods_id='{{item.goodsId}}' data-goods_state='{{item.goodsState}}'>删除</text>
-                  </view>
-                </view>
-
+              <view class='business_order_content_title_right'>
+                <text>活动剩余</text>
               </view>
             </view>
+            <view class='business_order_content_content'>
+              <image src='{{item.detailsBigImage}}'></image>
+              <view class='business_order_content_content_text'>
+                <text class='text_det'>{{item.goodsDescribe}}</text>
+                <text class='text_money'>￥ {{item.floorPrice}}</text>
+              </view>
+
+            </view>
+            <view class='business_order_content_state'>
+              <view class='business_order_content_state_num'>
+                <text>2人参与 </text>
+                <text> 剩余7件</text>
+              </view>
+              <view class='bus_or'>
+                <view class='business_order_content_state_btn'>
+                  <text wx:if="{{item.goodsState == 1}}" bindtap='ToeditGoodsStateById' data-goods_id='{{item.goodsId}}' data-goods_state='{{item.goodsState}}'>上架</text>
+                  <text wx:if="{{item.goodsState == 2}}" bindtap='ToeditGoodsStateById' data-goods_id='{{item.goodsId}}' data-goods_state='{{item.goodsState}}'>下架</text>
+                </view>
+
+                <view class='business_order_content_state_btn' wx:if="{{item.goodsState == 2}}">
+
+                  <text wx:if="{{item.goodsState == 2}}" bindtap='TodelGoodsStateById' data-goods_id='{{item.goodsId}}' data-goods_state='{{item.goodsState}}'>删除</text>
+                </view>
+              </view>
+
+            </view>
           </view>
-        </scroll-view>
-      </swiper-item>
-    </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!-- 2 -->
     <swiper-item>
       <scroll-view scroll-y="true">
         <view class='business_order'>
@@ -91,6 +91,7 @@
         </view>
       </scroll-view>
     </swiper-item>
+    <!-- 3 -->
     <swiper-item>
       <scroll-view scroll-y="true">
         <view class='business_order'>

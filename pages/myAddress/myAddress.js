@@ -6,13 +6,33 @@ Page({
 
   data: {
     // 地址列表
-    addressList: []
+    addressList: [],
+    ddState: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function() {
+  onLoad: function(options) {
+    var _this = this
+    console.log(options)
+    if (options.ddState) {
+      this.setData({
+        ddState: options.ddState
+      })
+    }
+    // 拼团购
+    if (options.assembleId) {
+      _this.setData({
+        assembleId: options.assembleId
+      })
+    }
+    // 0元购
+    if (options.zeroId) {
+      _this.setData({
+        zeroId: options.zeroId
+      })
+    }
     // 重定向this值
     var _this = this;
     // 获取本地缓存内的user_id信息
@@ -66,7 +86,30 @@ Page({
       }
     })
   },
-
+  longToClick: function(e) {
+    var _this = this
+    var ddState = _this.data.ddState
+    console.log(ddState)
+    if (ddState == 1) {
+      var index = e.currentTarget.dataset.index
+      var ADDREssList = _this.data.addressList[index]
+      // 把所有信息传入缓存
+      wx.setStorage({
+        key: 'addRess',
+        data: ADDREssList,
+      })
+    }
+    if (_this.data.assembleId) {
+      wx.navigateTo({
+        url: '/pages/OrderPayment/OrderPayment?assembleId=' + _this.data.assembleId,
+      })
+    }
+    if (_this.data.zeroId) {
+      wx.navigateTo({
+        url: '/pages/OrderPayment/OrderPayment?zeroId=' + _this.data.zeroId,
+      })
+    }
+  },
   //DY函数执行 长按事件地址条目执行删除
   longTap: function(e) {
     var _this = this

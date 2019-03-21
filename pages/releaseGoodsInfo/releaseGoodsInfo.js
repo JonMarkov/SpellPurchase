@@ -569,7 +569,8 @@ Page({
         let resData = res.data
         if (resData.code == 0) {
           wx.navigateTo({
-            url: '/pages/publishPreview/publishPreview?goodsId=' + resData.goodsId,
+            // url: '/pages/publishPreview/publishPreview?goodsId=' + resData.goodsId,
+            url:'/pages/releaseGoods/releaseGoods'
           })
         }
       }
