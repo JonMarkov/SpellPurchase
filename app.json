@@ -19,7 +19,9 @@
     "pages/orderList/orderList",
     "pages/userMyOrderDetails/userMyOrderDetails",
     "pages/terminalOrder/terminalOrder",
-    "pages/publishPreview/publishPreview"
+    "pages/publishPreview/publishPreview",
+    "pages/CenVip/CenVip",
+    "pages/OrderPayment/OrderPayment"
   ],
   "window": {
     "navigationBarBackgroundColor": "#7a43b6",

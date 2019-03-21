@@ -2,7 +2,10 @@ page {
   background: #f8f8f8;
   width: 100%;
 }
-
+.bus_or{
+  display: flex;
+  flex-direction: row
+}
 /* tobar  */
 
 .swiper-tab {

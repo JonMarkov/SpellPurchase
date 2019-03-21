@@ -61,6 +61,7 @@ Page({
     BargainState: true,
     sex: "包邮"
   },
+
   // 监听商品名称函数
   ToGoodsName: function(e) {
     this.setData({
@@ -581,6 +582,56 @@ Page({
       url: '/pages/publishPreview/publishPreview',
     })
   },
+  // DY函数定义 请求是否还有发布次数
+  reqList: function() {
+    var _this = this
+    // 声明user_id
+    var user_id = this.data.user_id
+    // 拼装请求所需参数
+    var params = {
+      // 请求方法名
+      action: 'releaseLimitNumber',
+      // 请求参数
+      requestParam: {
+        busId: user_id,
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res.data)
+        let resData = res.data
+        if(resData.code == -1){
+          wx.showModal({
+            title: '提示',
+            cancelText: '取消',
+            confirmText: '购买VIP',
+            content: "您的发布次已用完了，您可以分享好友获取次数或购买VIP（￥9.90）",
+            success: function (res) {
+              if (res.confirm) { //这里是点击了确定以后
+                wx.navigateTo({
+                  url: '/pages/CenVip/CenVip',
+                })
+              } else { //这里是点击了取消以后
+                wx.navigateTo({
+                  url: '/pages/releaseGoods/releaseGoods',
+                })
+              }
+            }
+          })
+        }
+    
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -603,7 +654,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    // 请求次数
+    this.reqList()
   },
 
   /**
@@ -644,7 +696,19 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function (ops) {
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    let title = '12'
+    let imageUrl = '2'
+    let path = 'this.data.shareList.path'
+    return {
+      title: title,
+      imageUrl: imageUrl,
+      path: path
+    }
 
   }
 })

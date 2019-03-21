@@ -1,7 +1,7 @@
 <!--pages/comDetails/comDetails.wxml-->
 <!-- 商品详情图-->
 <view class='banner_swiper'>
-<image src='{{detList.detailsImage}}'></image>
+  <image src='{{detList.detailsImage}}'></image>
 </view>
 <!-- 商品详情内容 star -->
 <view class='DetCom'>
@@ -69,7 +69,53 @@
 <!-- 点击按钮部分 -->
 <view class='DetBtn'>
   <text class='DetBtn_left'>￥{{detList.groupPurchasePrice}}</text>
-  <view class='DetBtn_right'>
+  <view class='DetBtn_right' data-activity='{{detList.activityType}}' bindtap='Toshare'>
     <text>发起拼团</text>
+  </view>
+</view>
+
+
+<!--屏幕背景变暗的背景  -->
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<!--弹出框  -->
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <view class='commImg'>
+    <image src='{{imghref}}{{goods_img[0].img}}' mode="aspectFit"></image>
+  </view>
+  <view class='column'>
+    <text class="sku-price">￥{{gg_price}}</text>
+    <text class="sku-title">
+        <block wx:if="{{gg_txt==''}}">请选择规格</block><block wx:else>已选择 {{colour_txt}}，{{material_txt}}，{{sizes_txt}}</block>
+      </text>
+  </view>
+  <view class='guige'>
+    <text class="gg-title">颜色</text>
+    <view class='gg'>
+      <text wx:for="{{colors}}" wx:key="" wx:for-item="item" class="{{colour_txt==item?'active':''}}" data-txt="{{item}}" bindtap="filterColour">{{item}}</text>
+    </view>
+  </view>
+  <text class="line"></text>
+  <view class='guige'>
+    <text class="gg-title">材质</text>
+    <view class='gg'>
+      <text wx:for="{{material}}" wx:key="" wx:for-item="item" class="{{material_txt==item?'active':''}}"  data-txt="{{item}}" bindtap="filterMaterial">{{item}}</text>
+    </view>
+  </view>
+  <text class="line"></text>
+  <view class='guige'>
+    <text class="gg-title">尺码</text>
+    <view class='gg'>
+      <text wx:for="{{sizes}}" wx:key="gg" wx:for-item="item" class="{{sizes_txt==item?'active':''}}" data-txt="{{item}}" bindtap="filterSize">{{item}}</text>
+    </view>
+  </view>
+  <text class="line"></text>
+<!-- 如果是砍价订单则出现分享按钮 -->
+<!-- 如果是拼团订单则出现付款按钮 -->
+<!-- 如果是0元购则出现付款立即成功按钮 -->
+  <view class='guige'>
+
+    <button wx:if="{{detList.activityType == 3}}" class='share user-motto' id="shareBtn" open-type="share" hover-class="other-button-hover">确认(砍价)</button>
+      <button wx:if="{{detList.activityType == 2}}">确认（拼团）</button>
+       <button wx:if="{{detList.activityType == 1}}">确认（0元购）</button>
   </view>
 </view>

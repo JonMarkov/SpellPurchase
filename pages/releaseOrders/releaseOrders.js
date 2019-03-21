@@ -11,7 +11,11 @@ Page({
     currentTab: 0,
     curIndex: 1,
     goods_name: '',
-    fahuoState: 0
+    fahuoState: 0,
+    hiddenmodalput: true,
+    logisticsCompany:'',
+    AddNum:''
+
 
   },
 
@@ -130,6 +134,76 @@ Page({
           businessInfo: resData
         })
       }
+    })
+  },
+  //点击按钮痰喘指定的hiddenmodalput弹出框  
+  modalinput: function () {
+    this.setData({
+      hiddenmodalput: !this.data.hiddenmodalput
+    })
+  },
+  //取消按钮  
+  cancel: function () {
+    this.setData({
+      hiddenmodalput: true
+    });
+  },
+  //确认  
+  confirm: function (e) {
+    console.log(e)
+    var _this = this
+    // 用户Id
+    var activitType = e.currentTarget.dataset.activittype
+    // 发货状态
+    var orderNo = e.currentTarget.dataset.orderno
+    // 商品搜索参数
+    var logisticsCompany = _this.data.logisticsCompany
+    var AddNum = _this.data.AddNum
+    var params = {
+      // 请求方法名
+      action: 'addDeliveryInfo',
+      // 请求参数
+      requestParam: {
+        activtiyType:activitType,
+        orderNo: orderNo,   
+        logisticsCompany: logisticsCompany,    
+        oddNumbers: AddNum
+      }
+    }
+    console.log(params)
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      // dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res)
+        if(res.data.code == 0){
+          _this.rqOrderFn()
+        }
+      }
+    })
+    this.setData({
+      hiddenmodalput: true
+    })
+  }, 
+  TologisticsCompany:function(e){
+    var _this = this
+    console.log(e.detail.value)
+    _this.setData({
+      logisticsCompany: e.detail.value
+    })
+  },
+  ToAddNum:function(e){
+    var _this = this
+    console.log(e.detail.value)
+    _this.setData({
+      AddNum: e.detail.value
     })
   },
   /**

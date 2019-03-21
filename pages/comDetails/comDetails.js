@@ -6,7 +6,69 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 是否显示弹窗
+    showModalStatus: true,
+    // 颜色的SKU
+    colour_txt: '',
+    // 材质的SKU
+    material_txt: '',
+    // 尺码的SKU
+    size_txt: '',
+    gg_price: 0,
+    guigeList: []
+  },
+  // 颜色
+  filterColour: function(e) {
+    var self = this;
+    var txt = e.currentTarget.dataset.txt
+    self.setData({
+      colour_txt: txt,
+    });
+    setTimeout(function() {
+      self.price_zong()
+    }, 100)
+  },
 
+  // 材质
+  filterMaterial: function(e) {
+    var self = this;
+    var txt = e.currentTarget.dataset.txt
+    self.setData({
+      material_txt: txt,
+    });
+    setTimeout(function() {
+      self.price_zong()
+    }, 100)
+  },
+  // 尺寸
+  filterSize: function(e) {
+    var self = this;
+    var txt = e.currentTarget.dataset.txt
+    self.setData({
+      sizes_txt: txt,
+    });
+    setTimeout(function() {
+      self.price_zong()
+    }, 100)
+  },
+  // 计算价格
+  price_zong: function() {
+    var _this = this;
+    // SKU数组
+    var guigeList = _this.data.guigeList
+    // 当前选择的颜色
+    var colour_txt = _this.data.colour_txt
+    // 当前选择的材质
+    var material_txt = _this.data.material_txt
+    // 当前选择的尺码
+    var sizes_txt = _this.data.sizes_txt
+    for (var i in guigeList) {
+      if (colour_txt == guigeList[i].colour && material_txt == guigeList[i].material && sizes_txt == guigeList[i].size) {
+        _this.setData({
+          gg_price: guigeList[i].price
+        })
+      }
+    }
   },
   // DY函数定义 请求商品详情函数
   reqBanner: function() {
@@ -42,8 +104,36 @@ Page({
         let endTime = (resData.activityEndTime) / 1000
         //获取当前时间
         let surplusTime = (resData.activitySurplusTime) / 1000
+        // // SKU属性
+        let goodsAttributes = resData.goodsAttributes
+        // // 默认的数据颜色
+        let colors = resData.colors
+        let colour_txt = resData.colors[0]
+        // // 默认的数据材质
+        let material = resData.material
+        let material_txt = resData.material[0]
+        // // 默认的数据尺码
+        let sizes = resData.sizes
+        let sizes_txt = resData.sizes[0]
+        // 获取初始化价钱
+        for (var i in goodsAttributes) {
+          if (
+            colour_txt == goodsAttributes[i].colour &&
+            material_txt == goodsAttributes[i].material &&
+            sizes_txt == goodsAttributes[i].size) {
+            var price = goodsAttributes[i].price
+          }
+        }
         // 把数据存进data
         _this.setData({
+          gg_price: price,
+          colors: colors,
+          colour_txt: colour_txt,
+          material: material,
+          material_txt: material_txt,
+          sizes: sizes,
+          sizes_txt: sizes_txt,
+          guigeList: goodsAttributes,
           detList: resData,
           starTime: starTime,
           endTime: endTime,
@@ -51,6 +141,8 @@ Page({
         })
       }
     })
+
+
   },
   // DY函数定义 请求活动剩余时间
   activity: function() {
@@ -96,6 +188,17 @@ Page({
         clearInterval(actTimer)
       }
     }, 1000)
+  },
+  // DY分享商品
+  Toshare: function(e) {
+    var activity_type = e.currentTarget.dataset.activity;
+    if (activity_type == 1) {
+      console.log('砍价')
+    } else if (activity_type == 2) {
+      console.log('拼团')
+    } else if (activity_type == 2) {
+      console.log('0元购')
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -169,7 +272,20 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function (ops) {
+    this.reqBanner()
+    if (ops.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(ops.target)
+    }
+    let title = 'this.data.shareList.shareList'
+    let imageUrl = 'this.data.shareList.picUrl'
+    let path = 'this.data.shareList.path'
+    return {
+      title: title,
+      imageUrl: imageUrl,
+      path: path
+    }
+  
   }
 })

@@ -197,12 +197,10 @@ Page({
   },
   // DY函数定义 点击进入砍价函数
   ToBargain: function(e) {
-    var _this = this
-    // 获取当前点击的商品id
     let goods_id = e.currentTarget.dataset.goods_id
-    let user_id = _this.data.user_id
-    console.log(goods_id)
-    console.log(user_id)
+    wx.navigateTo({
+      url: '/pages/comDetails/comDetails?goods_id=' + goods_id,
+    })
   },
   //DY函数定义 请求消息列表函数
   messageList: function() {

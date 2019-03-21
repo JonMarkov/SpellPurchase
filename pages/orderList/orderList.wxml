@@ -5,8 +5,8 @@
 </view>
 <swiper current="{{currentTab}}" duration="1000">
   <swiper-item>
-    <view class='sucOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
-      <view class='sucOrderList_title'>
+    <view class='sucOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="">
+      <view class='sucOrderList_title' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
         <view class='sucOrderList_title_title'>
           <text>{{item.goodsName}}</text>
         </view>
@@ -15,11 +15,11 @@
         </view>
       </view>
       <view class='sucOrderList_content'>
-        <view class='sucOrderList_content_img'>
+        <view class='sucOrderList_content_img' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
           <image src='{{item.goodsImage}}'></image>
         </view>
         <view class='sucOrderList_content_det'>
-          <view class='sucOrderList_content_det_info'>
+          <view class='sucOrderList_content_det_info' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
             <view class='sucOrderList_content_det_info_one'>
               订单号：{{item.orderNo}}
             </view>
@@ -28,11 +28,13 @@
             </view>
           </view>
           <view class='sucOrderList_content_det_money'>
-            <view class='sucOrderList_content_det_money_red'>
+            <view class='sucOrderList_content_det_money_red' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
               ￥ {{item.price}}
             </view>
             <view class='sucOrderList_content_det_money_btn'>
-              按钮
+              <text wx:if="{{item.deliveryState == 1}}">未发货</text>
+              <text wx:if="{{item.deliveryState == 2}}"  data-my_order='{{item.orderNo}}' bindtap='ToeditDeliveryState'>确认收货</text>
+              <text wx:if="{{item.deliveryState == 3}}">已完成</text>
             </view>
           </view>
         </view>
@@ -41,21 +43,21 @@
     
   </swiper-item>
   <swiper-item>
-    <view class='penOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
+    <view class='penOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" >
       <view class='sucOrderList_title'>
-        <view class='sucOrderList_title_title'>
+        <view class='sucOrderList_title_title' bindtap='ToMyOrderDet'>
           <text>{{item.goodsName}}</text>
         </view>
-        <view class='sucOrderList_title_state'>
+        <view class='sucOrderList_title_state' bindtap='ToMyOrderDet'>
           <text>{{order_type_text}}</text>
         </view>
       </view>
       <view class='sucOrderList_content'>
-        <view class='sucOrderList_content_img'>
+        <view class='sucOrderList_content_img' bindtap='ToMyOrderDet'>
           <image src='{{item.goodsImage}}'></image>
         </view>
         <view class='sucOrderList_content_det'>
-          <view class='sucOrderList_content_det_info'>
+          <view class='sucOrderList_content_det_info' bindtap='ToMyOrderDet'>
             <view class='sucOrderList_content_det_info_one'>
               订单号：{{item.orderNo}}
             </view>
@@ -64,11 +66,13 @@
             </view>
           </view>
           <view class='sucOrderList_content_det_money'>
-            <view class='sucOrderList_content_det_money_red'>
+            <view class='sucOrderList_content_det_money_red' bindtap='ToMyOrderDet'>
               ￥ {{item.price}}
             </view>
             <view class='sucOrderList_content_det_money_btn'>
-              按钮
+              <text wx:if="{{item.deliveryState == 1}}">未发货</text>
+              <text wx:if="{{item.deliveryState == 2}}"  data-my_order='{{item.orderNo}}' bindtap='ToeditDeliveryState'>确认收货</text>
+              <text wx:if="{{item.deliveryState == 3}}">已完成</text>
             </view>
           </view>
         </view>
@@ -76,34 +80,36 @@
     </view>
   </swiper-item>
   <swiper-item>
-    <view class='verdueOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" bindtap='ToMyOrderDet'>
+    <view class='verdueOrderList' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' wx:for="{{orderInfo}}" wx:key="" >
       <view class='sucOrderList_title'>
-        <view class='sucOrderList_title_title'>
+        <view class='sucOrderList_title_title' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
           <text>{{item.goodsName}}</text>
         </view>
-        <view class='sucOrderList_title_state'>
+        <view class='sucOrderList_title_state' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
           <text>{{order_type_text}}</text>
         </view>
       </view>
       <view class='sucOrderList_content'>
-        <view class='sucOrderList_content_img'>
+        <view class='sucOrderList_content_img' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
           <image src='{{item.goodsImage}}'></image>
         </view>
         <view class='sucOrderList_content_det'>
           <view class='sucOrderList_content_det_info'>
-            <view class='sucOrderList_content_det_info_one'>
+            <view class='sucOrderList_content_det_info_one' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
               订单号：{{item.orderNo}}
             </view>
-            <view class='sucOrderList_content_det_info_two'>
+            <view class='sucOrderList_content_det_info_two' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
               {{item.goodsDescribe}}
             </view>
           </view>
           <view class='sucOrderList_content_det_money'>
-            <view class='sucOrderList_content_det_money_red'>
+            <view class='sucOrderList_content_det_money_red' data-my_order='{{item.orderNo}}' data-my_state='{{order_state}}' bindtap='ToMyOrderDet'>
               ￥ {{item.price}}
             </view>
             <view class='sucOrderList_content_det_money_btn'>
-              按钮
+              <text wx:if="{{item.deliveryState == 1}}">未发货</text>
+              <text wx:if="{{item.deliveryState == 2}}" data-my_order='{{item.orderNo}}' bindtap='ToeditDeliveryState'>确认收货</text>
+              <text wx:if="{{item.deliveryState == 3}}">已完成</text>
             </view>
           </view>
         </view>

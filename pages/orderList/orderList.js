@@ -142,12 +142,14 @@ Page({
           let goodsName = resData[i].goodsName
           let orderNo = resData[i].orderNo
           let price = resData[i].price
+          let deliveryState = resData[i].deliveryState
           var temp = {
             goodsDescribe: goodsDescribe,
             goodsImage: goodsImage,
             goodsName: goodsName,
             orderNo: orderNo,
-            price: price
+            price: price,
+            deliveryState:deliveryState
           }
           orderInfo.push(temp)
         }
@@ -155,6 +157,43 @@ Page({
           orderInfo: orderInfo
         })
 
+      }
+    })
+  },
+  ToeditDeliveryState:function(e){
+    var _this = this
+    // 用户ID
+    var user_id = _this.data.user_id
+    // 订单类型
+    var activtiyType = _this.data.order_state
+    var my_order = e.target.dataset.my_order
+    var params = {
+      // 请求方法名
+      action: 'editDeliveryState',
+      // 请求参数
+      requestParam: {
+        userId: user_id,
+        activtiyType: activtiyType,
+        orderNo: my_order
+      }
+    }
+    // 请求参数合并
+    const newparams = Object.assign(params);
+    // 请求登录的Java后台接口
+    wx.request({
+      url: WxLicUrl,
+      data: newparams,
+      method: "POST",
+      // dataType: JSON,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: res => {
+        console.log(res.data)
+        if(res.data.code == 0){
+          _this.reOrderList()
+        }
+  
       }
     })
   },
