@@ -5,7 +5,7 @@ App({
   },
   /**     * 设置全局变量     */
   globalData: {
-    wx_url_1: 'http://192.168.10.55:8080/yxqpg/index',
+    wx_url_1: 'http://192.168.1.106:8080/yxqpg/index',
     // wx_url_1:'http://47.105.235.162:8080/yxqpg/index'
   }
 })

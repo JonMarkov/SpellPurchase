@@ -1,30 +1,31 @@
 <view class="box">
   <view class="goods_name">
-    <text>夜游四方乐</text>
+    <text>{{infoDet.goodsName}}</text>
     <text class="activity_time">活动剩余：21:22:20</text>
   </view>
   <!-- 购买商品 -->
   <view class="goods">
-    <image src="/images/head.jpg" class="goods_img"></image>
+    <image src="{{infoDet.goodsImage}}" class="goods_img"></image>
     <view class="goods_details">
-      <text class="goods_title">夏季新款半身裙</text>
-      <view class="goods_size">颜色分类：
-        <text>蓝色</text>尺码：
-        <text>均码</text>
+      <text class="goods_title">{{infoDet.goodsName}}</text>
+      <view class="goods_size">
+        <text> {{infoDet.color}} </text>
+        <text> {{infoDet.caiZhi}} </text>
+        <text> {{infoDet.size}} </text>
+        <text> {{infoDet.styles}} </text>
       </view>
       <view class="price">
-        <text class="unit_price">￥59</text>
+        <text class="unit_price">￥{{infoDet.price}}</text>
       </view>
     </view>
   </view>
-  <view class="suc_num">已有
-    <text>123</text>人注册成功</view>
+  <view class="suc_num" wx:if="{{zeroId}}">已有
+    <text>{{infoDet.registerNum}}</text>人注册成功</view>
+  <view class="suc_num" wx:if="{{assembleId}}">还有
+    <text>{{infoDet.groupNum}}</text>人注册成功</view>
   <view class="group">
-    <image src="/images/head.jpg"></image>
-    <image src="/images/head.jpg"></image>
-    <image src="/images/head.jpg"></image>
-    <image src="/images/head.jpg"></image>
-    <image src="/images/head.jpg"></image>
+    <image wx:for="{{infoDet.users}}" wx:key="" src="{{item.avatarurl}}"></image>
   </view>
-  <button class="get_btn">帮他免费拿</button>
+  <button class="get_btn" wx:if="{{zeroId}}" bindtap='zeroIdFnClick'>帮他免费拿</button>
+  <button class="get_btn" wx:if="{{assembleId}}" bindtap='assembleIdFnClick'>参与拼团</button>
 </view>

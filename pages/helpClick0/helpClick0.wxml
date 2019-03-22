@@ -24,7 +24,7 @@
     </view>
   </view>
   <view class="bargain_btn">
-    <button>帮他砍价</button>
-    <button class="active">我要砍价</button>
+    <button bindtap='OthersFnClick'>帮他砍价</button>
+    <button bindtap='OwnFnClick' class="active">我要砍价</button>
   </view>
 </view>

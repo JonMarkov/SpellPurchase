@@ -1,5 +1,9 @@
 {
   "pages": [
+        
+
+        "pages/helpClick0/helpClick0", 
+        "pages/helpClick/helpClick",
     "pages/login/login",
     "pages/comDetails/comDetails",
     "pages/singleProduct/singleProduct",
@@ -22,8 +26,7 @@
     "pages/publishPreview/publishPreview",
     "pages/CenVip/CenVip",
     "pages/OrderPayment/OrderPayment",
-    "pages/helpClick0/helpClick0",
-    "pages/helpClick/helpClick",
+
     "pages/shareSuccess/shareSuccess"
   ],
   "window": {

@@ -8,20 +8,33 @@ Page({
   },
   // SMZQ生命周期钩子函数 首先触发onLoad方法，一个页面只会调用一次。
   onLoad: function(options) {
+    console.log(options.assembleNumMa)
+    // 拼团购标记
+    if (options.assembleNumMa) {
+      assembleNumMa: options.assembleNumMa
+    }
+    // 0元购标记
+    if (options.zeroNumMa) {
+      zeroNumMa: options.zeroNumMa
+    }
+    // 砍价拿标记
+    if (options.bargainNumMa) {
+      bargainNumMa: options.bargainNumMa
+    }
     // 重定向this指向，预防回调函数改变this问题
     var _this = this;
     // ZX函数执行 执行判断是否已经授权
     _this.gaveNotExpired()
   },
   // DY函数定义 判断用户是否已经授权，如果已授权则直接跳转
-  gaveNotExpired:function(){
+  gaveNotExpired: function() {
     // 查看是否授权
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         if (res.authSetting['scope.userInfo']) {
           // 获取用户信息
           wx.getUserInfo({
-            success: function (res) {
+            success: function(res) {
               //如果用户已经授权过则直接跳转首页
               wx.switchTab({
                 url: '/pages/home/home'
@@ -34,6 +47,7 @@ Page({
   },
   // DY函数定义 授权点击按钮开始授权
   bindGetUserInfo: function(e) {
+    var _this = this
     // 获取用户的信息
     if (e.detail.userInfo) {
       // 把用户的信息存入本地缓存
@@ -61,7 +75,6 @@ Page({
             url: WxLicUrl,
             data: newparams,
             method: "POST",
-            // dataType: JSON,
             header: {
               'content-type': 'application/json' // 默认值
             },
@@ -81,11 +94,33 @@ Page({
                 key: 'LoginSq',
                 data: res.data,
               })
-              // 点击允许按钮之后如果code等于0则代表请求成功->跳转Home页面
-              if (res.data.code == 0){
-                wx.switchTab({
-                  url: '/pages/home/home'
-                })
+              // 点击允许按钮之后如果code等于0则代表请求成功
+              if (res.data.code == 0) {
+                // 从拼团帮点跳入
+                if (this.data.assembleNumMa != '') {
+                  wx.navigateTo({
+                    url: '/pages/helpClick/helpClick?assembleId=' + _this.data.assembleNumMa,
+                  })
+                } else
+                  // 从0元购帮点进入
+                  if (this.data.zeroNumMa != '') {
+                    wx.navigateTo({
+                      url: '/pages/helpClick/helpClick?zeroId=' + _this.data.zeroNumMa,
+                    })
+                  } else
+                    // 从砍价拿点击进入
+                    if (this.data.bargainNumMa != '') {
+                      wx.navigateTo({
+                        url: '/pages/helpClick0/helpClick0?bargainId=' + _this.data.bargainNumMa,
+                      })
+                    } else
+                // 正常进入
+                {
+                  wx.switchTab({
+                    url: '/pages/home/home'
+                  })
+                }
+
               }
             }
           })
