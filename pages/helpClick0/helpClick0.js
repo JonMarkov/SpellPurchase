@@ -95,11 +95,56 @@ Page({
 
     }
   },
+  // DY函数定义 请求活动剩余时间
+  activity: function () {
+    var _this = this
+    // 活动结束时间
+    let endTime = _this.data.endTime
+    // 获取当前时间
+    let surplusTime = this.data.surplusTime
+    // 剩余秒数
+    var actTimer = setInterval(function () {
+      // 获取最新的结束时间
+      let endTime = _this.data.endTime
+      // 获取最新的当前时间
+      let surplusTime = ++(_this.data.surplusTime)
+      // 剩余时间时间戳                                               
+      let SurTime = endTime - surplusTime
+      // 天数
+      // 毫秒和天数的换算规则
+      let daysGz = 60 * 60 * 24 //秒->分->时
+      let dayTime = parseInt(SurTime / daysGz)
+      // 小时
+      // 毫秒和小时的换算规则
+      let hourGz = 60 * 60 //秒->分
+      let hourTime = parseInt((SurTime - (daysGz * dayTime)) / hourGz)
+      // 分钟
+      // 毫秒和分钟的换算规则
+      let branchGz = 60 //分
+      let branchTime = parseInt((SurTime - ((daysGz * dayTime) + hourGz * hourTime)) / branchGz)
+      // 秒 
+      // 毫秒和秒的换算规则
+      let secondGz = 1 //无
+      let secondGzTime = parseInt((SurTime - ((daysGz * dayTime) + (hourGz * hourTime) + (branchGz * branchTime))) / secondGz)
+      _this.setData({
+        surplusTime: surplusTime,
+        dayTime: dayTime,
+        hourTime: hourTime,
+        branchTime: branchTime,
+        secondGzTime: secondGzTime
+      })
+      if (SurTime <= 0) {
+        clearInterval(actTimer)
+      }
+    }, 1000)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
     this.PointsFn()
+    // ZX函数执行 每秒执行一次倒计时函数
+    this.activity()
   },
 
   /**
