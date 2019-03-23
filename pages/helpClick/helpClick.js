@@ -7,13 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    assembleId: '022fa51c308d4d288328d2970a8e9c84'
+    zeroId: 'fc9a5bb8149f451da77a338d57ab779a'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var _this = this
     wx.getStorage({
       key: 'loginInfo',
       success: function(res) {
@@ -23,7 +24,18 @@ Page({
         })
       },
     })
-    var _this = this
+
+    // 从缓存缓存是否已经注册
+    wx.getStorage({
+      key: 'phone',
+      success: function(res) {
+        // 把user_id存入本地data数据
+        _this.setData({
+          phone: res.data,
+        })
+      },
+    })
+
     // 0元购
     if (options.zeroId) {
       _this.setData({
@@ -32,7 +44,10 @@ Page({
     }
     // 拼团
     if (options.assembleId) {
-      assembleId: options.assembleId || ''
+      _this.setData({
+        assembleId: options.assembleId || ''
+      })
+
     }
 
   },
@@ -88,10 +103,48 @@ Page({
         url: '/pages/login/login?zeroNumMa=' + zeroNumMa,
       })
     } else {
-
+      var goodsId = this.data.infoDet.goodsId;
+      // 如果有phone则跳转详情
+      if (!_this.data.phone) {
+        wx.switchTab({
+          url: '/pages/personal/personal?zeroNumMa=' + zeroNumMa,
+        })
+      } else {
+        // 获取订单Id
+        var zeroId = this.data.zeroId
+        // 获取用户Id
+        var clickUserId = this.data.user_id
+        // 拼装请求所需参数
+        var params = {
+          // 请求方法名
+          action: 'clickToRegister',
+          // 请求参数
+          requestParam: {
+            zeroId: zeroId,
+            clickUserId: clickUserId
+          }
+        }
+        // 请求参数合并
+        const newparams = Object.assign(params);
+        // 请求登录的Java后台接口
+        wx.request({
+          url: WxLicUrl,
+          data: newparams,
+          method: "POST",
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: res => {
+            console.log(res.data)
+            // 如果请求成功则跳转
+            
+          }
+        })
+      }
     }
   },
-  assembleIdFnClick:function(){
+  // 拼团
+  assembleIdFnClick: function() {
     var _this = this
     // 标记
     var assembleNumMa = _this.data.assembleId
@@ -101,7 +154,43 @@ Page({
         url: '/pages/login/login?assembleNumMa=' + assembleNumMa,
       })
     } else {
-
+      var goodsId = this.data.infoDet.goodsId;
+      // 如果有phone则跳转详情
+      if (!_this.data.phone) {
+        wx.switchTab({
+          url: '/pages/personal/personal?assembleNumMa=' + assembleNumMa,
+        })
+      } else {
+        // 获取订单Id
+        var assembleId = this.data.assembleId
+        // 获取用户Id
+        var clickUserId = this.data.user_id
+        // 拼装请求所需参数
+        var params = {
+          // 请求方法名
+          action: 'clickToGroup',
+          // 请求参数
+          requestParam: {
+            assembleId: assembleId,
+            clickUserId: clickUserId
+          }
+        }
+        // 请求参数合并
+        const newparams = Object.assign(params);
+        // 请求登录的Java后台接口
+        wx.request({
+          url: WxLicUrl,
+          data: newparams,
+          method: "POST",
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: res => {
+            console.log(res.data)
+            // 如果请求成功则跳转
+          }
+        })
+      }
     }
   },
 

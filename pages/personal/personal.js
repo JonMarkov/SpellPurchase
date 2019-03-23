@@ -176,6 +176,24 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: res => {
+            // 从拼团帮点跳入
+            if (this.data.assembleNumMa) {
+              wx.navigateTo({
+                url: '/pages/helpClick/helpClick?assembleId=' + _this.data.assembleNumMa,
+              })
+            } else
+              // 从0元购帮点进入
+              if (this.data.zeroNumMa) {
+                wx.navigateTo({
+                  url: '/pages/helpClick/helpClick?zeroId=' + _this.data.zeroNumMa,
+                })
+              } else
+                // 从砍价拿点击进入
+                if (this.data.bargainNumMa) {
+                  wx.navigateTo({
+                    url: '/pages/helpClick0/helpClick0?bargainId=' + _this.data.bargainNumMa,
+                  })
+                }
             // 返回信息
             let resData = res.data
             // 如果请求失败则显示相应的错误
@@ -366,6 +384,26 @@ Page({
         })
       },
     })
+    // 拼团购标记
+    if (options.assembleNumMa) {
+      _this.setData({
+        assembleNumMa: options.assembleNumMa
+      })
+
+    }
+    // 0元购标记
+    if (options.zeroNumMa) {
+      _this.setData({
+        zeroNumMa: options.zeroNumMa
+      })
+    }
+    // 砍价拿标记
+    if (options.bargainNumMa) {
+      _this.setData({
+        bargainNumMa: options.bargainNumMa
+      })
+    }
+
   },
 
   /**

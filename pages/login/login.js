@@ -4,25 +4,31 @@ Page({
   // SJ页面初始数据 页面所需数据定义
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
   // SMZQ生命周期钩子函数 首先触发onLoad方法，一个页面只会调用一次。
   onLoad: function(options) {
-    console.log(options.assembleNumMa)
+    // 重定向this指向，预防回调函数改变this问题
+    var _this = this;
     // 拼团购标记
     if (options.assembleNumMa) {
-      assembleNumMa: options.assembleNumMa
+      _this.setData({
+        assembleNumMa: options.assembleNumMa
+      })
+
     }
     // 0元购标记
     if (options.zeroNumMa) {
-      zeroNumMa: options.zeroNumMa
+      _this.setData({
+        zeroNumMa: options.zeroNumMa
+      })
     }
     // 砍价拿标记
     if (options.bargainNumMa) {
-      bargainNumMa: options.bargainNumMa
+      _this.setData({
+        bargainNumMa: options.bargainNumMa
+      })
     }
-    // 重定向this指向，预防回调函数改变this问题
-    var _this = this;
     // ZX函数执行 执行判断是否已经授权
     _this.gaveNotExpired()
   },
@@ -97,21 +103,24 @@ Page({
               // 点击允许按钮之后如果code等于0则代表请求成功
               if (res.data.code == 0) {
                 // 从拼团帮点跳入
-                if (this.data.assembleNumMa != '') {
+                if (this.data.assembleNumMa) {
+                  console.log(this.data.assembleNumMa)
                   wx.navigateTo({
                     url: '/pages/helpClick/helpClick?assembleId=' + _this.data.assembleNumMa,
                   })
                 } else
                   // 从0元购帮点进入
-                  if (this.data.zeroNumMa != '') {
+                  if (this.data.zeroNumMa) {
+                    console.log(this.data.zeroNumMa)
                     wx.navigateTo({
                       url: '/pages/helpClick/helpClick?zeroId=' + _this.data.zeroNumMa,
                     })
                   } else
                     // 从砍价拿点击进入
-                    if (this.data.bargainNumMa != '') {
+                    if (this.data.bargainNumMa) {
+                      console.log(this.data.bargainNumMa)
                       wx.navigateTo({
-                        url: '/pages/helpClick0/helpClick0?bargainId=' + _this.data.bargainNumMa,
+                        url: '/pages/helpClick0/helpClick0?bargainId=' + this.data.bargainNumMa,
                       })
                     } else
                 // 正常进入

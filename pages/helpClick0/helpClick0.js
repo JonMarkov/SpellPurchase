@@ -7,13 +7,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bargainId: '0580cec4a1754906930d48c3272e6037'
+    bargainId: '0580cec4a1754906930d48c3272e6037',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var _this = this
+    // 从缓存获取User_id
     wx.getStorage({
       key: 'loginInfo',
       success: function(res) {
@@ -23,7 +25,16 @@ Page({
         })
       },
     })
-    var _this = this
+    // 从缓存缓存是否已经注册
+    wx.getStorage({
+      key: 'phone',
+      success: function(res) {
+        // 把user_id存入本地data数据
+        _this.setData({
+          phone: res.data,
+        })
+      },
+    })
     // 砍价
     if (options.bargainId) {
       _this.setData({
@@ -39,7 +50,6 @@ Page({
         bargainId: _this.data.bargainId
       }
     }
-    console.log(helpData)
     // 拼装请求所需参数
     var params = {
       // 请求方法名
@@ -62,7 +72,10 @@ Page({
         console.log(res)
         var resData = res.data
         _this.setData({
-          infoDet: resData
+          infoDet: resData,
+          activaityEndTime: resData.activaityEndTime,
+          currentTime: resData.currentTime
+
         })
       }
     })
@@ -78,7 +91,35 @@ Page({
         url: '/pages/login/login?bargainNumMa=' + bargainNumMa,
       })
     } else {
-
+      // 获取订单Id
+      var bargainId = this.data.bargainId
+      // 获取用户Id
+      var bargainUserId = this.data.user_id
+      // 拼装请求所需参数
+      var params = {
+        // 请求方法名
+        action: 'clickToBargain',
+        // 请求参数
+        requestParam: {
+          bargainId: bargainId,
+          bargainUserId: bargainUserId
+        }
+      }
+      // 请求参数合并
+      const newparams = Object.assign(params);
+      // 请求登录的Java后台接口
+      wx.request({
+        url: WxLicUrl,
+        data: newparams,
+        method: "POST",
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: res => {
+          console.log(res.data)
+          // 如果请求成功则跳转
+        }
+      })
     }
   },
   // 自己砍价
@@ -92,59 +133,26 @@ Page({
         url: '/pages/login/login?bargainNumMa=' + bargainNumMa,
       })
     } else {
-
+      var goodsId = this.data.infoDet.goodsId;
+      // 如果有phone则跳转详情
+      if (!_this.data.phone) {
+        wx.switchTab({
+          url: '/pages/personal/personal?bargainNumMa=' + bargainNumMa,
+        })
+      } else {
+        wx.navigateTo({
+          url: '/pages/comDetails/comDetails?goods_id=' + goodsId,
+        })
+      }
     }
   },
-  // DY函数定义 请求活动剩余时间
-  activity: function () {
-    var _this = this
-    // 活动结束时间
-    let endTime = _this.data.endTime
-    // 获取当前时间
-    let surplusTime = this.data.surplusTime
-    // 剩余秒数
-    var actTimer = setInterval(function () {
-      // 获取最新的结束时间
-      let endTime = _this.data.endTime
-      // 获取最新的当前时间
-      let surplusTime = ++(_this.data.surplusTime)
-      // 剩余时间时间戳                                               
-      let SurTime = endTime - surplusTime
-      // 天数
-      // 毫秒和天数的换算规则
-      let daysGz = 60 * 60 * 24 //秒->分->时
-      let dayTime = parseInt(SurTime / daysGz)
-      // 小时
-      // 毫秒和小时的换算规则
-      let hourGz = 60 * 60 //秒->分
-      let hourTime = parseInt((SurTime - (daysGz * dayTime)) / hourGz)
-      // 分钟
-      // 毫秒和分钟的换算规则
-      let branchGz = 60 //分
-      let branchTime = parseInt((SurTime - ((daysGz * dayTime) + hourGz * hourTime)) / branchGz)
-      // 秒 
-      // 毫秒和秒的换算规则
-      let secondGz = 1 //无
-      let secondGzTime = parseInt((SurTime - ((daysGz * dayTime) + (hourGz * hourTime) + (branchGz * branchTime))) / secondGz)
-      _this.setData({
-        surplusTime: surplusTime,
-        dayTime: dayTime,
-        hourTime: hourTime,
-        branchTime: branchTime,
-        secondGzTime: secondGzTime
-      })
-      if (SurTime <= 0) {
-        clearInterval(actTimer)
-      }
-    }, 1000)
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    var _this = this
     this.PointsFn()
-    // ZX函数执行 每秒执行一次倒计时函数
-    this.activity()
   },
 
   /**

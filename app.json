@@ -1,7 +1,8 @@
 {
   "pages": [
+    "pages/helpClick/helpClick",
         "pages/helpClick0/helpClick0",
-        "pages/helpClick/helpClick",
+        
     "pages/login/login",
     "pages/comDetails/comDetails",
     "pages/singleProduct/singleProduct",
